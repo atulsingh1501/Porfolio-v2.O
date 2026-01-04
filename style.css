@@ -589,6 +589,19 @@ a {
     }
 }
 
+/* Skills Grid Specifics */
+#skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+    #skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
 /* Default hidden on desktop */
 .view-more-btn {
     display: none;
@@ -605,17 +618,35 @@ a {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid var(--border-subtle);
-        padding: var(--spacing-lg) var(--spacing-md);
-        /* Reduce padding */
-        position: relative;
-        /* Static flow */
+        padding: var(--spacing-sm) var(--spacing-md);
+        /* Reduced padding for compact bar */
+        position: sticky;
+        /* Sticky positioning */
+        top: 0;
+        z-index: 1000;
+        /* Ensure it stays on top */
         height: auto;
+        background: var(--bg-dark);
+        /* Ensure background is opaque */
     }
 
     .nav-menu {
         flex-direction: row;
         overflow-x: auto;
         padding-bottom: 4px;
+        gap: 8px;
+        /* Add gap between items */
+    }
+
+    .nav-item {
+        padding: 10px 16px;
+        /* Larger touch target */
+        white-space: nowrap;
+        /* Prevent wrapping */
+        background: rgba(255, 255, 255, 0.03);
+        /* Subtle background for clarity */
+        border-radius: 20px;
+        /* Pill shape for mobile */
     }
 
     .nav-footer {
@@ -638,6 +669,16 @@ a {
 
     .dashboard-grid {
         grid-template-columns: 1fr;
+    }
+
+    .github-card {
+        grid-column: span 1;
+    }
+
+    .card {
+        width: 100%;
+        min-width: 0;
+        /* Important for grid item overflow handling */
     }
 
     /* GitHub Graph Mobile */
@@ -866,4 +907,169 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-secondary);
+}
+
+/* --- New Recruiter-Friendly Project Cards --- */
+.projects-grid-featured {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.project-card-featured {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    /* Larger radius */
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    /* Image left, content right */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.project-mockup {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-right: 1px solid var(--border-subtle);
+    min-height: 300px;
+}
+
+.project-mockup i {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.1);
+}
+
+/* Placeholder for actual image: user can replace bg with img later */
+.mockup-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.project-content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.problem-statement {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    font-style: italic;
+    border-left: 3px solid var(--accent-color);
+    padding-left: 12px;
+}
+
+.role-badge {
+    background: rgba(20, 184, 166, 0.1);
+    /* Accent tint */
+    color: var(--accent-color);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    align-self: flex-start;
+    margin-bottom: 16px;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    flex-grow: 1;
+    /* Pushes footer down */
+}
+
+.feature-list li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.feature-list li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.tech-stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.tech-tag {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+
+.btn-outline:hover {
+    border-color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .project-card-featured {
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+    }
+
+    .project-mockup {
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        min-height: 200px;
+    }
 }

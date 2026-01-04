@@ -61,7 +61,11 @@
                     <p class="hero-description">I build pixel-perfect, interactive web experiences and solve complex
                         algorithmic problems. Focused on clean code, performance, and intuitive design.</p>
                     <div class="hero-actions">
-                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="assets/resume.pdf" class="btn btn-primary" target="_blank"><i
+                                class="fas fa-file-alt"></i> Resume</a>
+                        <a href="#projects" class="btn"
+                            style="border: 1px solid var(--border-subtle); color: var(--text-primary);">View
+                            Projects</a>
                         <a href="https://github.com/atulsingh1501" target="_blank" class="btn"
                             style="border: 1px solid var(--border-subtle); color: var(--text-secondary);"><i
                                 class="fab fa-github"></i> GitHub</a>
@@ -72,66 +76,124 @@
             <!-- 2. Projects Section (Most Important) -->
             <section id="projects" class="content-section">
                 <h3 class="section-title">Featured Projects</h3>
-                <div class="projects-grid">
-                    <!-- Waste Management System -->
-                    <div class="card project-card">
-                        <div class="project-header">
-                            <div class="folder-icon"><i class="far fa-folder"></i></div>
-                            <div class="project-links">
-                                <a href="https://github.com/atulsingh1501/waste_management_system" target="_blank"><i
-                                        class="fab fa-github"></i></a>
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                            </div>
+                <div class="projects-grid-featured">
+
+                    <!-- 1. Waste Management System -->
+                    <div class="project-card-featured">
+                        <div class="project-mockup">
+                            <!-- Placeholder: Replaced via CSS or user can add img -->
+                            <i class="fas fa-recycle"></i>
                         </div>
-                        <h4>Waste Management System</h4>
-                        <p>Smart dashboard for city waste tracking, route optimization, and citizen reporting.</p>
-                        <div class="tech-stack">
-                            <span><i class="fab fa-react"></i> React + TS</span>
-                            <span><i class="fab fa-node-js"></i> Node.js</span>
-                            <span><i class="fas fa-server"></i> Express</span>
-                            <span><i class="fas fa-bolt"></i> Vite</span>
+                        <div class="project-content">
+                            <div class="project-header-row">
+                                <h4 class="project-title">Waste Management System</h4>
+                            </div>
+                            <div class="role-badge">Full Stack Developer</div>
+                            <p class="problem-statement">Solves inefficient municipal waste collection by enabling
+                                real-time tracking and automated route optimization.</p>
+
+                            <ul class="feature-list">
+                                <li>Architected a real-time dashboard integrating IoT bin status sensors.</li>
+                                <li>Implemented an algorithm to optimize collection routes, reducing fuel costs.</li>
+                                <li>Built a citizen reporting portal for immediate flagging of overflow issues.</li>
+                            </ul>
+
+                            <div class="tech-stack-row">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">Vite</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="waste_management.html" class="btn btn-outline btn-sm"><i
+                                        class="fas fa-book-open"></i> Read Case Study</a>
+                                <a href="https://github.com/atulsingh1501/waste_management_system" target="_blank"
+                                    class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
+                                <a href="#" target="_blank" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- TripSmart -->
-                    <div class="card project-card">
-                        <div class="project-header">
-                            <div class="folder-icon"><i class="far fa-folder"></i></div>
-                            <div class="project-links">
-                                <a href="https://github.com/atulsingh1501/TripSmart" target="_blank"><i
-                                        class="fab fa-github"></i></a>
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                            </div>
+                    <!-- 2. TripSmart AI -->
+                    <div class="project-card-featured">
+                        <div class="project-mockup"
+                            style="background: linear-gradient(135deg, #0f172a 0%, #334155 100%);">
+                            <i class="fas fa-plane-departure"></i>
                         </div>
-                        <h4>TripSmart AI</h4>
-                        <p>Intelligent trip planner with smart budget allocation and multi-modal transport options.</p>
-                        <div class="tech-stack">
-                            <span><i class="fab fa-react"></i> React + TS</span>
-                            <span><i class="fab fa-node-js"></i> Node.js</span>
-                            <span><i class="fas fa-database"></i> MongoDB</span>
-                            <span><i class="fas fa-wind"></i> Tailwind</span>
+                        <div class="project-content">
+                            <div class="project-header-row">
+                                <h4 class="project-title">TripSmart AI</h4>
+                            </div>
+                            <div class="role-badge">Frontend & Logic Engineer</div>
+                            <p class="problem-statement">Eliminates travel planning fragmentation by unifying budgeting,
+                                scheduling, and booking in one intelligent platform.</p>
+
+                            <ul class="feature-list">
+                                <li>Developed an AI-driven itinerary generator based on user interests and budget.</li>
+                                <li>Engineered a dynamic budget allocation system with real-time currency conversion.
+                                </li>
+                                <li>Integrated interactive maps to visualize daily routes and transport options.</li>
+                            </ul>
+
+                            <div class="tech-stack-row">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Tailwind CSS</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="tripsmart.html" class="btn btn-outline btn-sm"><i class="fas fa-book-open"></i>
+                                    Read Case Study</a>
+                                <a href="https://github.com/atulsingh1501/TripSmart" target="_blank"
+                                    class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
+                                <a href="#" target="_blank" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Whatsapp Chat Analyzer -->
-                    <div class="card project-card">
-                        <div class="project-header">
-                            <div class="folder-icon"><i class="far fa-folder"></i></div>
-                            <div class="project-links">
-                                <a href="https://github.com/atulsingh1501/Whatsapp-chat-Analysis" target="_blank"><i
-                                        class="fab fa-github"></i></a>
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    <!-- 3. Whatsapp Chat Analyzer -->
+                    <div class="project-card-featured">
+                        <div class="project-mockup"
+                            style="background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header-row">
+                                <h4 class="project-title">Whatsapp Chat Analyzer</h4>
+                            </div>
+                            <div class="role-badge">Python Developer</div>
+                            <p class="problem-statement">Transforms unstructured chat export data into actionable
+                                insights through sentiment analysis and usage statistics.</p>
+
+                            <ul class="feature-list">
+                                <li>Built a robust parsing engine to clean and structure raw text data.</li>
+                                <li>Implemented sentiment analysis to visualize communication tone patterns.</li>
+                                <li>Designed interactive dashboards for tracking emoji usage and activity peak times.
+                                </li>
+                            </ul>
+
+                            <div class="tech-stack-row">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Streamlit</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Matplotlib</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/atulsingh1501/Whatsapp-chat-Analysis" target="_blank"
+                                    class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
+                                <a href="#" target="_blank" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-external-link-alt"></i> Live Demo</a>
                             </div>
                         </div>
-                        <h4>Whatsapp Chat Analyzer</h4>
-                        <p>Data analysis tool to visualize chat trends, emoji usage, and user activity stats.</p>
-                        <div class="tech-stack">
-                            <span><i class="fab fa-python"></i> Python</span>
-                            <span><i class="fas fa-chart-bar"></i> Streamlit</span>
-                            <span><i class="fas fa-table"></i> Pandas</span>
-                            <span><i class="fas fa-chart-line"></i> Matplotlib</span>
-                        </div>
                     </div>
+
                 </div>
             </section>
 
@@ -139,8 +201,7 @@
             <!-- 3. Skills Section (Grouped Tags, No Percentages) -->
             <section id="stack" class="content-section">
                 <h3 class="section-title">Technical Skills</h3>
-                <div class="dashboard-grid" id="skills-grid"
-                    style="grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg);">
+                <div class="dashboard-grid" id="skills-grid">
                     <!-- Languages -->
                     <div class="card" style="grid-column: span 1;">
                         <div class="card-header">
@@ -190,9 +251,11 @@
             </section>
 
             <!-- 4. Coding Stats Section -->
+            <!-- 4. Engineering Impact Section (Static & Fast) -->
             <section id="stats" class="content-section">
-                <h3 class="section-title">Coding Activity</h3>
+                <h3 class="section-title">Engineering Impact</h3>
                 <div class="dashboard-grid" id="stats-grid">
+
                     <!-- GitHub Card (Span 2) -->
                     <div class="card github-card">
                         <div class="card-header">
@@ -204,64 +267,76 @@
                         </div>
                     </div>
 
-                    <!-- LeetCode Card -->
+                    <!-- 2. Problem Solving (LeetCode) -->
                     <div class="card metric-card">
                         <div class="card-header">
-                            <h3><i class="fas fa-code"></i> LeetCode</h3>
+                            <h3><i class="fas fa-code"></i> Problem Solving</h3>
                             <a href="https://leetcode.com/u/Atulya_15/" target="_blank" class="external-link"><i
                                     class="fas fa-external-link-alt"></i></a>
                         </div>
                         <div class="metric-body">
                             <div class="big-number" id="leetcode-total">Loading...</div>
-                            <p class="metric-label">Problems Solved</p>
-                            <div class="mini-progress-bars">
-                                <div class="progress-item"><span class="label">Easy</span>
-                                    <div class="bar easy" id="leetcode-easy-bar" style="width: 0%"></div> <span
-                                        id="leetcode-easy-count" style="margin-left: auto;">-</span>
+                            <p class="metric-label">LeetCode Problems Solved</p>
+                            <div class="mini-progress-bars" style="margin-top: 12px;">
+                                <div class="progress-item"
+                                    style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                    <span style="color: var(--success-color);">Easy: <span
+                                            id="leetcode-easy-count">-</span></span>
+                                    <span style="color: var(--warning-color);">Med: <span
+                                            id="leetcode-medium-count">-</span></span>
+                                    <span style="color: var(--danger-color);">Hard: <span
+                                            id="leetcode-hard-count">-</span></span>
                                 </div>
-                                <div class="progress-item"><span class="label">Med</span>
-                                    <div class="bar medium" id="leetcode-medium-bar" style="width: 0%"></div> <span
-                                        id="leetcode-medium-count" style="margin-left: auto;">-</span>
-                                </div>
-                                <div class="progress-item"><span class="label">Hard</span>
-                                    <div class="bar hard" id="leetcode-hard-bar" style="width: 0%"></div> <span
-                                        id="leetcode-hard-count" style="margin-left: auto;">-</span>
+                                <div
+                                    style="width: 100%; height: 6px; background: #333; border-radius: 3px; overflow: hidden; display: flex;">
+                                    <div id="leetcode-easy-bar"
+                                        style="width: 0%; background: var(--success-color); transition: width 1s ease;">
+                                    </div>
+                                    <div id="leetcode-medium-bar"
+                                        style="width: 0%; background: var(--warning-color); transition: width 1s ease;">
+                                    </div>
+                                    <div id="leetcode-hard-bar"
+                                        style="width: 0%; background: var(--danger-color); transition: width 1s ease;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- CodeChef/HackerRank Split -->
+                    <!-- 3. Competitive Programming -->
                     <div class="card metric-card">
                         <div class="card-header">
-                            <h3><i class="fas fa-trophy"></i> Competitive</h3>
+                            <h3><i class="fas fa-chart-line"></i> Competitive</h3>
                         </div>
-                        <div class="metric-body" style="gap: 1.5rem; justify-content: flex-start; padding-top: 10px;">
-                            <a href="https://www.codechef.com/users/atul_1501" target="_blank"
-                                style="display: block; width: 100%; text-decoration: none;">
-                                <div
-                                    style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between;">
-                                    CodeChef <i class="fas fa-external-link-alt"
-                                        style="font-size: 0.7rem; color: var(--text-secondary);"></i>
-                                </div>
-                                <div id="codechef-rating" style="font-size: 0.85rem; color: var(--text-secondary);">
-                                    View Profile</div>
-                            </a>
-                            <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; width: 100%;">
-                                <a href="https://www.hackerrank.com/profile/atulsingh05540" target="_blank"
-                                    style="display: block; width: 100%; text-decoration: none;">
-                                    <div
-                                        style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between;">
-                                        HackerRank <i class="fas fa-external-link-alt"
-                                            style="font-size: 0.7rem; color: var(--text-secondary);"></i>
-                                    </div>
-                                    <div id="hackerrank-badge"
-                                        style="font-size: 0.85rem; color: var(--text-secondary);">
-                                        View Profile</div>
-                                </a>
-                            </div>
+                        <div class="metric-body">
+                            <ul style="list-style: none; padding: 0; margin-top: 5px; width: 100%;">
+                                <li
+                                    style="margin-bottom: 15px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+                                    <a href="https://www.codechef.com/users/atul_1501" target="_blank"
+                                        style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--text-primary);">
+                                        <span><i class="fas fa-code"
+                                                style="margin-right: 8px; color: var(--text-secondary);"></i>
+                                            CodeChef</span>
+                                        <span
+                                            style="font-size: 0.8rem; color: var(--accent-color); border: 1px solid var(--accent-color); padding: 2px 8px; border-radius: 12px;">View
+                                            Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.hackerrank.com/profile/atulsingh05540" target="_blank"
+                                        style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--text-primary);">
+                                        <span><i class="fab fa-hackerrank"
+                                                style="margin-right: 8px; color: var(--text-secondary);"></i>
+                                            HackerRank</span>
+                                        <span
+                                            style="font-size: 0.8rem; color: var(--accent-color); border: 1px solid var(--accent-color); padding: 2px 8px; border-radius: 12px;">View
+                                            Profile</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+
                 </div>
             </section>
 

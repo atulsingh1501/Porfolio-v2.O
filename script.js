@@ -1,8 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- GitHub Calendar (Custom Render) ---
-    // Removed external library init to use custom data source for consistency
-    const calendarEl = document.querySelector(".calendar");
-    if (calendarEl) calendarEl.innerHTML = '<div class="custom-calendar"><div class="graph-weeks" id="graph-weeks"></div><div class="graph-footer"><span>Learn how we count contributions</span><div style="display:flex; gap:3px; align-items: center"><span>Less</span><div style="display:flex; gap:3px;"><span class="graph-day" data-level="0"></span><span class="graph-day" data-level="1"></span><span class="graph-day" data-level="2"></span><span class="graph-day" data-level="3"></span><span class="graph-day" data-level="4"></span></div><span>More</span></div></div></div>'; // Skeleton
+    // --- Static Metrics (No JS Required) ---
+    // The stats section is now fully static HTML for instant loading and reliability.
+    // Dynamic fetchers have been removed to prevent 'Loading...' states.
+
+    // --- Smooth Scrolling for Anchor Links ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+    // --- Active Navigation Link Highlighting ---
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
 
     // --- LeetCode Stats (Real-time) ---
     async function fetchLeetCodeStats() {
@@ -26,11 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('leetcode-medium-bar').style.width = `${(data.mediumSolved / total) * 100}%`;
                 document.getElementById('leetcode-hard-bar').style.width = `${(data.hardSolved / total) * 100}%`;
             } else {
-                document.getElementById('leetcode-total').innerText = "500+"; // Fallback
+                document.getElementById('leetcode-total').innerText = "250+"; // Fallback static
             }
         } catch (error) {
             console.error("LeetCode fetch failed:", error);
-            document.getElementById('leetcode-total').innerText = "500+"; // Fallback
+            document.getElementById('leetcode-total').innerText = "250+"; // Fallback static
         }
     }
     fetchLeetCodeStats();
@@ -85,8 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // --- Year Filtering Logic ---
                 const graphContainer = document.getElementById('graph-weeks');
-                if (graphContainer) {
-                    graphContainer.innerHTML = '';
+                // Note: The graph container usually exists inside .calendar div. We need to make sure basic structure exists.
+                // The structure is usually injected by the HTML replace we did? No, the HTML has <div class="calendar">Loading...</div>
+                // So we need to inject the skeleton first.
+
+                const calendarEl = document.querySelector(".calendar");
+                if (calendarEl) {
+                    calendarEl.innerHTML = '<div class="custom-calendar"><div class="graph-weeks" id="graph-weeks"></div><div class="graph-footer"><span>Learn how we count contributions</span><div style="display:flex; gap:3px; align-items: center"><span>Less</span><div style="display:flex; gap:3px;"><span class="graph-day" data-level="0"></span><span class="graph-day" data-level="1"></span><span class="graph-day" data-level="2"></span><span class="graph-day" data-level="3"></span><span class="graph-day" data-level="4"></span></div><span>More</span></div></div></div>';
+                }
+
+                const graphContainerRecheck = document.getElementById('graph-weeks');
+
+                if (graphContainerRecheck) {
+                    graphContainerRecheck.innerHTML = '';
 
                     // 1. Create Layout Structure
                     const mainWrapper = document.createElement('div');
@@ -102,14 +150,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     graphContent.className = 'calendar-grid-wrapper';
                     mainWrapper.appendChild(graphContent);
 
-                    graphContainer.appendChild(mainWrapper);
+                    graphContainerRecheck.appendChild(mainWrapper);
 
                     const allContribs = data.contributions;
 
                     // Identify available years
                     const yearsSet = new Set();
                     allContribs.forEach(d => yearsSet.add(new Date(d.date).getFullYear()));
-                    const years = Array.from(yearsSet).sort((a, b) => a - b); // 2024, 2025, 2026
+                    const years = Array.from(yearsSet).sort((a, b) => a - b); // Ascending
 
                     let activeYear = years[years.length - 1]; // Default to latest
 
@@ -119,14 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // Filter data
                         const yearData = allContribs.filter(d => new Date(d.date).getFullYear() === targetYear);
-
-                        // Update Total for this year
                         const yearTotal = yearData.reduce((acc, curr) => acc + curr.count, 0);
-                        const streakEl = document.getElementById('github-streak');
-                        // Reuse the global streak but update total text to reflect "Year Total" or "Total"
-                        // Actually, user likely wants "Total" to remain GLOBAL or YEAR specific?
-                        // Usually "2024: X contributions". Let's show Year Specific Total in the text.
-                        // But we also want to show "Streak" which is global.
+
+                        // Update Year Total display if needed
                         if (streakEl) {
                             streakEl.innerHTML = `<span style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">${targetYear}: <span style="color: var(--text-primary);">${yearTotal}</span></span> &nbsp;|&nbsp; Streak: <div class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--success-color); border: 1px solid rgba(16, 185, 129, 0.2); margin-left: 4px;"><span class="live-dot"></span> ${streak}</div>`;
                         }
@@ -145,167 +188,101 @@ document.addEventListener('DOMContentLoaded', () => {
                         // 1. Months Header
                         const monthsHeader = document.createElement('div');
                         monthsHeader.className = 'months-header';
+                        monthsHeader.style.display = 'flex';
+                        monthsHeader.style.gap = '3px';
+                        monthsHeader.style.marginBottom = '4px';
+                        monthsHeader.style.height = '15px'; // Ensure height for labels
+                        monthsHeader.style.fontSize = '0.75rem';
+                        monthsHeader.style.color = 'var(--text-secondary)';
 
-                        // 2. Main Body (Weekdays + Grid)
+                        // 2. Main Body (Grid)
                         const calendarBody = document.createElement('div');
                         calendarBody.className = 'calendar-body';
 
-                        // Weekday Labels
-                        const weekdaysCol = document.createElement('div');
-                        weekdaysCol.className = 'weekdays-col';
-                        weekdaysCol.innerHTML = `
-                            <span class="wday-label"></span>
-                            <span class="wday-label">Mon</span>
-                            <span class="wday-label"></span>
-                            <span class="wday-label">Wed</span>
-                            <span class="wday-label"></span>
-                            <span class="wday-label">Fri</span>
-                            <span class="wday-label"></span>
-                        `;
-                        calendarBody.appendChild(weekdaysCol);
-
-                        const grid = document.createElement('div');
-                        grid.className = 'graph-grid';
-
-                        // Logic to build weeks
-                        let weeks = [];
+                        // Group by weeks
+                        const weeks = [];
                         let currentWeek = [];
-
-                        // Pad beginning of year if needed?
-                        // GitHub starts graph on SUNDAY first week.
-                        // We need to calculate day of week for Jan 1
-                        /* Simple Render: Just push days.
-                           For accurate "weekday alignment", usually we pad based on day of week.
-                           But our 'yearData' is just array of dates.
-                           We should verify if 'yearData[0]' is a Sunday. 
-                           If not, pad with empty squares until we hit the real start day.
-                        */
-                        if (yearData.length > 0) {
-                            const firstDate = new Date(yearData[0].date);
-                            const startDay = firstDate.getDay(); // 0 = Sun, 1 = Mon ...
-
-                            // Pad initial week
-                            for (let i = 0; i < startDay; i++) {
-                                currentWeek.push({ level: -1 }); // -1 indicates empty/spacer
-                            }
-                        }
-
-                        yearData.forEach((day, index) => {
-                            currentWeek.push(day);
-                            if (currentWeek.length === 7) {
+                        yearData.forEach((d, i) => {
+                            currentWeek.push(d);
+                            if (new Date(d.date).getDay() === 6 || i === yearData.length - 1) {
                                 weeks.push(currentWeek);
                                 currentWeek = [];
                             }
                         });
-                        // Push remaining
-                        if (currentWeek.length > 0) {
-                            weeks.push(currentWeek);
-                        }
 
-                        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        // Render Months and Weeks
                         let lastMonth = -1;
 
-                        weeks.forEach((week, weekIndex) => {
-                            // Headers
-                            const firstValidDay = week.find(d => d.level !== -1);
-                            if (firstValidDay) {
-                                const dObj = new Date(firstValidDay.date);
-                                const mIndex = dObj.getMonth();
-                                if (mIndex !== lastMonth && weekIndex < weeks.length - 2) {
-                                    const mLabel = document.createElement('span');
-                                    mLabel.className = 'month-label';
-                                    mLabel.innerText = monthNames[mIndex];
-                                    mLabel.style.left = `${weekIndex * 13}px`;
-                                    monthsHeader.appendChild(mLabel);
-                                    lastMonth = mIndex;
-                                }
+                        weeks.forEach((week, index) => {
+                            // Month Label Logic
+                            const firstDayOfWeek = new Date(week[0].date);
+                            const monthIndex = firstDayOfWeek.getMonth();
+                            const monthName = firstDayOfWeek.toLocaleString('default', { month: 'short' });
+
+                            const monthLabelSlot = document.createElement('div');
+                            monthLabelSlot.style.width = '10px'; // Match week column width
+                            monthLabelSlot.style.textAlign = 'left';
+                            monthLabelSlot.style.position = 'relative';
+                            monthLabelSlot.style.flexShrink = '0'; // Prevent shrinking
+
+                            // Only show label if month changed and we have enough space (e.g. at least 2 weeks till next label or end)
+                            if (monthIndex !== lastMonth) {
+                                const label = document.createElement('span');
+                                label.innerText = monthName;
+                                label.style.position = 'absolute'; // Overflow to right
+                                monthLabelSlot.appendChild(label);
+                                lastMonth = monthIndex;
                             }
 
-                            const weekEl = document.createElement('div');
-                            weekEl.className = 'graph-week';
+                            monthsHeader.appendChild(monthLabelSlot);
+
+                            // Week Column Render
+                            const weekCol = document.createElement('div');
+                            weekCol.style.display = 'flex';
+                            weekCol.style.flexDirection = 'column';
+                            weekCol.style.gap = '3px';
+                            weekCol.style.flexShrink = '0'; // Prevent shrinking
 
                             week.forEach(day => {
                                 const dayEl = document.createElement('div');
-                                if (day.level === -1) {
-                                    dayEl.className = 'graph-day empty';
-                                } else {
-                                    dayEl.className = 'graph-day';
-                                    dayEl.setAttribute('data-level', day.level);
-                                    dayEl.title = `${day.count} contributions on ${day.date}`;
-                                }
-                                weekEl.appendChild(dayEl);
+                                dayEl.className = 'graph-day';
+                                dayEl.style.width = '10px';
+                                dayEl.style.height = '10px';
+                                dayEl.style.borderRadius = '2px';
+
+                                // Level Logic
+                                let level = 0;
+                                if (day.count > 0) level = 1;
+                                if (day.count >= 3) level = 2;
+                                if (day.count >= 6) level = 3;
+                                if (day.count >= 10) level = 4;
+
+                                dayEl.setAttribute('data-level', level);
+                                dayEl.title = `${day.date}: ${day.count} contributions`;
+                                weekCol.appendChild(dayEl);
                             });
-
-                            // Pad end of last week
-                            while (weekEl.children.length < 7) {
-                                const emptyDay = document.createElement('div');
-                                emptyDay.className = 'graph-day empty';
-                                weekEl.appendChild(emptyDay);
-                            }
-
-                            grid.appendChild(weekEl);
+                            calendarBody.appendChild(weekCol);
                         });
 
-                        calendarBody.appendChild(grid);
+                        calendarBody.style.display = 'flex';
+                        calendarBody.style.gap = '3px';
+
                         graphContent.appendChild(monthsHeader);
                         graphContent.appendChild(calendarBody);
                     };
 
-                    // Initial Render
                     renderYear(activeYear);
                 }
             }
         } catch (error) {
-            console.error("GitHub Streak fetch failed:", error);
-            const streakEl = document.getElementById('github-streak');
-            if (streakEl) streakEl.innerText = "Streak: -";
+            console.error("GitHub fetch failed:", error);
+            const calendarEl = document.querySelector(".calendar");
+            if (calendarEl) calendarEl.innerText = "Unable to load contributions.";
         }
     }
     fetchGitHubStreak();
 
-    // --- Navigation Highlights ---
-    const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('section');
-    const mainContent = document.querySelector('.main-content');
-
-    // Simple scroll spy to highlight sidebar
-    if (mainContent) {
-        mainContent.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                // 150px offset for header
-                if (mainContent.scrollTop >= (sectionTop - 250)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('href').includes(current)) {
-                    item.classList.add('active');
-                }
-            });
-        });
-    }
-
-    // --- Smooth Scroll for anchors ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-
-            // Remove active class from all
-            navItems.forEach(item => item.classList.remove('active'));
-            // Add to clicked
-            this.classList.add('active');
-
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    // --- Sidebar Toggle for Mobile ---
+    const sidebar = document.querySelector('.sidebar');
+    // Add a toggle button logic here if you add a burger menu later
 });
