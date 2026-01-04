@@ -5,6 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atul Singh | Frontend Developer</title>
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Atul Singh | Frontend Engineer & DSA Specialist">
+    <meta property="og:description"
+        content="Portfolio of a Frontend Engineer building high-performance web apps and solving complex algorithmic problems.">
+    <meta property="og:image" content="assets/images/profile.jpg">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Atul Singh | Frontend Engineer">
+    <meta property="twitter:description" content="Building high-performance web apps and solving complex problems.">
+    <meta property="twitter:image" content="assets/images/profile.jpg">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +25,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
-    <!-- GitHub Calendar CSS Removed (Using Custom) -->
 </head>
 
 <body>
@@ -57,9 +68,9 @@
             <section id="overview" class="hero-section">
                 <div class="hero-content">
                     <h1 class="hero-name">Hi, I'm Atul Singh</h1>
-                    <p class="hero-role">Frontend Developer | Freelancer | Prompt Engineer | DSA Learner</p>
-                    <p class="hero-description">I build pixel-perfect, interactive web experiences and solve complex
-                        algorithmic problems. Focused on clean code, performance, and intuitive design.</p>
+                    <p class="hero-role">Frontend Engineer | DSA | Prompt Engineer</p>
+                    <p class="hero-description">I build high-performance web applications and solve complex algorithmic
+                        problems, bridging the gap between efficient code and AI-driven solutions.</p>
                     <div class="hero-actions">
                         <a href="assets/resume.pdf" class="btn btn-primary" target="_blank"><i
                                 class="fas fa-file-alt"></i> Resume</a>
@@ -79,17 +90,20 @@
                 <div class="projects-grid-featured">
 
                     <!-- 1. Waste Management System -->
+                    <!-- 1. Waste Management System -->
+                    <!-- 1. Waste Management System -->
                     <div class="project-card-featured">
                         <div class="project-mockup">
-                            <!-- Placeholder: Replaced via CSS or user can add img -->
-                            <i class="fas fa-recycle"></i>
+                            <img src="assets/images/waste_management.png" alt="Waste Management Dashboard"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                         </div>
                         <div class="project-content">
                             <div class="project-header-row">
                                 <h4 class="project-title">Waste Management System</h4>
                             </div>
                             <div class="role-badge">Full Stack Developer</div>
-                            <p class="problem-statement">Solves inefficient municipal waste collection by enabling
+                            <p class="problem-statement" style="color: var(--danger-color);">Solves inefficient
+                                municipal waste collection by enabling
                                 real-time tracking and automated route optimization.</p>
 
                             <ul class="feature-list">
@@ -119,31 +133,31 @@
 
                     <!-- 2. TripSmart AI -->
                     <div class="project-card-featured">
-                        <div class="project-mockup"
-                            style="background: linear-gradient(135deg, #0f172a 0%, #334155 100%);">
-                            <i class="fas fa-plane-departure"></i>
+                        <div class="project-mockup">
+                            <img src="assets/images/tripsmart_real.png" alt="TripSmart AI Interface"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                         </div>
                         <div class="project-content">
                             <div class="project-header-row">
                                 <h4 class="project-title">TripSmart AI</h4>
                             </div>
                             <div class="role-badge">Frontend & Logic Engineer</div>
-                            <p class="problem-statement">Eliminates travel planning fragmentation by unifying budgeting,
+                            <p class="problem-statement" style="color: var(--danger-color);">Eliminates travel planning
+                                fragmentation by unifying budgeting,
                                 scheduling, and booking in one intelligent platform.</p>
 
                             <ul class="feature-list">
                                 <li>Developed an AI-driven itinerary generator based on user interests and budget.</li>
                                 <li>Engineered a dynamic budget allocation system with real-time currency conversion.
                                 </li>
-                                <li>Integrated interactive maps to visualize daily routes and transport options.</li>
+                                <li>Integrated collaborative tools for group trip planning.</li>
                             </ul>
 
                             <div class="tech-stack-row">
                                 <span class="tech-tag">React</span>
-                                <span class="tech-tag">TypeScript</span>
-                                <span class="tech-tag">Tailwind CSS</span>
+                                <span class="tech-tag">Redux</span>
                                 <span class="tech-tag">Node.js</span>
-                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">PostgreSQL</span>
                             </div>
 
                             <div class="project-actions">
@@ -159,17 +173,19 @@
 
                     <!-- 3. Whatsapp Chat Analyzer -->
                     <div class="project-card-featured">
-                        <div class="project-mockup"
-                            style="background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);">
-                            <i class="fab fa-whatsapp"></i>
+                        <div class="project-mockup">
+                            <img src="assets/images/whatsapp_custom.jpg" alt="Whatsapp Chat Analysis Dashboard"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                         </div>
                         <div class="project-content">
                             <div class="project-header-row">
                                 <h4 class="project-title">Whatsapp Chat Analyzer</h4>
                             </div>
                             <div class="role-badge">Python Developer</div>
-                            <p class="problem-statement">Transforms unstructured chat export data into actionable
+                            <p class="problem-statement" style="color: var(--danger-color);">Transforms unstructured
+                                chat export data into actionable
                                 insights through sentiment analysis and usage statistics.</p>
+
 
                             <ul class="feature-list">
                                 <li>Built a robust parsing engine to clean and structure raw text data.</li>

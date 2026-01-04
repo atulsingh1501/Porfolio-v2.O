@@ -923,8 +923,8 @@ a {
     /* Larger radius */
     overflow: hidden;
     display: grid;
-    grid-template-columns: 350px 1fr;
-    /* Image left, content right */
+    /* Compact Mode: Fixed smaller width to prevent huge cards */
+    grid-template-columns: 280px 1fr;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -936,17 +936,36 @@ a {
 
 .project-mockup {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
     border-right: 1px solid var(--border-subtle);
-    min-height: 300px;
+    height: 100%;
+    min-height: 200px;
+    /* Reduced for sleekness */
+    overflow: hidden;
+    /* Ensure zoom doesn't spill */
+}
+
+/* Ensure image always fills container */
+.project-mockup img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    /* Remove inline-block gaps */
+    transform: none;
+    /* Removed zoom */
+    transition: transform 0.5s ease;
 }
 
 .project-mockup i {
     font-size: 4rem;
     color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Center fallback icon */
 }
 
 /* Placeholder for actual image: user can replace bg with img later */
@@ -958,20 +977,25 @@ a {
 }
 
 .project-content {
-    padding: 32px;
+    padding: 24px;
+    /* Reduced from 32px */
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    /* Center content vertically */
 }
 
 .project-header-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    /* Tightened */
 }
 
 .project-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    /* Slightly smaller */
     font-weight: 700;
     color: var(--text-primary);
     margin: 0;
@@ -979,8 +1003,9 @@ a {
 
 .problem-statement {
     color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 16px;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    /* Tightened from 16px */
     font-style: italic;
     border-left: 3px solid var(--accent-color);
     padding-left: 12px;
@@ -990,30 +1015,32 @@ a {
     background: rgba(20, 184, 166, 0.1);
     /* Accent tint */
     color: var(--accent-color);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
-    padding: 4px 10px;
+    padding: 2px 8px;
     border-radius: 4px;
     align-self: flex-start;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    /* Tightened */
 }
 
 .feature-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 24px 0;
-    flex-grow: 1;
-    /* Pushes footer down */
+    margin: 0 0 16px 0;
+    /* Tightened from 24px */
 }
 
 .feature-list li {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    /* Slightly smaller text */
     color: var(--text-secondary);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    /* Tightened */
     position: relative;
-    padding-left: 20px;
+    padding-left: 16px;
 }
 
 .feature-list li::before {
@@ -1026,8 +1053,9 @@ a {
 .tech-stack-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
+    gap: 6px;
+    margin-bottom: 16px;
+    /* Tightened */
 }
 
 .tech-tag {
@@ -1065,11 +1093,27 @@ a {
     .project-card-featured {
         grid-template-columns: 1fr;
         /* Stack vertically */
+        height: auto;
+        /* Allow auto height */
     }
 
     .project-mockup {
         border-right: none;
         border-bottom: 1px solid var(--border-subtle);
-        min-height: 200px;
+        width: 100%;
+        aspect-ratio: 16/9;
+        /* Always maintain landscape ratio */
+        height: auto;
+        min-height: 0;
     }
+
+    .project-content {
+        padding: 24px;
+    }
+}
+
+/* Ensure problem statement is red as requested */
+.problem-statement {
+    color: var(--danger-color);
+    font-weight: 500;
 }
