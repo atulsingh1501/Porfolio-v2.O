@@ -43,6 +43,7 @@
                 <p class="nav-role">Frontend Developer</p>
             </div>
 
+            <!-- Desktop Sidebar Menu (Restored) -->
             <div class="nav-menu">
                 <a href="#overview" class="nav-item active"><i class="fas fa-home"></i> Overview</a>
                 <a href="#projects" class="nav-item"><i class="fas fa-layer-group"></i> Projects</a>
@@ -52,12 +53,20 @@
                 <a href="#connect" class="nav-item"><i class="fas fa-paper-plane"></i> Connect</a>
             </div>
 
+            <!-- Removed nav-menu from here to place it at body root for mobile -->
+
             <div class="nav-footer">
                 <a href="https://github.com/atulsingh1501" target="_blank" class="icon-link"><i
                         class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/atul-singh-20y/" target="_blank" class="icon-link"><i
                         class="fab fa-linkedin"></i></a>
                 <a href="https://twitter.com" target="_blank" class="icon-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/the.hoodieman/" target="_blank" class="icon-link"><i
+                        class="fab fa-instagram"></i></a>
+                <button id="mobile-menu-btn" class="icon-link theme-btn" aria-label="Toggle Menu"
+                    style="display: none;">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </nav>
 
@@ -72,16 +81,13 @@
                     <p class="hero-description">I build high-performance web applications and solve complex algorithmic
                         problems, bridging the gap between efficient code and AI-driven solutions.</p>
                     <div class="hero-actions">
-                        <a href="assets/resume.pdf" class="btn btn-primary" target="_blank"><i
-                                class="fas fa-file-alt"></i> Resume</a>
-                        <a href="#projects" class="btn"
-                            style="border: 1px solid var(--border-subtle); color: var(--text-primary);">View
-                            Projects</a>
-                        <a href="https://github.com/atulsingh1501" target="_blank" class="btn"
-                            style="border: 1px solid var(--border-subtle); color: var(--text-secondary);"><i
-                                class="fab fa-github"></i> GitHub</a>
+                        <a href="d:\My Projects\portfolio\Atul_Singh_Resume.pdf" class="btn btn-primary" download>
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
+                        <a href="https://github.com/atulsingh1501" target="_blank" class="btn btn-outline">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
                     </div>
-                </div>
             </section>
 
             <!-- 2. Projects Section (Most Important) -->
@@ -410,6 +416,8 @@
                                 class="fab fa-linkedin"></i></a>
                         <a href="https://twitter.com" target="_blank" class="icon-link"><i
                                 class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/the.hoodieman/" target="_blank" class="icon-link"><i
+                                class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </section>
@@ -423,6 +431,16 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
     <script src="script.js"></script>
+    <!-- Mobile Navigation Overlay (New, Separate from Sidebar) -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <a href="#overview" class="nav-item-mobile"><i class="fas fa-home"></i> Overview</a>
+        <a href="#projects" class="nav-item-mobile"><i class="fas fa-layer-group"></i> Projects</a>
+        <a href="#stack" class="nav-item-mobile"><i class="fas fa-cubes"></i> Stack</a>
+        <a href="#stats" class="nav-item-mobile"><i class="fas fa-chart-line"></i> Stats</a>
+        <a href="#achievements" class="nav-item-mobile"><i class="fas fa-trophy"></i> Awards</a>
+        <a href="#connect" class="nav-item-mobile"><i class="fas fa-paper-plane"></i> Connect</a>
+    </div>
+
 </body>
 
 </html>

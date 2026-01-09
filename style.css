@@ -25,6 +25,8 @@
     --radius-lg: 12px;
 }
 
+/* Theme button styles removed */
+
 * {
     margin: 0;
     padding: 0;
@@ -69,11 +71,118 @@ a {
     padding: var(--spacing-lg);
     flex-shrink: 0;
     /* Sticky positioning for sidebar */
+    /* Sticky positioning for sidebar */
     position: sticky;
     top: 0;
     height: 100vh;
-    overflow-y: auto;
-    /* Internal scrolling if sidebar content is too long */
+    overflow-y: hidden;
+    /* No internal scroll needed if menu is external */
+}
+
+/* --- Navigation Split Strategy --- */
+
+/* 1. Desktop Sidebar Menu (Default) */
+.nav-menu {
+    display: flex;
+    /* Visible on Desktop */
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.nav-item i {
+    width: 24px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.nav-item.active {
+    background: rgba(20, 184, 166, 0.1);
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+/* 2. Mobile Overlay (Hidden on Desktop) */
+.mobile-nav-overlay {
+    display: none;
+    /* Hidden by default */
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+
+    /* Hide Desktop Sidebar Menu */
+    .sidebar .nav-menu {
+        display: none !important;
+    }
+
+    /* Show Mobile Overlay (when active) */
+    .mobile-nav-overlay {
+        display: flex;
+        /* Flex but hidden via opacity/visibility */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        z-index: 2000;
+
+        /* Animation State */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: all 0.3s ease-in-out;
+        transform: scale(0.95);
+    }
+
+    .mobile-nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        transform: scale(1);
+    }
+
+    .nav-item-mobile {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-secondary);
+        text-decoration: none;
+        position: relative;
+    }
+
+    .nav-item-mobile i {
+        display: none;
+    }
+
+    /* No icons on mobile menu */
+
+    .nav-item-mobile.active {
+        color: var(--accent-color);
+    }
+
+    .nav-item-mobile:hover {
+        color: var(--text-primary);
+    }
 }
 
 .profile-summary {
@@ -604,123 +713,407 @@ a {
 }
 
 @media (max-width: 768px) {
-    #skills-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-
-/* Default hidden on desktop */
-.view-more-btn {
-    display: none;
-}
-
-@media (max-width: 768px) {
     .dashboard-container {
         flex-direction: column;
         height: auto;
-        overflow: auto;
+        overflow-x: hidden;
     }
 
+    /* Mobile Sidebar Container */
     .sidebar {
         width: 100%;
+        max-width: 100%;
+        /* Prevent overflow */
+        box-sizing: border-box;
         border-right: none;
         border-bottom: 1px solid var(--border-subtle);
-        padding: var(--spacing-sm) var(--spacing-md);
-        /* Reduced padding for compact bar */
-        position: sticky;
-        /* Sticky positioning */
-        top: 0;
-        z-index: 1000;
-        /* Ensure it stays on top */
-        height: auto;
-        background: var(--bg-dark);
-        /* Ensure background is opaque */
-    }
-
-    .nav-menu {
+        padding: 12px 16px;
+        display: flex;
         flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 4px;
-        gap: 8px;
-        /* Add gap between items */
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 1100;
+        height: 60px;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(12px);
     }
 
-    .nav-item {
-        padding: 10px 16px;
-        /* Larger touch target */
-        white-space: nowrap;
-        /* Prevent wrapping */
-        background: rgba(255, 255, 255, 0.03);
-        /* Subtle background for clarity */
-        border-radius: 20px;
-        /* Pill shape for mobile */
+    .profile-summary {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        width: auto;
+        border: none;
+        flex-shrink: 1;
+        /* Allow shrinking */
+        min-width: 0;
+        /* Enable flex shrinking for text */
     }
 
-    .nav-footer {
+    .avatar-wrapper {
+        margin: 0 !important;
+        width: 42px !important;
+        /* Slightly larger base */
+        height: 42px !important;
+        position: relative !important;
+        flex-shrink: 0;
+        /* Ensure wrapper itself doesn't hide the dot if dot is on border */
+        overflow: visible !important;
+    }
+
+    /* The masking container for the round image */
+    .profile-pic-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        /* This crops the zoomed image */
+        position: relative;
+        margin: 0;
+    }
+
+    /* Zoom the image inside the crop */
+    .avatar-wrapper .profile-pic {
+        transform: scale(1.35) !important;
+        /* ZOOM HERE */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transform-origin: center 20%;
+        /* Focus on face */
+    }
+
+    /* Status Dot - Positioned on WRAPPER, not container */
+    .avatar-wrapper .status-indicator {
+        width: 11px;
+        height: 11px;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        top: auto;
+        /* Reset */
+        left: auto;
+        /* Reset */
+        border: 2px solid var(--bg-dark);
+        border-radius: 50%;
+        background: var(--success-color);
+        z-index: 10;
+        /* Above image */
+    }
+
+    .profile-info {
         display: none;
     }
 
-    .main-content {
-        padding: var(--spacing-lg) var(--spacing-md);
-        /* Reduce padding */
-        overflow: visible;
+    .nav-name {
+        font-size: 1rem;
+        margin: 0;
+        font-weight: 600;
+        color: var(--text-primary);
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+        /* Prevent text from pushing controls off screen */
     }
 
+    .nav-role {
+        display: none;
+    }
+
+    /* The Dropdown Menu (Mobile Only) */
+    .nav-menu {
+        display: none;
+        position: fixed;
+        /* Fixed relative to viewport */
+        top: 60px;
+        /* Right below the header */
+        left: 0;
+        right: 0;
+        width: 100vw;
+        /* Full viewport width */
+        height: auto;
+        max-height: 80vh;
+        /* Prevent overflowing screen height */
+        flex-direction: column;
+        background: var(--bg-dark);
+        /* Solid background */
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 16px;
+        gap: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        overflow-y: auto;
+        z-index: 2000;
+        /* Higher than sidebar */
+        transform: translateY(0);
+        /* Ensure new stacking context */
+    }
+
+    .nav-menu.active {
+        display: flex !important;
+        /* Force display when active */
+    }
+
+    .nav-item {
+        width: 100%;
+        padding: 14px 16px;
+        /* Larger touch target */
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        text-align: left;
+        font-size: 1rem;
+        color: var(--text-secondary);
+        border: 1px solid transparent;
+        margin: 0;
+        display: block;
+        /* Ensure it takes full width */
+        box-sizing: border-box;
+        /* Include padding in width */
+    }
+
+    .nav-item.active {
+        background: rgba(20, 184, 166, 0.1);
+        color: var(--accent-color);
+        font-weight: 600;
+        border: 1px solid rgba(20, 184, 166, 0.2);
+    }
+
+    /* Desktop Override for moved nav */
+    @media (min-width: 769px) {
+        .nav-menu {
+            display: flex !important;
+            position: static;
+            width: auto;
+            height: auto;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            overflow: visible;
+            transform: none;
+            z-index: auto;
+            margin-top: 2rem;
+            /* Restore desktop margin */
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background: transparent;
+        }
+
+        .sidebar .nav-menu {
+            /* Since we moved it out, we need to handle desktop positioning relative to sidebar content? 
+               Wait, if we moved it out of .sidebar in HTML, it won't be in the sidebar on Desktop either!
+               We need to put it BACK into the grid area visually on desktop.
+            */
+            display: none;
+        }
+    }
+
+    /* Controls */
+    .nav-footer {
+        display: flex !important;
+        align-items: center;
+        gap: 16px;
+        padding: 0;
+        border: none;
+        margin: 0;
+    }
+
+    .nav-footer .icon-link {
+        display: none;
+    }
+
+    .nav-footer #theme-toggle {
+        display: flex;
+        font-size: 1.2rem;
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        padding: 8px;
+    }
+
+    #mobile-menu-btn {
+        display: flex !important;
+        font-size: 1.4rem;
+        color: var(--text-primary);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+    }
+
+    .main-content {
+        padding: 16px;
+        width: 100%;
+        margin-top: 0;
+        /* Remove top margin as header is sticky */
+    }
+
+    /* Center text for Hero on Mobile */
     .hero-section {
-        padding: 30px 20px;
+        padding: 32px 20px;
+        margin-bottom: 24px;
+        text-align: center;
+        /* Center align everything */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .hero-name {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        word-wrap: break-word;
+        margin-bottom: 8px;
     }
 
-    .dashboard-grid {
-        grid-template-columns: 1fr;
+    .hero-role {
+        font-size: 1rem;
+        margin-bottom: 16px;
+        display: inline-block;
     }
 
-    .github-card {
-        grid-column: span 1;
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        align-items: center;
+        /* Center buttons */
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        max-width: 280px;
+        /* Prevent them from being too wide on landscape */
+        justify-content: center;
+        padding: 10px 20px;
+        /* Better click area */
+    }
+
+    .content-section {
+        margin-bottom: 32px;
+        /* Tighten section spacing */
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+    }
+
+    .dashboard-grid,
+    .projects-grid,
+    #skills-grid,
+    #achieve-grid,
+    #stats-grid {
+        grid-template-columns: 1fr !important;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
 
     .card {
+        padding: 16px;
         width: 100%;
-        min-width: 0;
-        /* Important for grid item overflow handling */
     }
 
-    /* GitHub Graph Mobile */
-    .layout-wrapper {
-        flex-direction: column;
-        /* Stack year selector on top */
-        gap: 12px;
+    /* COMPACT PROJECTS */
+    .projects-grid-featured {
+        gap: 24px;
+    }
+
+    .project-card-featured {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .project-mockup {
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        width: 100%;
+        height: 140px !important;
+        /* Visual strip */
+        min-height: 0;
+    }
+
+    .project-content {
+        padding: 16px !important;
+    }
+
+    .project-title {
+        font-size: 1.1rem;
+    }
+
+    .problem-statement {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+
+    .feature-list {
+        margin-bottom: 12px;
+    }
+
+    .feature-list li {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .project-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .project-actions .btn {
+        flex-grow: 1;
+        justify-content: center;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    /* STATS & GITHUB FIXES */
+    .github-card {
+        grid-column: span 1;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .calendar-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 8px;
     }
 
     .year-selector {
         flex-direction: row;
-        /* Horizontal years on mobile */
         overflow-x: auto;
-        padding-bottom: 8px;
+        margin-bottom: 8px;
         width: 100%;
     }
 
-    .year-btn {
-        flex-shrink: 0;
+    /* CONTACT COMPACT */
+    #connect .card {
+        padding: 24px 16px !important;
+        text-align: center;
     }
 
-    .months-header {
-        margin-left: 0;
-        /* Align with left */
-        font-size: 0.7rem;
+    #connect h2 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
     }
 
-    .github-card {
-        grid-column: span 1;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
+    #connect p {
+        margin-bottom: 20px;
     }
 }
 

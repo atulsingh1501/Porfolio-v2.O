@@ -282,7 +282,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     fetchGitHubStreak();
 
+
     // --- Sidebar Toggle for Mobile ---
-    const sidebar = document.querySelector('.sidebar');
-    // Add a toggle button logic here if you add a burger menu later
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+
+    if (mobileMenuBtn && mobileNavOverlay) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNavOverlay.classList.toggle('active');
+
+            // Toggle icon between bars and times (X)
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileNavOverlay.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when a link is clicked
+        const mobileLinks = mobileNavOverlay.querySelectorAll('.nav-item-mobile');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNavOverlay.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    }
 });
