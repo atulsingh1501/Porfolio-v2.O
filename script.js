@@ -313,4 +313,36 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Profile Picture Modal Logic (WhatsApp Style) ---
+    const profilePicContainer = document.querySelector('.profile-pic-container');
+    const profileModal = document.getElementById('profile-modal');
+    const modalImg = document.getElementById('profile-modal-img');
+    const closeModal = document.querySelector('.close-modal');
+
+    if (profilePicContainer && profileModal && modalImg) {
+        profilePicContainer.addEventListener('click', (e) => {
+            e.preventDefault();
+            profileModal.classList.add('active');
+            // Sync image source just in case
+            const currentPic = document.querySelector('.profile-pic');
+            if (currentPic) {
+                modalImg.src = currentPic.src;
+            }
+        });
+    }
+
+    if (closeModal && profileModal) {
+        closeModal.addEventListener('click', () => {
+            profileModal.classList.remove('active');
+        });
+    }
+
+    if (profileModal) {
+        profileModal.addEventListener('click', (e) => {
+            if (e.target === profileModal) {
+                profileModal.classList.remove('active');
+            }
+        });
+    }
 });
