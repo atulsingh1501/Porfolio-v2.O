@@ -204,12 +204,9 @@ a {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    /* Keep for safety */
     object-fit: cover;
-    object-position: center 20%;
-    /* Focus on upper part (face) */
-    transform: scale(1.8);
-    /* Moderate zoom */
+    object-position: center top;
+    /* Natural face framing, no zoom */
 }
 
 .avatar-wrapper .status-indicator {
@@ -776,16 +773,14 @@ a {
         margin: 0;
     }
 
-    /* Zoom the image inside the crop */
+    /* Mobile profile pic */
     .avatar-wrapper .profile-pic {
-        transform: scale(1.35) !important;
-        /* ZOOM HERE */
+        transform: scale(1.1) !important;
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
-        transform-origin: center 20%;
-        /* Focus on face */
+        transform-origin: center top;
     }
 
     /* Status Dot - Positioned on WRAPPER, not container */
