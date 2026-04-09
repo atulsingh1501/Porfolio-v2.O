@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: TripSmart AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .case-study-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .cs-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 40px;
+        }
+
+        .cs-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .cs-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .cs-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cs-section {
+            margin-bottom: 60px;
+        }
+
+        .cs-section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .cs-content {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .cs-content strong {
+            color: var(--text-primary);
+        }
+
+        .cs-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cs-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .cs-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 6px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 40px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Override global app styles for standalone page */
+        body {
+            overflow: auto !important;
+            display: block !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="case-study-container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+        <header class="cs-header">
+            <h1 class="cs-title">TripSmart AI</h1>
+            <p class="cs-subtitle">Eliminating travel planning fragmentation with a unified, AI-driven intelligent
+                planner.</p>
+            <div class="cs-meta">
+                <span class="role-badge">Frontend & Logic Engineer</span>
+                <span class="role-badge">Case Study</span>
+            </div>
+        </header>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">01. The Problem</h3>
+            <div class="cs-content">
+                <p>Travel planning is notoriously fragmented. Users typically juggle 3-4 different tabs: Google Maps for
+                    routes, Excel for budgets, and TripAdvisor for recommendations. This context switching leads to
+                    <strong>decision fatigue</strong>, lost data, and budget overruns.
+                </p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">02. The Solution</h3>
+            <div class="cs-content">
+                <p>I built a <strong>centralized Single Page Application (SPA)</strong> that aggregates itinerary
+                    generation, budget tracking, and route visualization into one cohesive flow</p>
+                <p style="margin-top: 1rem;"><strong>Architectural Decision:</strong> I chose a <strong>NoSQL database
+                        (MongoDB)</strong> over SQL because itinerary structures vary wildly (e.g., a "beach day" vs.
+                    "city tour") and required a flexible document schema to adapt without rigid migrations.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">03. Tech Stack</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>React + TypeScript:</strong> For robust, type-safe state management of complex itinerary
+                        objects.</li>
+                    <li><strong>Node.js:</strong> To maintain a unified JavaScript environment across the full stack.
+                    </li>
+                    <li><strong>Tailwind CSS:</strong> For rapid, responsive UI development without context switching to
+                        CSS files.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">04. Key Features</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>AI Itinerary Generator:</strong> Creates day-by-day plans based on user constraints
+                        (budget, dates, interests).</li>
+                    <li><strong>Dynamic Budget Tracker:</strong> Real-time deduction of estimated costs from the total
+                        budget as activities are added.</li>
+                    <li><strong>Interactive Map Integration:</strong> Visualizes daily routes to verify logistical
+                        feasibility.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">05. Challenges & Learnings</h3>
+            <div class="cs-content">
+                <p><strong>Challenge: Complex State Management</strong><br>
+                    Managing the nested state of a multi-day itinerary (Days > Activities > Details) caused "prop
+                    drilling" and render performance issues.</p>
+                <p><em>Solution:</em> I implemented <strong>Context API with useReducer</strong> to centralize state
+                    logic, which simplified component updates and improved maintainability.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Challenge: Map API Quotas</strong><br>
+                    Frequent re-rendering of the map component was rapidly consuming API quotas.</p>
+                <p><em>Solution:</em> I implemented <strong>Debouncing</strong> on map update triggers and cached common
+                    route data, reducing API calls by ~40%.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">06. Impact</h3>
+            <div class="cs-content">
+                <p>The final MVP successfully unified the planning workflow, allowing users to create a complete 3-day
+                    itinerary in under 5 minutes. This project sharpened my skills in <strong>handling complex nested
+                        data structures</strong> and <strong>optimizing frontend performance</strong> in
+                    interaction-heavy applications.</p>
+            </div>
+        </section>
+
+        <a href="index.html" class="btn btn-primary">View Other Projects</a>
+    </div>
+</body>
+
+</html>

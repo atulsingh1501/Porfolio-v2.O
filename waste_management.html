@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Waste Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reusing consistent case study styles */
+        .case-study-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .cs-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 40px;
+        }
+
+        .cs-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .cs-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .cs-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cs-section {
+            margin-bottom: 60px;
+        }
+
+        .cs-section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .cs-content {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .cs-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cs-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .cs-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 6px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 40px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Override global app styles for standalone page */
+        body {
+            overflow: auto !important;
+            display: block !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="case-study-container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+        <header class="cs-header">
+            <h1 class="cs-title">Waste Management System</h1>
+            <p class="cs-subtitle">Optimizing municipal cleanliness through data-driven route planning and citizen
+                engagement.</p>
+            <div class="cs-meta">
+                <span class="role-badge">Full Stack Developer</span>
+                <span class="role-badge">Case Study</span>
+            </div>
+        </header>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">01. The Problem</h3>
+            <div class="cs-content">
+                <p>Municipal waste collection is often inefficient. Trucks follow static routes regardless of bin
+                    fullness, leading to <strong>wasted fuel</strong> on empty bins and <strong>health hazards</strong>
+                    from overflowing ones that were missed. Additionally, citizens lack a direct channel to report
+                    spot-dumps.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">02. The Solution</h3>
+            <div class="cs-content">
+                <p>I developed a centralized <strong>Role-Based Ecosystem</strong> to handle the complex logistics of
+                    waste
+                    collection:</p>
+                <div style="margin-top: 1rem;">
+                    <ul class="cs-list">
+                        <li><strong>Admin Dashboard:</strong> A command center for logistics, assigning vehicles, and
+                            visualizing city-wide collection data.</li>
+                        <li><strong>Staff Interface:</strong> A dedicated portal for drivers to view daily schedules and
+                            update route completion status in real-time.</li>
+                        <li><strong>Citizen Portal:</strong> A simplified reporting tool allowing residents to flag
+                            missed collections and track resolution.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">03. Tech Stack</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>React + Vite:</strong> For a high-performance, lag-free dashboard experience.</li>
+                    <li><strong>Node.js & Express:</strong> To handle concurrent requests from multiple users (citizens
+                        and admins) efficiently.</li>
+                    <li><strong>Context API:</strong> Used for global state management of user sessions and
+                        authentication flows without Redux bloat.</li>
+                    <li><strong>Leaflet Maps:</strong> For lightweight, open-source visualization of bin locations.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">04. Key Features</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>Dynamic Reporting:</strong> Citizens can upload geo-tagged images of waste, instantly
+                        creating tickets for admins.</li>
+                    <li><strong>Role-Based Access Control (RBAC):</strong> Secure separation of driver, citizen, and
+                        admin privileges.</li>
+                    <li><strong>Status Tracking:</strong> Real-time updates on report resolution (Pending -> In Progress
+                        -> Resolved).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">05. Challenges & Learnings</h3>
+            <div class="cs-content">
+                <p><strong>Challenge: Concurrency Handling</strong><br>
+                    Multiple users reporting issues simultaneously caused database locks with the initial SQLite setup.
+                </p>
+                <p><em>Solution:</em> I migrated to a robust backend architecture using <strong>connection
+                        pooling</strong> in Node.js to manage high-throughput requests without latency.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">06. Future Roadmap</h3>
+            <div class="cs-content">
+                <p><strong>IoT Integration (Planned):</strong> The next major iteration will introduce <strong>Smart
+                        Bins</strong> equipped with IoT ultrasonic sensors.</p>
+                <p>These sensors will transmit real-time fill-level data to the dashboard, allowing for <strong>fully
+                        automated route generation</strong>—dispatching trucks <em>only</em> when bins are near
+                    capacity, further reducing operational costs.</p>
+            </div>
+        </section>
+
+        <a href="index.html" class="btn btn-primary">View Other Projects</a>
+    </div>
+</body>
+
+</html>

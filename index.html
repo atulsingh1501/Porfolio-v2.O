@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atul Singh | Frontend Developer</title>
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Atul Singh | Frontend Engineer & DSA Specialist">
+    <meta property="og:description"
+        content="Portfolio of a Frontend Engineer building high-performance web apps and solving complex algorithmic problems.">
+    <meta property="og:image" content="assets/images/profile.jpg">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Atul Singh | Frontend Engineer">
+    <meta property="twitter:description" content="Building high-performance web apps and solving complex problems.">
+    <meta property="twitter:image" content="assets/images/profile.jpg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar / Navigation (Compact) -->
+        <nav class="sidebar">
+            <div class="profile-summary">
+                <div class="avatar-wrapper"
+                    style="position: relative; width: 48px; height: 48px; margin-bottom: var(--spacing-md);">
+                    <div class="profile-pic-container" style="margin-bottom: 0;">
+                        <img src="assets/images/profile.jpg" alt="Atul Singh" class="profile-pic">
+                    </div>
+                    <div class="status-indicator live-dot"></div>
+                </div>
+                <h1 class="nav-name">Atul Singh</h1>
+                <p class="nav-role">Frontend Developer</p>
+            </div>
+
+            <!-- Desktop Sidebar Menu (Restored) -->
+            <div class="nav-menu">
+                <a href="#overview" class="nav-item active"><i class="fas fa-home"></i> Overview</a>
+                <a href="#projects" class="nav-item"><i class="fas fa-layer-group"></i> Projects</a>
+                <a href="#stack" class="nav-item"><i class="fas fa-cubes"></i> Stack</a>
+                <a href="#stats" class="nav-item"><i class="fas fa-chart-line"></i> Stats</a>
+                <a href="#achievements" class="nav-item"><i class="fas fa-trophy"></i> Awards</a>
+                <a href="#connect" class="nav-item"><i class="fas fa-paper-plane"></i> Connect</a>
+            </div>
+
+            <!-- Removed nav-menu from here to place it at body root for mobile -->
+
+            <div class="nav-footer">
+                <a href="https://github.com/atulsingh1501" target="_blank" class="icon-link"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/atul-singh-20y/" target="_blank" class="icon-link"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com" target="_blank" class="icon-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/0001_logic/" target="_blank" class="icon-link"><i
+                        class="fab fa-instagram"></i></a>
+                <button id="mobile-menu-btn" class="icon-link theme-btn" aria-label="Toggle Menu"
+                    style="display: none;">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- 1. Hero Section -->
+            <section id="overview" class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-name">Hi, I'm Atul Singh</h1>
+                    <p class="hero-role">Frontend Engineer | DSA | Prompt Engineer</p>
+                    <p class="hero-description">I build high-performance web applications and solve complex algorithmic
+                        problems, bridging the gap between efficient code and AI-driven solutions.</p>
+                    <div class="hero-actions">
+                        <a href="d:\My Projects\portfolio\Atul_Singh_Resume.pdf" class="btn btn-primary" download>
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
+                        <a href="https://github.com/atulsingh1501" target="_blank" class="btn btn-outline">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+            </section>
+
+            <!-- 2. Projects Section (Most Important) -->
+            <section id="projects" class="content-section">
+                <h3 class="section-title">Featured Projects</h3>
+                <div class="projects-grid-featured">
+
+                    <!-- 1. Waste Management System -->
+                    <!-- 1. Waste Management System -->
+                    <!-- 1. Waste Management System -->
+                    <div class="project-card-featured">
+                        <div class="project-mockup">
+                            <img src="assets/images/waste_management.png" alt="Waste Management Dashboard"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header-row">
+                                <h4 class="project-title">Waste Management System</h4>
+                            </div>
+                            <div class="role-badge">Full Stack Developer</div>
+                            <p class="problem-statement" style="color: var(--danger-color);">Solves inefficient
+                                municipal waste collection by enabling
+                                real-time tracking and automated route optimization.</p>
+
+                            <ul class="feature-list">
+                                <li>Architected a real-time dashboard integrating IoT bin status sensors.</li>
+                                <li>Implemented an algorithm to optimize collection routes, reducing fuel costs.</li>
+                                <li>Built a citizen reporting portal for immediate flagging of overflow issues.</li>
+                            </ul>
+
+                            <div class="tech-stack-row">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">Vite</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="waste_management.html" class="btn btn-outline btn-sm"><i
+                                        class="fas fa-book-open"></i> Read Case Study</a>
+                                <a href="https://github.com/atulsingh1501/waste_management_system" target="_blank"
+                                    class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
+                                <a href="#" target="_blank" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. TripSmart AI -->
+                    <div class="project-card-featured">
+                        <div class="project-mockup">
+                            <img src="assets/images/tripsmart_real.png" alt="TripSmart AI Interface"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header-row">
+                                <h4 class="project-title">TripSmart AI</h4>
+                            </div>
+                            <div class="role-badge">Frontend & Logic Engineer</div>
+                            <p class="problem-statement" style="color: var(--danger-color);">Eliminates travel planning
+                                fragmentation by unifying budgeting,
+                                scheduling, and booking in one intelligent platform.</p>
+
+                            <ul class="feature-list">
+                                <li>Developed an AI-driven itinerary generator based on user interests and budget.</li>
+                                <li>Engineered a dynamic budget allocation system with real-time currency conversion.
+                                </li>
+                                <li>Integrated collaborative tools for group trip planning.</li>
+                            </ul>
+
+                            <div class="tech-stack-row">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Redux</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="tripsmart.html" class="btn btn-outline btn-sm"><i class="fas fa-book-open"></i>
+                                    Read Case Study</a>
+                                <a href="https://github.com/atulsingh1501/TripSmart" target="_blank"
+                                    class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
+                                <a href="#" target="_blank" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Whatsapp Chat Analyzer -->
+                    <div class="project-card-featured">
+                        <div class="project-mockup">
+                            <img src="assets/images/whatsapp_custom.jpg" alt="Whatsapp Chat Analysis Dashboard"
+                                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header-row">
+                                <h4 class="project-title">Whatsapp Chat Analyzer</h4>
+                            </div>
+                            <div class="role-badge">Python Developer</div>
+                            <p class="problem-statement" style="color: var(--danger-color);">Transforms unstructured
+                                chat export data into actionable
+                                insights through sentiment analysis and usage statistics.</p>
+
+
+                            <ul class="feature-list">
+                                <li>Built a robust parsing engine to clean and structure raw text data.</li>
+                                <li>Implemented sentiment analysis to visualize communication tone patterns.</li>
+                                <li>Designed interactive dashboards for tracking emoji usage and activity peak times.
+                                </li>
+                            </ul>
+
+                            <div class="tech-stack-row">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Streamlit</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Matplotlib</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/atulsingh1501/Whatsapp-chat-Analysis" target="_blank"
+                                    class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub Repo</a>
+                                <a href="#" target="_blank" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- 3. Skills Section (Grouped Tags, No Percentages) -->
+            <section id="stack" class="content-section">
+                <h3 class="section-title">Technical Skills</h3>
+                <div class="dashboard-grid" id="skills-grid">
+                    <!-- Languages -->
+                    <div class="card" style="grid-column: span 1;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-code"></i> Languages</h3>
+                        </div>
+                        <div class="skills-container">
+                            <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+                            <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
+                            <span class="skill-tag"><i class="fas fa-code"></i> C++</span>
+                            <span class="skill-tag"><i class="fab fa-html5"></i> HTML5</span>
+                            <span class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</span>
+                        </div>
+                    </div>
+
+                    <!-- Frameworks -->
+                    <div class="card" style="grid-column: span 1;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-layer-group"></i> Frameworks</h3>
+                        </div>
+                        <div class="skills-container">
+                            <span class="skill-tag"><i class="fab fa-react"></i> React.js</span>
+                            <span class="skill-tag"><i class="fab fa-node-js"></i> Node.js</span>
+                            <span class="skill-tag"><i class="fas fa-server"></i> Express.js</span>
+                            <span class="skill-tag"><i class="fas fa-database"></i> MongoDB</span>
+                            <span class="skill-tag"><i class="fas fa-wind"></i> Tailwind</span>
+                            <span class="skill-tag"><i class="fas fa-cube"></i> Three.js</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="card" style="grid-column: span 1;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-tools"></i> Tools</h3>
+                        </div>
+                        <div class="skills-container">
+                            <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
+                            <span class="skill-tag"><i class="fab fa-github"></i> GitHub</span>
+                            <span class="skill-tag"><i class="fas fa-terminal"></i> VS Code</span>
+                            <span class="skill-tag"><i class="fas fa-laptop-code"></i> IntelliJ IDEA</span>
+                            <span class="skill-tag"><i class="fas fa-paper-plane"></i> Postman</span>
+                            <span class="skill-tag"><i class="fas fa-rocket"></i> Antigravity</span>
+                            <span class="skill-tag"><i class="fab fa-figma"></i> Figma</span>
+                            <span class="skill-tag"><i class="fas fa-robot"></i> Prompt Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Coding Stats Section -->
+            <!-- 4. Engineering Impact Section (Static & Fast) -->
+            <section id="stats" class="content-section">
+                <h3 class="section-title">Engineering Impact</h3>
+                <div class="dashboard-grid" id="stats-grid">
+
+                    <!-- GitHub Card (Span 2) -->
+                    <div class="card github-card">
+                        <div class="card-header">
+                            <h3><i class="fab fa-github"></i> Contributions</h3>
+                            <span class="badge" id="github-streak">Streak: -</span>
+                        </div>
+                        <div class="calendar-wrapper">
+                            <div class="calendar">Loading...</div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Problem Solving (LeetCode) -->
+                    <div class="card metric-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-code"></i> Problem Solving</h3>
+                            <a href="https://leetcode.com/u/Atulya_15/" target="_blank" class="external-link"><i
+                                    class="fas fa-external-link-alt"></i></a>
+                        </div>
+                        <div class="metric-body">
+                            <div class="big-number" id="leetcode-total">Loading...</div>
+                            <p class="metric-label">LeetCode Problems Solved</p>
+                            <div class="mini-progress-bars" style="margin-top: 12px;">
+                                <div class="progress-item"
+                                    style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                    <span style="color: var(--success-color);">Easy: <span
+                                            id="leetcode-easy-count">-</span></span>
+                                    <span style="color: var(--warning-color);">Med: <span
+                                            id="leetcode-medium-count">-</span></span>
+                                    <span style="color: var(--danger-color);">Hard: <span
+                                            id="leetcode-hard-count">-</span></span>
+                                </div>
+                                <div
+                                    style="width: 100%; height: 6px; background: #333; border-radius: 3px; overflow: hidden; display: flex;">
+                                    <div id="leetcode-easy-bar"
+                                        style="width: 0%; background: var(--success-color); transition: width 1s ease;">
+                                    </div>
+                                    <div id="leetcode-medium-bar"
+                                        style="width: 0%; background: var(--warning-color); transition: width 1s ease;">
+                                    </div>
+                                    <div id="leetcode-hard-bar"
+                                        style="width: 0%; background: var(--danger-color); transition: width 1s ease;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Competitive Programming -->
+                    <div class="card metric-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> Competitive</h3>
+                        </div>
+                        <div class="metric-body">
+                            <ul style="list-style: none; padding: 0; margin-top: 5px; width: 100%;">
+                                <li
+                                    style="margin-bottom: 15px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+                                    <a href="https://www.codechef.com/users/atul_1501" target="_blank"
+                                        style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--text-primary);">
+                                        <span><i class="fas fa-code"
+                                                style="margin-right: 8px; color: var(--text-secondary);"></i>
+                                            CodeChef</span>
+                                        <span
+                                            style="font-size: 0.8rem; color: var(--accent-color); border: 1px solid var(--accent-color); padding: 2px 8px; border-radius: 12px;">View
+                                            Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.hackerrank.com/profile/atulsingh05540" target="_blank"
+                                        style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--text-primary);">
+                                        <span><i class="fab fa-hackerrank"
+                                                style="margin-right: 8px; color: var(--text-secondary);"></i>
+                                            HackerRank</span>
+                                        <span
+                                            style="font-size: 0.8rem; color: var(--accent-color); border: 1px solid var(--accent-color); padding: 2px 8px; border-radius: 12px;">View
+                                            Profile</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 5. Achievements Section -->
+            <section id="achievements" class="content-section">
+                <h3 class="section-title">Achievements</h3>
+                <div class="dashboard-grid" id="achieve-grid"
+                    style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                    <!-- SIH 2024 Participation -->
+                    <div class="card" style="border-left: 3px solid var(--success-color);">
+                        <div class="card-header" style="margin-bottom: 0.5rem;">
+                            <h4 style="font-size: 1.1rem; color: var(--text-primary);">SIH 2024 Participant</h4>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Selected for SIH 2024 via Vadodara
+                            Hackathon. Developed an autonomous tactical drone.</p>
+                    </div>
+
+                    <!-- XR Creator Hackathon -->
+                    <div class="card" style="border-left: 3px solid #a855f7;">
+                        <div class="card-header" style="margin-bottom: 0.5rem;">
+                            <h4 style="font-size: 1.1rem; color: var(--text-primary);">XR Creator Hackathon</h4>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Earned both Qualification (Cleared
+                            Round 1) and Participation certificates in WAVES 2025 by Ministry of I&B.</p>
+                    </div>
+
+                    <!-- Vadodara Hackathon -->
+                    <div class="card" style="border-left: 3px solid #3b82f6;">
+                        <div class="card-header" style="margin-bottom: 0.5rem;">
+                            <h4 style="font-size: 1.1rem; color: var(--text-primary);">Vadodara Hackathon 5.0</h4>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Active participant and innovator at
+                            the regional hackathon organized by Parul University.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Contact Section -->
+            <section id="connect" class="content-section">
+                <div class="card" style="text-align: center; padding: 60px 40px; align-items: center;">
+                    <h2 style="margin-bottom: 1rem; color: var(--text-primary); font-size: 1.8rem;">Let's Connect</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px;">I'm currently
+                        looking for new opportunities. Whether you have a question or just want to say hi, I'll try my
+                        best to get back to you!</p>
+                    <a href="mailto:atulsingh05540@gmail.com" class="btn btn-primary"
+                        style="display: inline-flex; font-size: 1.1rem; padding: 12px 24px;">
+                        <i class="fas fa-envelope"></i> &nbsp; Say Hello
+                    </a>
+                    <p style="margin-top: 1rem; color: var(--text-secondary); font-family: monospace; font-size: 1rem;">
+                        atulsingh05540@gmail.com</p>
+                    <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 24px;">
+                        <a href="https://github.com/atulsingh1501" target="_blank" class="icon-link"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/atul-singh-20y/" target="_blank" class="icon-link"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com" target="_blank" class="icon-link"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/0001_logic/" target="_blank" class="icon-link"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="dashboard-footer">
+                <p>© 2024 Atul Singh. Built with code & caffeine.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Profile Picture Modal -->
+    <div id="profile-modal" class="profile-modal">
+        <span class="close-modal">&times;</span>
+        <img class="profile-modal-content" id="profile-modal-img" src="assets/images/profile.jpg" alt="Profile Picture">
+    </div>
+
+    <!-- Mobile Navigation Overlay (New, Separate from Sidebar) -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <a href="#overview" class="nav-item-mobile"><i class="fas fa-home"></i> Overview</a>
+        <a href="#projects" class="nav-item-mobile"><i class="fas fa-layer-group"></i> Projects</a>
+        <a href="#stack" class="nav-item-mobile"><i class="fas fa-cubes"></i> Stack</a>
+        <a href="#stats" class="nav-item-mobile"><i class="fas fa-chart-line"></i> Stats</a>
+        <a href="#achievements" class="nav-item-mobile"><i class="fas fa-trophy"></i> Awards</a>
+        <a href="#connect" class="nav-item-mobile"><i class="fas fa-paper-plane"></i> Connect</a>
+    </div>
+
+</body>
+
+</html>
