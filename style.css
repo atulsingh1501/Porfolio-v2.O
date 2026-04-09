@@ -205,8 +205,10 @@ a {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    object-position: center top;
-    /* Natural face framing, no zoom */
+    object-position: 50% 25%;
+    transform: scale(1.4);
+    transform-origin: center 25%;
+    /* Moderate zoom, face-centered */
 }
 
 .avatar-wrapper .status-indicator {
