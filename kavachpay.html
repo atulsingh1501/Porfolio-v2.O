@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: KavachPay — Parametric Insurance | Atul Singh</title>
+    <meta name="description" content="A deep-dive into KavachPay, an AI-powered parametric insurance platform for gig workers built with React, Node.js, and Python by Atul Singh.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .case-study-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .cs-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 40px;
+        }
+
+        .cs-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .cs-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .cs-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cs-section {
+            margin-bottom: 60px;
+        }
+
+        .cs-section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .cs-content {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .cs-content strong {
+            color: var(--text-primary);
+        }
+
+        .cs-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cs-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .cs-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 6px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 40px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        .cs-image {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            margin: 24px 0 40px;
+            display: block;
+        }
+
+        .cs-callout {
+            background: rgba(var(--accent-rgb, 99, 102, 241), 0.08);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cs-callout strong {
+            color: var(--text-primary);
+        }
+
+        /* Override global app styles for standalone page */
+        body {
+            overflow: auto !important;
+            display: block !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="case-study-container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+        <header class="cs-header">
+            <h1 class="cs-title">KavachPay</h1>
+            <p class="cs-subtitle">The winning project for the Guidewire DEVTrails University Hackathon (Soar Phase). AI-driven parametric insurance platform specifically designed for India's 15 million gig delivery workers disrupted by extreme weather.</p>
+            <div class="cs-meta">
+                <span class="role-badge">Full Stack Developer & ML Architecture</span>
+                <span class="role-badge">React · Python · Node.js</span>
+                <span class="role-badge">Case Study</span>
+            </div>
+        </header>
+
+        <img src="assets/images/kavachpay_ui_preview.png" alt="KavachPay dashboard showing live weather card and work-proof status" class="cs-image">
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">01. The Problem</h3>
+            <div class="cs-content">
+                <p>India's ~15 million gig delivery workers face massive income vulnerability. Heavy rainfall, extreme heat, floods, or curfews can lead to days of zero earnings. Traditional insurance is too slow, paper-heavy, and unsuited for micro-disruptions.</p>
+                <p style="margin-top: 1rem;">Existing parametric insurance solutions rely heavily on <strong>GPS location</strong>. This creates a fatal flaw: GPS spoofing. A coordinated Telegram group could spoof being in a flood zone and drain the insurance liquidity pool in hours. When fraud kills the platform, honest workers lose coverage.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">02. The Solution</h3>
+            <div class="cs-content">
+                <p>I built <strong>KavachPay</strong> during the Guidewire DEVTrails Hackathon. It is a behavioral parametric insurance platform powered by the <strong>Work-Proof Protocol (WPP)</strong>.</p>
+                <div class="cs-callout">
+                    <strong>Core Innovation:</strong> Instead of asking "Where is this person via GPS?", KavachPay asks "Can this person prove their browser session shows genuine work activity?" It moves verification from client-side spoofable GPS to server-side behavioral signals like IP geolocation, session duration, click patterns, and work-hour alignment.
+                </div>
+                <p style="margin-top: 1rem;">The system cross-references these behavioral fingerprints with authoritative satellite data (IMD) to auto-trigger claims, paying out directly to UPI via Razorpay without the worker lifting a finger.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">03. Tech Stack</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>Frontend (React + Tailwind):</strong> Responsive dashboard with live weather cards, Work-Proof status indicators, and embedded zone risk maps (TomTom).</li>
+                    <li><strong>Backend (Node.js + Express):</strong> Manages the Work-Proof session chunking, cryptographic signing, and transaction processing.</li>
+                    <li><strong>Database (PostgreSQL):</strong> Manages relational data for users, policies, claims, and securely stores session proofs.</li>
+                    <li><strong>ML Architecture (Python):</strong> Powered by Isolation Forests (anomaly detection in session behavior), XGBoost (genuine work validation), and Graph Neural Networks (detecting coordinated fraud syndicates).</li>
+                    <li><strong>External APIs:</strong> IMD/OpenWeather (environmental consensus), TomTom (congestion), Twilio (SMS alerts), Razorpay (UPI payouts).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">04. Key Features</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>Work-Proof Protocol:</strong> Cryptographically signed 5-minute session chunks verified entirely on the backend to defeat GPS spoofing apps.</li>
+                    <li><strong>Environmental Consensus Engine:</strong> Multi-tiered validation relying on satellite/physical infrastructure (IMD, AQICN) that cannot be spoofed.</li>
+                    <li><strong>Automated Claim Adjudication:</strong> If Work-Proof, session authenticity, and event consensus metrics align, claims are paid to UPI in under 60 seconds.</li>
+                    <li><strong>Fraud Ring Response Protocol:</strong> Detects coordinated Telegram syndicates by analyzing IP subnet density, login entropy, and behavioral synchronization.</li>
+                    <li><strong>Admin/Fraud Review Dashboard:</strong> Queue and visualization tool for claims requiring manual override or investigation.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">05. Challenges &amp; Learnings</h3>
+            <div class="cs-content">
+                <p><strong>Challenge: Defeating GPS Spoofing Syndicates</strong><br>
+                    The primary hurdle in parametric insurance is that bad actors can coordinate via Telegram to fake their locations and simulate natural disasters at scale. Relying on simple geofencing was not viable.</p>
+                <p><em>Solution:</em> I shifted the defense surface area to <strong>server-side IP geolocation</strong> and <strong>browser interaction patterns</strong>. Since attackers have to actually interface with our browser client, their network provenance (ISP) and behavioral anomalies betray them even if their GPS coordinates look perfect.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Challenge: Ensuring Honest Workers Get Paid Promptly</strong><br>
+                    Overly aggressive anti-fraud systems can create high false-positive rates, blocking genuine workers who might just be using a new route or phone.</p>
+                <p><em>Solution:</em> I implemented a <strong>partial advance payout system</strong>. While claims with moderate fraud scores go under review, 40% of the claim amount is dispensed immediately, combined with a transparent SMS communication flow.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">06. Impact</h3>
+            <div class="cs-content">
+                <p>This project successfully secured qualification into Phase 3 (Soar Phase) of the Guidewire DEVTrails Hackathon. It addresses a real-world multi-million dollar vulnerability in parametric insurance models while protecting the most financially vulnerable workers in the gig economy.</p>
+                <div class="cs-callout">
+                    <strong>Repository:</strong> Full documentation and source code are available at
+                    <a href="https://github.com/atulsingh1501/KavachPay" target="_blank"
+                        style="color: var(--accent-color);">github.com/atulsingh1501/KavachPay</a>.
+                </div>
+            </div>
+        </section>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px;">
+            <a href="https://github.com/atulsingh1501/KavachPay" target="_blank" class="btn btn-outline">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <a href="https://kavachpay-seven.vercel.app/" target="_blank" class="btn btn-outline">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="https://youtu.be/vvW7pTM19fY" target="_blank" class="btn btn-primary">
+                <i class="fab fa-youtube"></i> Watch Pitch
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
