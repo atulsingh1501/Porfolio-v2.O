@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Digital RX — Clinic Management App | Atul Singh</title>
+    <meta name="description" content="A deep-dive into Digital RX, a full-stack offline-first clinic management app with WhatsApp prescription delivery, built by Atul Singh.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .case-study-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .cs-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 40px;
+        }
+
+        .cs-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .cs-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .cs-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cs-section {
+            margin-bottom: 60px;
+        }
+
+        .cs-section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .cs-content {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .cs-content strong {
+            color: var(--text-primary);
+        }
+
+        .cs-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cs-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .cs-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 6px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 40px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        .cs-image {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            margin: 24px 0 40px;
+            display: block;
+        }
+
+        .cs-callout {
+            background: rgba(var(--accent-rgb, 99, 102, 241), 0.08);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cs-callout strong {
+            color: var(--text-primary);
+        }
+
+        /* Override global app styles for standalone page */
+        body {
+            overflow: auto !important;
+            display: block !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="case-study-container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+        <header class="cs-header">
+            <h1 class="cs-title">Digital RX</h1>
+            <p class="cs-subtitle">An offline-first clinic management app that lets doctors create NMC-compliant
+                prescriptions and silently deliver them to patients via WhatsApp — eliminating paperwork entirely.</p>
+            <div class="cs-meta">
+                <span class="role-badge">Full Stack Developer</span>
+                <span class="role-badge">React · Node.js · Baileys</span>
+                <span class="role-badge">Case Study</span>
+            </div>
+        </header>
+
+        <img src="assets/images/digitalrx_ui_preview.png" alt="Digital RX app — prescription view with WhatsApp send" class="cs-image">
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">01. The Problem</h3>
+            <div class="cs-content">
+                <p>Indian doctors in small and mid-level clinics still rely on handwritten prescriptions. This creates
+                    three painful problems: <strong>illegible handwriting</strong> leads to dispensing errors,
+                    <strong>no digital record</strong> means patient history is untracked, and <strong>missed
+                        follow-ups</strong> result in incomplete treatment compliance.</p>
+                <p style="margin-top: 1rem;">Existing EMR software is either too expensive, too complex, or requires
+                    constant internet — making them impractical for a busy solo practitioner.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">02. The Solution</h3>
+            <div class="cs-content">
+                <p>I designed and built <strong>Digital RX</strong> — a fully <strong>offline-first PWA</strong> using
+                    React + Vite that requires no database server. All patient data lives in the browser's
+                    <code>localStorage</code>, making it instantly available with zero setup.</p>
+                <p style="margin-top: 1rem;">The killer feature: a custom <strong>Node.js + Express backend</strong>
+                    that integrates <strong>Baileys</strong> (a lightweight WebSocket-based WhatsApp library) to
+                    silently send prescription PDFs directly to the patient's WhatsApp number — no manual copy-pasting,
+                    no third-party messaging service, no per-message fees.</p>
+                <div class="cs-callout">
+                    <strong>Architectural Decision:</strong> I chose <code>localStorage</code> over a cloud database
+                    deliberately. Most clinics run on a single device (a doctor's laptop or desktop). Removing the
+                    database dependency means zero monthly hosting costs, instant startup, and full offline
+                    functionality — the app works even when the internet is down.
+                </div>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">03. Tech Stack</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>React + Vite:</strong> Fast HMR during development; production build is a single
+                        optimized bundle served as a static site.</li>
+                    <li><strong>Node.js + Express:</strong> Lightweight REST API server handling WhatsApp messaging and
+                        medicine database queries.</li>
+                    <li><strong>Baileys (WhatsApp WebSocket):</strong> Connects directly to WhatsApp without Puppeteer
+                        or Chrome — runs on low-memory servers and local machines alike.</li>
+                    <li><strong>Electron:</strong> Packages the entire app (frontend + backend) as a standalone Windows
+                        .exe installer — no internet, no browser, no setup required for the doctor.</li>
+                    <li><strong>jsPDF / html2canvas:</strong> Generates NMC-compliant prescription PDFs client-side
+                        before WhatsApp delivery.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">04. Key Features</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>Live Medicine Search:</strong> A 200+ offline Indian medicine database enables
+                        instant autocomplete — name, strength, and instructions auto-fill on selection.</li>
+                    <li><strong>NMC-Compliant PDF Prescriptions:</strong> Generated entirely in the browser via
+                        html2canvas + jsPDF, pre-formatted with doctor letterhead, registration number, and patient
+                        details.</li>
+                    <li><strong>Silent WhatsApp Delivery:</strong> After scanning a one-time QR code, the app sends
+                        PDF prescriptions to any Indian mobile number — no manual messaging needed.</li>
+                    <li><strong>Follow-up Reminders:</strong> Tracks scheduled follow-up dates per patient and
+                        surfaces overdue cases on the dashboard.</li>
+                    <li><strong>Desktop App (Electron):</strong> Distributed as a single Windows installer — the
+                        doctor installs it once and it just works, with no cloud dependency.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">05. Challenges & Learnings</h3>
+            <div class="cs-content">
+                <p><strong>Challenge: WhatsApp Session Persistence</strong><br>
+                    The Baileys WhatsApp session token would expire silently, requiring the doctor to re-scan the QR
+                    code — often mid-consultation, causing frustration.</p>
+                <p><em>Solution:</em> I implemented a <strong>real-time QR freshness timer</strong> (a green banner
+                    counting down seconds) and a <strong>Force Restart</strong> button that wipes the stale session
+                    and generates a fresh QR instantly. Session credentials are now persisted to disk, so most
+                    reconnections happen automatically.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Challenge: Electron + Baileys Packaging</strong><br>
+                    Baileys uses native Node.js modules (like <code>bufferutil</code>) that webpack/Vite refused to
+                    bundle for Electron — causing blank screens in the packaged .exe.</p>
+                <p><em>Solution:</em> I split the architecture: Electron runs the Express/Baileys backend as a
+                    <strong>child_process</strong> on a dynamic port, and the Electron renderer loads the Vite frontend
+                    separately. This clean separation resolved all native module conflicts.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Challenge: Mobile-Responsive UI for a Clinic Setting</strong><br>
+                    The app was designed desktop-first, but doctors in some clinics use tablets during rounds.</p>
+                <p><em>Solution:</em> Refactored layouts to CSS Grid + card-based views, added a hamburger
+                    navigation for smaller screens, and ensured all prescription actions (send, download) were
+                    easily thumb-reachable on a 10" tablet.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">06. Impact</h3>
+            <div class="cs-content">
+                <p>Digital RX reduces the average prescription workflow from <strong>~8 minutes</strong> (handwritten +
+                    photo + WhatsApp manual send) to <strong>under 90 seconds</strong> — a medicine is selected and a
+                    PDF lands in the patient's WhatsApp before they leave the clinic room.</p>
+                <p style="margin-top: 1rem;">This project deepened my expertise in <strong>full-stack offline
+                        architecture</strong>, <strong>WebSocket-based third-party integrations</strong>, and
+                    <strong>Electron desktop app packaging</strong> — a rare combination that spans both web and
+                    systems-level engineering.</p>
+                <div class="cs-callout">
+                    <strong>Live Demo:</strong> The web version is deployed at
+                    <a href="https://digital-rx-ten.vercel.app/" target="_blank"
+                        style="color: var(--accent-color);">digital-rx-ten.vercel.app</a> — use a PIN of
+                    <code>1234</code> to log in and explore the interface.
+                </div>
+            </div>
+        </section>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px;">
+            <a href="https://github.com/atulsingh1501/digitalRX" target="_blank" class="btn btn-outline">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <a href="https://digital-rx-ten.vercel.app/" target="_blank" class="btn btn-primary">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="index.html" class="btn btn-outline">View Other Projects</a>
+        </div>
+    </div>
+</body>
+
+</html>
