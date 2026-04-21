@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: PrepTrack — Placement Prep Tracker | Atul Singh</title>
+    <meta name="description" content="A deep-dive into PrepTrack, a full-stack MERN placement preparation tracker built with React, Node.js, MongoDB and JWT auth, by Atul Singh.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .case-study-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .cs-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 40px;
+        }
+
+        .cs-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .cs-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .cs-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cs-section {
+            margin-bottom: 60px;
+        }
+
+        .cs-section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .cs-content {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .cs-content strong {
+            color: var(--text-primary);
+        }
+
+        .cs-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cs-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .cs-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 6px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 40px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        .cs-image {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            margin: 24px 0 40px;
+            display: block;
+        }
+
+        .cs-callout {
+            background: rgba(var(--accent-rgb, 99, 102, 241), 0.08);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cs-callout strong {
+            color: var(--text-primary);
+        }
+
+        /* Override global app styles for standalone page */
+        body {
+            overflow: auto !important;
+            display: block !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="case-study-container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+        <header class="cs-header">
+            <h1 class="cs-title">PrepTrack</h1>
+            <p class="cs-subtitle">A full-stack MERN placement preparation tracker that brings LeetCode logging, daily
+                task management, goal tracking, study resources, and interview boards into one authenticated platform —
+                built for students who grind.</p>
+            <div class="cs-meta">
+                <span class="role-badge">Full Stack Developer</span>
+                <span class="role-badge">React · Node.js · MongoDB</span>
+                <span class="role-badge">Case Study</span>
+            </div>
+        </header>
+
+        <img src="assets/images/preptrack_ui_preview.png" alt="PrepTrack dashboard — activity heatmap, LeetCode tracker and stats" class="cs-image">
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">01. The Problem</h3>
+            <div class="cs-content">
+                <p>Students preparing for placements operate across an overwhelming number of tools simultaneously:
+                    LeetCode for problems, Notion for notes, Google Sheets for task tracking, random sticky notes for
+                    goals, and WhatsApp groups for resources. This context-switching leads to <strong>lost progress
+                        data, missed follow-ups, and zero visibility</strong> into overall placement readiness.</p>
+                <p style="margin-top: 1rem;">There was no single authenticated platform purpose-built for students to
+                    track everything — DSA grind, skill inventory, study materials, goals, and coding profiles — from
+                    one dashboard.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">02. The Solution</h3>
+            <div class="cs-content">
+                <p>I built <strong>PrepTrack</strong> — a full-stack MERN application with JWT-based authentication
+                    where every piece of preparation data is owned by the user and persisted in MongoDB. The frontend is
+                    a React + Vite SPA with Zustand for state management, and the backend is a Node.js + Express REST
+                    API with protected routes.</p>
+                <div class="cs-callout">
+                    <strong>Architectural Decision:</strong> I chose <strong>MongoDB</strong> over SQL because
+                    preparation data is inherently unstructured — a LeetCode log entry looks nothing like a study
+                    resource or an interview feedback record. Document-based storage with Mongoose schemas gave the
+                    flexibility to model each module independently without rigid migrations.
+                </div>
+                <p style="margin-top: 1rem;">The app is structured as an <strong>npm workspaces monorepo</strong> where
+                    both <code>client/</code> and <code>backend/</code> are managed from the project root, enabling a
+                    single <code>npm install</code> to wire up all dependencies.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">03. Tech Stack</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>React + Vite:</strong> Fast HMR during development with a lean production bundle; React
+                        Router v6 handles client-side navigation across 8+ pages.</li>
+                    <li><strong>Zustand:</strong> Lightweight global state management replacing Redux boilerplate —
+                        each module (tasks, goals, leetcode) has its own isolated store.</li>
+                    <li><strong>Node.js + Express:</strong> RESTful API with 7 resource routers, all protected by a
+                        custom JWT middleware that verifies the <code>Authorization: Bearer</code> header.</li>
+                    <li><strong>MongoDB + Mongoose:</strong> Flexible document schemas per module (Tasks, LeetCode
+                        entries, Goals, Skills, Resources, Profiles) all scoped to the authenticated user.</li>
+                    <li><strong>JWT Authentication:</strong> Stateless auth — tokens are issued on login and verified
+                        server-side, enabling secure multi-device access without session storage.</li>
+                    <li><strong>Tailwind CSS:</strong> Utility-first styling for rapid responsive UI iteration with a
+                        consistent design system.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">04. Key Features</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>Dashboard Overview:</strong> Central hub showing LeetCode problems solved by difficulty,
+                        active goals count, tasks completed today, a GitHub-style activity heatmap, and weekly
+                        problem-solving trend charts.</li>
+                    <li><strong>LeetCode Tracker:</strong> Log each problem with title, difficulty, topic tag, and
+                        status (Solved / Revisit / Skip). Filter by difficulty or topic with visual progress
+                        bars.</li>
+                    <li><strong>Daily Agenda:</strong> Task manager with due dates, one-click completion toggle, and a
+                        weekly overview to visualise productivity patterns.</li>
+                    <li><strong>Goals Module:</strong> Set SMART goals with numeric targets and an animated circular
+                        readiness ring that fills as you progress.</li>
+                    <li><strong>Study Hub:</strong> Organised repository of PDFs, external links, and notes
+                        categorised by DSA, Core CS (OS/CN/DBMS), HR prep, and System Design.</li>
+                    <li><strong>Interview Board:</strong> Kanban-style board (Scheduled → In Progress → Done) to log
+                        mock interview details — company, round, date, and feedback notes.</li>
+                    <li><strong>Platform Trackers:</strong> Save and quick-launch your profiles on LeetCode, GitHub,
+                        Codeforces, GeeksForGeeks, and HackerRank from one page.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">05. Challenges &amp; Learnings</h3>
+            <div class="cs-content">
+                <p><strong>Challenge: Managing Parallel Module State Without Redux</strong><br>
+                    With 7+ independent data modules (tasks, goals, leetcode, skills…), a single Redux store would
+                    have become a monolithic mess. Prop drilling was not an option either.</p>
+                <p><em>Solution:</em> I adopted <strong>Zustand</strong> with one store per module. Each store
+                    co-locates its state, actions, and async API calls — making each feature independently
+                    testable and the codebase dramatically easier to navigate.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Challenge: JWT Token Expiry UX</strong><br>
+                    When a JWT expired mid-session, users received cryptic 401 errors across every API call, breaking
+                    the entire UI state simultaneously.</p>
+                <p><em>Solution:</em> I added an <strong>Axios response interceptor</strong> that catches 401 errors
+                    globally, clears the token from <code>localStorage</code>, and redirects the user to the login page
+                    with a toast notification — gracefully handling session expiry without per-component error
+                    handling.</p>
+
+                <p style="margin-top: 1.5rem;"><strong>Challenge: Activity Heatmap Performance</strong><br>
+                    Rendering 365 daily squares with per-day color intensity from API data caused a noticeable render
+                    lag on the dashboard.</p>
+                <p><em>Solution:</em> I pre-aggregated the activity data server-side into a date-keyed map before
+                    sending it to the frontend, and memoized the heatmap component with <code>React.memo</code> to
+                    prevent unnecessary re-renders on unrelated state changes.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">06. Impact</h3>
+            <div class="cs-content">
+                <p>PrepTrack consolidates what previously required 4–5 separate tools into a single authenticated
+                    dashboard. The readiness score gives students a quantified, at-a-glance view of where they stand —
+                    replacing the anxiety of "I don't know how ready I am" with a concrete metric.</p>
+                <p style="margin-top: 1rem;">Building this project deepened my expertise in <strong>full-stack MERN
+                        architecture</strong>, <strong>JWT-based authentication flows</strong>, <strong>monorepo
+                        tooling with npm workspaces</strong>, and designing data schemas for multi-module
+                    applications.</p>
+                <div class="cs-callout">
+                    <strong>Repository:</strong> Full source code is available at
+                    <a href="https://github.com/atulsingh1501/PrepTrack" target="_blank"
+                        style="color: var(--accent-color);">github.com/atulsingh1501/PrepTrack</a>.
+                    Clone it, <code>npm install</code>, add your MongoDB URI and you're running in under 2 minutes.
+                </div>
+            </div>
+        </section>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px;">
+            <a href="https://github.com/atulsingh1501/PrepTrack" target="_blank" class="btn btn-outline">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <a href="index.html" class="btn btn-outline">View Other Projects</a>
+        </div>
+    </div>
+</body>
+
+</html>
