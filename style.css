@@ -583,19 +583,19 @@ body::after {
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .stat-card.github-span { grid-column: span 2; overflow: visible; }
 .stat-card.github-span .stat-card-label {
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 6px 8px;
+  gap: 8px;
   margin-bottom: 4px;
 }
 .stat-card.github-span .stat-card-label #github-streak {
   margin-left: auto;
-  font-size: 0.78rem;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   flex-shrink: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  font-size: 0.75rem;
+  white-space: nowrap;
 }
 
 /* Competitive card */
@@ -817,19 +817,19 @@ footer {
   .stats-grid { grid-template-columns: 1fr; }
   .stat-card.github-span { grid-column: span 1; }
 
-  /* GitHub card label: icon+title on first line, streak badge on second */
+  /* GitHub card label: keep icon+title LEFT, streak badge RIGHT on same row */
   .stat-card.github-span .stat-card-label {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 4px 8px;
   }
   .stat-card.github-span .stat-card-label #github-streak {
-    margin-left: 0;
-    width: 100%;
-    font-size: 0.74rem;
-    letter-spacing: 0.02em;
-    white-space: normal;
-    word-break: break-word;
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 0.68rem;
+    gap: 6px;
+    white-space: nowrap;
   }
+  /* Compact the stat card padding on very small screens */
+  .stat-card { padding: 18px 16px; }
 }
