@@ -95,7 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const streakEl = document.getElementById('github-streak');
       if (streakEl) {
-        streakEl.innerHTML = `<span style="color:var(--fg-muted)">Total: <strong style="color:var(--fg)">${totalContribs}</strong></span> &nbsp;|&nbsp; Streak: <strong style="color:var(--accent)">${streak}</strong>`;
+        streakEl.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;';
+        streakEl.innerHTML =
+          `<span style="color:var(--fg-muted);font-size:inherit">TOTAL: <strong style="color:var(--fg)">${totalContribs}</strong></span>` +
+          `<span style="color:var(--fg-muted);font-size:inherit">STREAK: <strong style="color:var(--accent)">${streak}</strong></span>`;
       }
 
       // Build calendar

@@ -583,16 +583,19 @@ body::after {
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .stat-card.github-span { grid-column: span 2; overflow: visible; }
 .stat-card.github-span .stat-card-label {
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 6px 8px;
   margin-bottom: 4px;
 }
 .stat-card.github-span .stat-card-label #github-streak {
   margin-left: auto;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   white-space: nowrap;
   flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Competitive card */
@@ -813,5 +816,20 @@ footer {
   /* Stack all stats vertically */
   .stats-grid { grid-template-columns: 1fr; }
   .stat-card.github-span { grid-column: span 1; }
-  .stat-card-label { flex-direction: column; align-items: flex-start; }
+
+  /* GitHub card label: icon+title on first line, streak badge on second */
+  .stat-card.github-span .stat-card-label {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+  }
+  .stat-card.github-span .stat-card-label #github-streak {
+    margin-left: 0;
+    width: 100%;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    white-space: normal;
+    word-break: break-word;
+  }
 }
