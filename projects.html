@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Projects | Atul Singh</title>
+  <meta name="description" content="All projects by Atul Singh — Full-stack web apps, AI tools, and more, built across different technologies and domains.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="All Projects | Atul Singh">
+  <meta property="og:description" content="A complete showcase of projects built by Atul Singh across full-stack, AI, and frontend domains.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Parkinsans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =============================================
+       ALL PROJECTS PAGE — EXTRA STYLES
+       ============================================= */
+
+    /* Hero Header */
+    .projects-hero {
+      padding: 28px 0 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .projects-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .projects-hero p {
+      color: var(--fg-muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Filter Tabs */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .filter-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--fg-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 6px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .filter-tab .count {
+      font-size: 0.72rem;
+      color: var(--fg-muted);
+      opacity: 0.7;
+    }
+    .filter-tab:hover {
+      color: var(--fg);
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.04);
+    }
+    .filter-tab.active {
+      color: #000;
+      background: var(--fg);
+      border-color: var(--fg);
+    }
+    .filter-tab.active .count {
+      color: rgba(0,0,0,0.5);
+    }
+
+    /* Section header */
+    .all-projects-header {
+      margin-bottom: 16px;
+    }
+    .all-projects-header h2 {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .all-projects-header h2 span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--fg-muted);
+      margin-left: 8px;
+    }
+
+    /* Full Projects Grid — 2 cols */
+    .all-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    /* Project Card — extended for all-projects page */
+    .all-project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .all-project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+    .all-project-card .project-screenshot {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+      border-bottom: 1px solid var(--border);
+    }
+    .all-project-card:hover .project-screenshot {
+      transform: scale(1.03);
+    }
+    /* Placeholder for projects without images */
+    .project-img-placeholder {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 2.4rem;
+    }
+
+    .all-project-body {
+      padding: 18px 20px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .all-project-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .all-project-name {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .all-project-links {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .all-project-desc {
+      font-size: 0.82rem;
+      color: var(--fg-muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    /* Hidden state */
+    .all-project-card.hidden {
+      display: none;
+    }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--fg-muted);
+      font-size: 0.9rem;
+    }
+    .empty-state i { font-size: 2rem; margin-bottom: 12px; display: block; }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--fg-muted);
+      text-decoration: none;
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--fg); }
+    .back-link i { font-size: 0.72rem; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .all-projects-grid { grid-template-columns: 1fr; }
+      .projects-hero { padding: 20px 0 16px; }
+      .filter-bar { gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Atul<span>.</span></a>
+
+    <ul class="nav-links">
+      <li><a href="index.html#hero" id="nav-home">Home</a></li>
+      <li><a href="projects.html" class="active" id="nav-projects">Projects</a></li>
+      <li><a href="index.html#skills" id="nav-skills">Skills</a></li>
+      <li><a href="index.html#stats" id="nav-stats">Stats</a></li>
+      <li><a href="index.html#achievements" id="nav-ach">Achievements</a></li>
+      <li><a href="index.html#contact" id="nav-contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+    <button class="close-mobile-nav" id="close-mobile-nav"><i class="fas fa-times"></i></button>
+    <a href="index.html#hero">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="index.html#stats">Stats</a>
+    <a href="index.html#achievements">Achievements</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="page-wrap">
+
+    <!-- Back link -->
+    <a href="index.html" class="back-link" style="display:inline-flex; margin-top:16px; margin-bottom:8px;">
+      <i class="fas fa-arrow-left"></i> Back to home
+    </a>
+
+    <!-- Page Hero -->
+    <div class="projects-hero">
+      <h1>Projects</h1>
+      <p>My projects and work across different technologies and domains.</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-bar" id="filter-bar" role="tablist" aria-label="Project categories">
+      <button class="filter-tab active" data-filter="all" id="filter-all" role="tab" aria-selected="true">
+        All <span class="count">6</span>
+      </button>
+      <button class="filter-tab" data-filter="fullstack" id="filter-fullstack" role="tab" aria-selected="false">
+        Full-Stack <span class="count">4</span>
+      </button>
+      <button class="filter-tab" data-filter="ai" id="filter-ai" role="tab" aria-selected="false">
+        AI Products <span class="count">2</span>
+      </button>
+      <button class="filter-tab" data-filter="frontend" id="filter-frontend" role="tab" aria-selected="false">
+        Frontend <span class="count">1</span>
+      </button>
+      <button class="filter-tab" data-filter="hackathon" id="filter-hackathon" role="tab" aria-selected="false">
+        Hackathon <span class="count">2</span>
+      </button>
+    </div>
+
+    <!-- All Projects Count Header -->
+    <div class="all-projects-header">
+      <h2 id="section-heading">All Projects <span id="visible-count">(6 projects)</span></h2>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="all-projects-grid" id="projects-grid">
+
+      <!-- 1. Digital RX -->
+      <div class="all-project-card" data-category="fullstack ai">
+        <img src="assets/images/digitalrx_ui_preview.png" alt="Digital RX Dashboard" class="project-screenshot">
+        <div class="all-project-body">
+          <div class="all-project-top">
+            <h3 class="all-project-name">Digital RX</h3>
+            <div class="all-project-links">
+              <a href="digitalrx.html" class="pill-link"><i class="fas fa-book-open"></i> Case Study</a>
+              <a href="https://digital-rx-ten.vercel.app/" target="_blank" class="pill-link"><i class="fas fa-external-link-alt"></i> Live</a>
+              <a href="https://github.com/atulsingh1501/digitalRX" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
+            </div>
+          </div>
+          <p class="all-project-desc">Digitalizes busy clinic workflows enabling doctors to create NMC-compliant prescriptions and silently deliver them to patients via WhatsApp — with zero paperwork.</p>
+          <div class="tech-bubbles">
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">Vite</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">Express</span>
+            <span class="tech-pill">Baileys</span>
+            <span class="tech-pill">Electron</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. TripSmart AI -->
+      <div class="all-project-card" data-category="fullstack ai">
+        <img src="assets/images/tripsmart_real.png" alt="TripSmart AI" class="project-screenshot">
+        <div class="all-project-body">
+          <div class="all-project-top">
+            <h3 class="all-project-name">TripSmart AI</h3>
+            <div class="all-project-links">
+              <a href="tripsmart.html" class="pill-link"><i class="fas fa-book-open"></i> Case Study</a>
+              <a href="https://trip-smart-tau.vercel.app/" target="_blank" class="pill-link"><i class="fas fa-external-link-alt"></i> Live</a>
+              <a href="https://github.com/atulsingh1501/TripSmart_Deploy" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
+            </div>
+          </div>
+          <p class="all-project-desc">Eliminates travel planning fragmentation by unifying budgeting, scheduling, and booking in one intelligent AI-powered platform with real-time currency conversion.</p>
+          <div class="tech-bubbles">
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">Redux</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. PrepTrack -->
+      <div class="all-project-card" data-category="fullstack">
+        <img src="assets/images/preptrack_ui_preview.png" alt="PrepTrack Dashboard" class="project-screenshot">
+        <div class="all-project-body">
+          <div class="all-project-top">
+            <h3 class="all-project-name">PrepTrack</h3>
+            <div class="all-project-links">
+              <a href="preptrack.html" class="pill-link"><i class="fas fa-book-open"></i> Case Study</a>
+              <a href="https://github.com/atulsingh1501/PrepTrack" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
+            </div>
+          </div>
+          <p class="all-project-desc">Unifies the entire placement preparation workflow — LeetCode tracking, daily tasks, goals, study resources, and Kanban interview boards — in one MERN platform.</p>
+          <div class="tech-bubbles">
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">MongoDB</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">Express</span>
+            <span class="tech-pill">Zustand</span>
+            <span class="tech-pill">JWT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. SthaniyaVendor -->
+      <div class="all-project-card" data-category="fullstack ai">
+        <img src="assets/images/sthaniya_vendor.png" alt="SthaniyaVendor" class="project-screenshot">
+        <div class="all-project-body">
+          <div class="all-project-top">
+            <h3 class="all-project-name">SthaniyaVendor</h3>
+            <div class="all-project-links">
+              <a href="waste_management.html" class="pill-link"><i class="fas fa-book-open"></i> Case Study</a>
+              <a href="https://github.com/atulsingh1501/SthaniyaVendor" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
+            </div>
+          </div>
+          <p class="all-project-desc">Hyperlocal vendor portal — helps kirana stores digitize with AI voice + image inventory (Gemini + TensorFlow.js), UPI QR billing, barcode scanning, and an offline-first buyer discovery mobile app.</p>
+          <div class="tech-bubbles">
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">FastAPI</span>
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">React Native</span>
+            <span class="tech-pill">Gemini AI</span>
+            <span class="tech-pill">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. KavachPay -->
+      <div class="all-project-card" data-category="hackathon">
+        <img src="assets/images/kavachpay_ui_preview.png" alt="KavachPay" class="project-screenshot">
+        <div class="all-project-body">
+          <div class="all-project-top">
+            <h3 class="all-project-name">KavachPay</h3>
+            <div class="all-project-links">
+              <a href="kavachpay.html" class="pill-link"><i class="fas fa-book-open"></i> Case Study</a>
+              <a href="https://github.com/atulsingh1501/KavachPay" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
+            </div>
+          </div>
+          <p class="all-project-desc">Work-Proof Protocol — a parametric insurance innovation built for Guidewire DEVTrails Hackathon. Qualified for Phase 3 (Soar Phase). Smart contracts meet InsurTech.</p>
+          <div class="tech-bubbles">
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">Smart Contracts</span>
+            <span class="tech-pill">InsurTech</span>
+            <span class="tech-pill">Vite</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Waste Management (SwachhNagar) -->
+      <div class="all-project-card" data-category="fullstack hackathon">
+        <img src="assets/images/waste_management.png" alt="SwachhNagar Waste Management" class="project-screenshot">
+        <div class="all-project-body">
+          <div class="all-project-top">
+            <h3 class="all-project-name">SwachhNagar</h3>
+            <div class="all-project-links">
+              <a href="swachhnagar.html" class="pill-link"><i class="fas fa-book-open"></i> Case Study</a>
+              <a href="https://github.com/atulsingh1501/SwachhNagar-Smart-Waste-Management-System" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
+            </div>
+          </div>
+          <p class="all-project-desc">Civic tech platform for smart waste management — real-time garbage tracking, complaint routing, and route optimization for municipal corporations. Built for SIH 2024.</p>
+          <div class="tech-bubbles">
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">MongoDB</span>
+            <span class="tech-pill">Maps API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Portfolio v2 -->
+      <div class="all-project-card" data-category="frontend">
+        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0d1117 100%); border-bottom: 1px solid var(--border); position: relative; overflow: hidden;">
+          <div style="position:absolute;inset:0;background-image:radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:18px 18px;"></div>
+          <div style="position:relative;text-align:center;">
+            <div style="font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--fg);letter-spacing:-0.04em;">Atul<span style="color:var(--accent);">.</span></div>
+            <div style="font-size:0.72rem;color:var(--fg-muted);margin-top:6px;letter-spacing:0.06em;">PORTFOLIO V2</div>
+          </div>
+        </div>
+        <div class="all-project-body">
+          <div class="all-project-top">
+            <h3 class="all-project-name">Portfolio v2.0</h3>
+            <div class="all-project-links">
+              <a href="index.html" class="pill-link"><i class="fas fa-external-link-alt"></i> Live</a>
+              <a href="https://github.com/atulsingh1501/Porfolio-v2.O" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
+            </div>
+          </div>
+          <p class="all-project-desc">Personal developer portfolio built from scratch with pure HTML, CSS &amp; JS — featuring dark mode, animated GitHub contribution graph, LeetCode stats, and a premium Nishul.dev-inspired design system.</p>
+          <div class="tech-bubbles">
+            <span class="tech-pill">HTML5</span>
+            <span class="tech-pill">CSS3</span>
+            <span class="tech-pill">JavaScript</span>
+            <span class="tech-pill">GitHub API</span>
+            <span class="tech-pill">LeetCode API</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /all-projects-grid -->
+
+    <!-- Spacer -->
+    <div style="height: 80px;"></div>
+
+  </main>
+
+  <footer>
+    <p>© 2025 Atul Singh. Built with code &amp; caffeine.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // ---- Filter Logic ----
+    const filterBar = document.getElementById('filter-bar');
+    const cards = document.querySelectorAll('.all-project-card');
+    const visibleCount = document.getElementById('visible-count');
+    const sectionHeading = document.getElementById('section-heading');
+
+    function updateCount(count, label) {
+      visibleCount.textContent = `(${count} project${count !== 1 ? 's' : ''})`;
+    }
+
+    filterBar.addEventListener('click', (e) => {
+      const tab = e.target.closest('.filter-tab');
+      if (!tab) return;
+
+      // Update active tab
+      document.querySelectorAll('.filter-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      const filter = tab.dataset.filter;
+      let visible = 0;
+
+      cards.forEach(card => {
+        const cats = card.dataset.category || '';
+        const matches = filter === 'all' || cats.split(' ').includes(filter);
+        card.classList.toggle('hidden', !matches);
+        if (matches) visible++;
+      });
+
+      updateCount(visible);
+    });
+
+    // ---- Mobile Nav ----
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const overlay = document.getElementById('mobile-nav-overlay');
+    const closeBtn = document.getElementById('close-mobile-nav');
+
+    if (menuBtn) menuBtn.addEventListener('click', () => overlay.classList.add('active'));
+    if (closeBtn) closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+    overlay.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => overlay.classList.remove('active'));
+    });
+  </script>
+
+</body>
+</html>

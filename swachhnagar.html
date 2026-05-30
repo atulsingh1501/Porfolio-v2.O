@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study: SwachhNagar — Smart Waste Management | Atul Singh</title>
+  <meta name="description" content="A deep-dive into SwachhNagar — a civic tech platform for smart waste management with real-time garbage tracking, complaint routing, and route optimization. Built for SIH 2024.">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Parkinsans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      overflow: auto !important;
+      display: block !important;
+      height: auto !important;
+      font-family: var(--font-body);
+    }
+    .cs-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 60px clamp(16px, 4vw, 40px) 100px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--fg-muted); text-decoration: none;
+      margin-bottom: 48px; font-weight: 500; font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--fg); }
+
+    /* Hero */
+    .cs-hero { margin-bottom: 52px; }
+    .cs-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .cs-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      color: var(--fg); margin-bottom: 16px; line-height: 1.15;
+    }
+    .cs-subtitle {
+      font-size: 1.05rem; color: var(--fg-muted);
+      line-height: 1.75; max-width: 680px; margin-bottom: 24px;
+    }
+    .cs-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .cs-badge {
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--fg-muted); border: 1px solid var(--border);
+      border-radius: 99px; padding: 4px 14px;
+    }
+    .cs-badge.accent {
+      color: var(--accent); border-color: rgba(0,199,88,0.35);
+      background: rgba(0,199,88,0.06);
+    }
+
+    /* Hero image */
+    .cs-hero-img {
+      width: 100%; border-radius: var(--radius);
+      border: 1px solid var(--border); display: block;
+      margin-bottom: 8px;
+    }
+    .cs-img-caption {
+      font-size: 0.78rem; color: var(--fg-muted);
+      text-align: center; margin-bottom: 52px;
+    }
+
+    /* Stats row */
+    .cs-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 52px;
+    }
+    .cs-stat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 18px; text-align: center;
+    }
+    .cs-stat-num {
+      font-family: var(--font-head); font-size: 1.8rem;
+      font-weight: 700; color: var(--fg); letter-spacing: -0.04em;
+    }
+    .cs-stat-label { font-size: 0.78rem; color: var(--fg-muted); margin-top: 4px; }
+
+    /* Sections */
+    .cs-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    .cs-section-num {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+    }
+    .cs-section-title {
+      font-family: var(--font-head); font-size: 1.4rem;
+      font-weight: 700; letter-spacing: -0.02em;
+      color: var(--fg); margin-bottom: 16px;
+    }
+    .cs-text {
+      font-size: 1rem; color: var(--fg-muted);
+      line-height: 1.78; margin-bottom: 16px;
+    }
+    .cs-text strong { color: var(--fg); }
+
+    /* Problem cards */
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .problem-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+    }
+    .problem-card h4 {
+      font-family: var(--font-head); font-size: 0.9rem;
+      font-weight: 600; color: var(--fg); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .problem-card p { font-size: 0.85rem; color: var(--fg-muted); line-height: 1.6; }
+
+    /* Feature cards */
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .feature-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: var(--border-hover); }
+    .feature-icon {
+      width: 36px; height: 36px;
+      background: rgba(0,199,88,0.1);
+      border: 1px solid rgba(0,199,88,0.2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 1rem;
+      margin-bottom: 12px;
+    }
+    .feature-card h4 {
+      font-family: var(--font-head); font-size: 0.95rem;
+      font-weight: 600; color: var(--fg); margin-bottom: 8px;
+    }
+    .feature-card p { font-size: 0.84rem; color: var(--fg-muted); line-height: 1.65; }
+
+    /* Tech table */
+    .tech-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.88rem; margin-bottom: 24px;
+    }
+    .tech-table th {
+      text-align: left; font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--fg-muted);
+      border-bottom: 1px solid var(--border); padding: 10px 16px;
+    }
+    .tech-table td {
+      padding: 12px 16px; color: var(--fg-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+    .tech-table td:first-child { color: var(--fg); font-weight: 600; white-space: nowrap; }
+    .tech-table tr:last-child td { border-bottom: none; }
+
+    /* Callout */
+    .cs-callout {
+      background: rgba(0,199,88,0.06);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px; margin: 20px 0;
+      font-size: 0.95rem; color: var(--fg-muted); line-height: 1.7;
+    }
+    .cs-callout strong { color: var(--fg); }
+
+    /* Challenge items */
+    .challenge-item { margin-bottom: 32px; }
+    .challenge-item h4 {
+      font-family: var(--font-head); font-size: 1rem;
+      font-weight: 600; color: var(--fg);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    }
+    .challenge-item h4::before {
+      content: '';
+      display: inline-block; width: 8px; height: 8px;
+      border-radius: 50%; background: var(--accent); flex-shrink: 0;
+    }
+
+    /* Architecture diagram */
+    .arch-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px; margin-bottom: 24px; text-align: center;
+    }
+    .arch-layer {
+      padding: 14px; border-radius: var(--radius-sm);
+      border: 1px dashed rgba(255,255,255,0.12);
+    }
+    .arch-layer h5 {
+      font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .arch-layer ul { list-style: none; padding: 0; }
+    .arch-layer ul li {
+      font-size: 0.78rem; color: var(--fg-muted);
+      padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .arch-layer ul li:last-child { border-bottom: none; }
+
+    /* Bottom actions */
+    .cs-actions {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 40px; padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      .problem-grid, .feature-grid { grid-template-columns: 1fr; }
+      .cs-stats { grid-template-columns: 1fr 1fr; }
+      .arch-box { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cs-wrap">
+
+    <a href="projects.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Back to Projects
+    </a>
+
+    <!-- HERO -->
+    <div class="cs-hero">
+      <p class="cs-label">Case Study</p>
+      <h1 class="cs-title">SwachhNagar</h1>
+      <p class="cs-subtitle">A civic tech platform for smart waste management — enabling real-time garbage tracking, citizen complaint routing, and route optimization for municipal corporations. Built for Smart India Hackathon 2024.</p>
+      <div class="cs-badges">
+        <span class="cs-badge accent">Full Stack Developer</span>
+        <span class="cs-badge">React · Node.js · Express</span>
+        <span class="cs-badge">MongoDB</span>
+        <span class="cs-badge">Maps API</span>
+        <span class="cs-badge">SIH 2024</span>
+      </div>
+    </div>
+
+    <img src="assets/images/waste_management.png" alt="SwachhNagar — Smart Waste Management Dashboard" class="cs-hero-img">
+    <p class="cs-img-caption">SwachhNagar dashboard — real-time garbage tracking, complaint management, and collection route optimization</p>
+
+    <!-- IMPACT STATS -->
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <div class="cs-stat-num">SIH</div>
+        <div class="cs-stat-label">Selected for Smart India Hackathon 2024 via Vadodara Hackathon</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">3-in-1</div>
+        <div class="cs-stat-label">Citizen app · Admin dashboard · Collection crew tracking</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">Real-time</div>
+        <div class="cs-stat-label">Live garbage vehicle tracking and complaint status updates</div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- PROBLEM -->
+    <div class="cs-section">
+      <p class="cs-section-num">01 — Problem</p>
+      <h2 class="cs-section-title">India's Waste Management Crisis</h2>
+      <p class="cs-text">Municipal corporations across India struggle with <strong>inefficient garbage collection routes, zero visibility into collection status, and an avalanche of untracked citizen complaints</strong>. Citizens have no way to know when their garbage will be collected, and corporations have no real-time data on where their vehicles are or which areas are overloaded.</p>
+
+      <div class="problem-grid">
+        <div class="problem-card">
+          <h4><i class="fas fa-map-marked-alt" style="color:var(--accent)"></i> No Route Visibility</h4>
+          <p>Garbage collection crews follow fixed paper routes with no optimization — leading to missed areas and redundant trips.</p>
+        </div>
+        <div class="problem-card">
+          <h4><i class="fas fa-comment-slash" style="color:#f59e0b"></i> Lost Complaints</h4>
+          <p>Citizens call helplines that log complaints on paper — with no tracking, no escalation, and no accountability for resolution.</p>
+        </div>
+        <div class="problem-card">
+          <h4><i class="fas fa-eye-slash" style="color:#ef4444"></i> Zero Real-Time Data</h4>
+          <p>Municipal admins have no live map of collection status, vehicle positions, or hotspot zones that need urgent attention.</p>
+        </div>
+        <div class="problem-card">
+          <h4><i class="fas fa-users-slash" style="color:#a855f7"></i> No Citizen Feedback Loop</h4>
+          <p>After filing a complaint, citizens receive zero updates — breeding distrust between municipalities and residents.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- SOLUTION -->
+    <div class="cs-section">
+      <p class="cs-section-num">02 — Solution</p>
+      <h2 class="cs-section-title">Smart, Connected Waste Management</h2>
+      <p class="cs-text">SwachhNagar connects <strong>citizens, collection crews, and municipal administrators</strong> on one platform — giving every stakeholder real-time visibility and automated workflows.</p>
+
+      <div class="cs-callout">
+        <strong>Core Insight:</strong> The problem isn't a lack of garbage collection staff — it's a lack of <em>coordination and visibility</em>. By adding a lightweight digital layer on top of existing infrastructure (GPS tracking + a complaint portal), the same workforce can serve 2–3x more area effectively.
+      </div>
+
+      <p class="cs-text">The platform has three distinct interfaces: a <strong>citizen portal</strong> for filing and tracking complaints, an <strong>admin dashboard</strong> for monitoring city-wide collection status and managing crews, and a <strong>crew mobile view</strong> showing optimized daily routes and assigned complaint pickups.</p>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- FEATURES -->
+    <div class="cs-section">
+      <p class="cs-section-num">03 — Features</p>
+      <h2 class="cs-section-title">What SwachhNagar Does</h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-map"></i></div>
+          <h4>Live Vehicle Tracking</h4>
+          <p>GPS-based real-time tracking of collection vehicles on an interactive map. Admins see all vehicles, routes, and estimated arrival times at a glance.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <h4>Citizen Complaint System</h4>
+          <p>Citizens can file garbage overflow complaints with location, photo, and description. Complaints are auto-routed to the nearest available crew with a ticket ID for tracking.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-route"></i></div>
+          <h4>Route Optimization</h4>
+          <p>Admin panel generates optimized daily routes for collection crews based on area density, complaint hotspots, and vehicle capacity — reducing fuel costs and missed pickups.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-bell"></i></div>
+          <h4>Real-Time Status Updates</h4>
+          <p>Citizens receive live updates as their complaint progresses — Received → Assigned → In Progress → Resolved. No more calling helplines to check status.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+          <h4>Admin Analytics Dashboard</h4>
+          <p>Municipal admins see zone-wise complaint heatmaps, collection efficiency metrics, crew performance, and daily/weekly trend charts.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h4>Crew Mobile Interface</h4>
+          <p>Collection crews get a simplified mobile view with their assigned route, complaint addresses, and one-tap status updates as they complete pickups.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- TECH STACK -->
+    <div class="cs-section">
+      <p class="cs-section-num">04 — Tech Stack</p>
+      <h2 class="cs-section-title">Architecture &amp; Technologies</h2>
+
+      <div class="arch-box">
+        <div class="arch-layer">
+          <h5>Frontend</h5>
+          <ul>
+            <li>React.js</li>
+            <li>React Router</li>
+            <li>Google Maps API</li>
+            <li>Chart.js</li>
+            <li>Tailwind CSS</li>
+          </ul>
+        </div>
+        <div class="arch-layer">
+          <h5>Backend</h5>
+          <ul>
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>MongoDB Atlas</li>
+            <li>Mongoose ORM</li>
+            <li>JWT Auth</li>
+          </ul>
+        </div>
+        <div class="arch-layer">
+          <h5>Infra &amp; APIs</h5>
+          <ul>
+            <li>Google Maps JS API</li>
+            <li>Directions API</li>
+            <li>Geolocation API</li>
+            <li>Socket.io (live)</li>
+            <li>Vercel Deploy</li>
+          </ul>
+        </div>
+      </div>
+
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Technology</th>
+            <th>Why This Choice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Database</td>
+            <td>MongoDB Atlas</td>
+            <td>Flexible schema for complaint data with varying metadata; geospatial indexing for location queries</td>
+          </tr>
+          <tr>
+            <td>Maps</td>
+            <td>Google Maps JS API</td>
+            <td>Reliable in India with Directions + Distance Matrix APIs needed for route optimization</td>
+          </tr>
+          <tr>
+            <td>Real-time</td>
+            <td>Socket.io</td>
+            <td>WebSocket-based live updates for vehicle positions and complaint status without polling</td>
+          </tr>
+          <tr>
+            <td>Auth</td>
+            <td>JWT + Role-based</td>
+            <td>Three distinct user roles (citizen, crew, admin) with route-level permission guards</td>
+          </tr>
+          <tr>
+            <td>Frontend</td>
+            <td>React + Chart.js</td>
+            <td>Dynamic dashboard with real-time re-rendering; Chart.js for analytics visualizations</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- CHALLENGES -->
+    <div class="cs-section">
+      <p class="cs-section-num">05 — Challenges &amp; Learnings</p>
+      <h2 class="cs-section-title">Hard Problems Solved</h2>
+
+      <div class="challenge-item">
+        <h4>Real-Time Vehicle Tracking at Scale</h4>
+        <p class="cs-text">Broadcasting GPS coordinates from multiple collection vehicles simultaneously to all connected admin dashboards without excessive server load was a key challenge.</p>
+        <div class="cs-callout">
+          <strong>Solution:</strong> Implemented a Socket.io room-based architecture where each municipal zone has its own room. Vehicles emit position updates to their zone room only — admins subscribe to only the zones they manage. This reduced server broadcast load by ~80% compared to broadcasting to all clients.
+        </div>
+      </div>
+
+      <div class="challenge-item">
+        <h4>Complaint Location Accuracy in Dense Urban Areas</h4>
+        <p class="cs-text">Browser Geolocation API returns imprecise coordinates in dense urban areas — sometimes off by 200–300 meters — which could route crews to the wrong lane.</p>
+        <div class="cs-callout">
+          <strong>Solution:</strong> Added a map-pin drag interface. After GPS auto-fill, citizens can drag the pin to the exact complaint location on the map. The system stores the manually adjusted coordinates if they differ from GPS by more than 50 meters.
+        </div>
+      </div>
+
+      <div class="challenge-item">
+        <h4>Route Optimization Within API Cost Limits</h4>
+        <p class="cs-text">Google Directions API charges per request — generating optimized routes for 20+ daily stops per crew would cost significantly on a hackathon budget.</p>
+        <div class="cs-callout">
+          <strong>Solution:</strong> Implemented a nearest-neighbor greedy algorithm as a pre-filter to cluster stops geographically before calling the Directions API. This reduced API calls by 70% while maintaining route quality within acceptable bounds for a city-scale deployment.
+        </div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- IMPACT -->
+    <div class="cs-section">
+      <p class="cs-section-num">06 — Impact</p>
+      <h2 class="cs-section-title">What SwachhNagar Achieves</h2>
+      <p class="cs-text">SwachhNagar transforms waste management from a <strong>disconnected, paper-based operation</strong> into a <strong>real-time, data-driven system</strong>. Municipal corporations gain visibility into their entire fleet and complaint backlog at a glance, while citizens get a transparent feedback loop for the first time.</p>
+      <p class="cs-text">This project deepened my skills in <strong>real-time systems with Socket.io</strong>, <strong>geospatial data handling with MongoDB</strong>, <strong>maps integration</strong>, and <strong>designing multi-role platforms</strong> where different user types need radically different interfaces from the same backend.</p>
+
+      <div class="cs-callout">
+        <strong>Hackathon Achievement:</strong> SwachhNagar was selected for <strong>Smart India Hackathon 2024</strong> via the Vadodara Hackathon 5.0 regional qualifier at Parul University — competing among top student teams across India building civic tech solutions.
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="cs-actions">
+      <a href="https://github.com/atulsingh1501/SwachhNagar-Smart-Waste-Management-System" target="_blank" class="btn-ghost">
+        <i class="fab fa-github"></i> View on GitHub
+      </a>
+      <a href="projects.html" class="btn-ghost">
+        <i class="fas fa-arrow-left"></i> All Projects
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>

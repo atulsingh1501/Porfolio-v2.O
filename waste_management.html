@@ -1,204 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Study: Waste Management System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Reusing consistent case study styles */
-        .case-study-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study: SthaniyaVendor — Hyperlocal Vendor Portal | Atul Singh</title>
+  <meta name="description" content="A deep-dive into SthaniyaVendor — a hyperlocal vendor portal with AI voice inventory, UPI QR billing, barcode scanning, and an offline-first buyer discovery app.">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Parkinsans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      overflow: auto !important;
+      display: block !important;
+      height: auto !important;
+      font-family: var(--font-body);
+    }
+    .cs-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 60px clamp(16px, 4vw, 40px) 100px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--fg-muted); text-decoration: none;
+      margin-bottom: 48px; font-weight: 500; font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--fg); }
 
-        .cs-header {
-            margin-bottom: 60px;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 40px;
-        }
+    /* Hero */
+    .cs-hero { margin-bottom: 52px; }
+    .cs-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .cs-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      color: var(--fg); margin-bottom: 16px; line-height: 1.15;
+    }
+    .cs-subtitle {
+      font-size: 1.05rem; color: var(--fg-muted);
+      line-height: 1.75; max-width: 680px; margin-bottom: 24px;
+    }
+    .cs-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .cs-badge {
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--fg-muted); border: 1px solid var(--border);
+      border-radius: 99px; padding: 4px 14px;
+    }
+    .cs-badge.accent {
+      color: var(--accent); border-color: rgba(0,199,88,0.35);
+      background: rgba(0,199,88,0.06);
+    }
 
-        .cs-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-        }
+    /* Hero image */
+    .cs-hero-img {
+      width: 100%; border-radius: var(--radius);
+      border: 1px solid var(--border); display: block;
+      margin-bottom: 8px;
+    }
+    .cs-img-caption {
+      font-size: 0.78rem; color: var(--fg-muted);
+      text-align: center; margin-bottom: 52px;
+    }
 
-        .cs-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
+    /* Stats row */
+    .cs-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 52px;
+    }
+    .cs-stat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 18px; text-align: center;
+    }
+    .cs-stat-num {
+      font-family: var(--font-head); font-size: 1.8rem;
+      font-weight: 700; color: var(--fg); letter-spacing: -0.04em;
+    }
+    .cs-stat-label { font-size: 0.78rem; color: var(--fg-muted); margin-top: 4px; }
 
-        .cs-meta {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
+    /* Sections */
+    .cs-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    .cs-section-num {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+    }
+    .cs-section-title {
+      font-family: var(--font-head); font-size: 1.4rem;
+      font-weight: 700; letter-spacing: -0.02em;
+      color: var(--fg); margin-bottom: 16px;
+    }
+    .cs-text {
+      font-size: 1rem; color: var(--fg-muted);
+      line-height: 1.78; margin-bottom: 16px;
+    }
+    .cs-text strong { color: var(--fg); }
 
-        .cs-section {
-            margin-bottom: 60px;
-        }
+    /* Problem cards */
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .problem-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+    }
+    .problem-card h4 {
+      font-family: var(--font-head); font-size: 0.9rem;
+      font-weight: 600; color: var(--fg); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .problem-card p { font-size: 0.85rem; color: var(--fg-muted); line-height: 1.6; }
 
-        .cs-section-title {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-color);
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
+    /* Feature cards */
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .feature-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: var(--border-hover); }
+    .feature-icon {
+      width: 36px; height: 36px;
+      background: rgba(0,199,88,0.1);
+      border: 1px solid rgba(0,199,88,0.2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 1rem;
+      margin-bottom: 12px;
+    }
+    .feature-card h4 {
+      font-family: var(--font-head); font-size: 0.95rem;
+      font-weight: 600; color: var(--fg); margin-bottom: 8px;
+    }
+    .feature-card p { font-size: 0.84rem; color: var(--fg-muted); line-height: 1.65; }
 
-        .cs-content {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
+    /* Tech table */
+    .tech-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.88rem; margin-bottom: 24px;
+    }
+    .tech-table th {
+      text-align: left; font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--fg-muted);
+      border-bottom: 1px solid var(--border); padding: 10px 16px;
+    }
+    .tech-table td {
+      padding: 12px 16px; color: var(--fg-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+    .tech-table td:first-child { color: var(--fg); font-weight: 600; white-space: nowrap; }
+    .tech-table tr:last-child td { border-bottom: none; }
 
-        .cs-list {
-            list-style: none;
-            padding: 0;
-        }
+    /* Callout */
+    .cs-callout {
+      background: rgba(0,199,88,0.06);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px; margin: 20px 0;
+      font-size: 0.95rem; color: var(--fg-muted); line-height: 1.7;
+    }
+    .cs-callout strong { color: var(--fg); }
 
-        .cs-list li {
-            position: relative;
-            padding-left: 24px;
-            margin-bottom: 12px;
-        }
+    /* Challenge items */
+    .challenge-item { margin-bottom: 32px; }
+    .challenge-item h4 {
+      font-family: var(--font-head); font-size: 1rem;
+      font-weight: 600; color: var(--fg);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    }
+    .challenge-item h4::before {
+      content: '';
+      display: inline-block; width: 8px; height: 8px;
+      border-radius: 50%; background: var(--accent); flex-shrink: 0;
+    }
 
-        .cs-list li::before {
-            content: "•";
-            color: var(--accent-color);
-            position: absolute;
-            left: 6px;
-            font-weight: bold;
-        }
+    /* Architecture diagram */
+    .arch-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px; margin-bottom: 24px; text-align: center;
+    }
+    .arch-layer {
+      padding: 14px; border-radius: var(--radius-sm);
+      border: 1px dashed rgba(255,255,255,0.12);
+    }
+    .arch-layer h5 {
+      font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .arch-layer ul { list-style: none; padding: 0; }
+    .arch-layer ul li {
+      font-size: 0.78rem; color: var(--fg-muted);
+      padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .arch-layer ul li:last-child { border-bottom: none; }
 
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin-bottom: 40px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
+    /* Bottom actions */
+    .cs-actions {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 40px; padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
 
-        .back-link:hover {
-            color: var(--accent-color);
-        }
-
-        /* Override global app styles for standalone page */
-        body {
-            overflow: auto !important;
-            display: block !important;
-            height: auto !important;
-        }
-    </style>
+    @media (max-width: 640px) {
+      .problem-grid, .feature-grid { grid-template-columns: 1fr; }
+      .cs-stats { grid-template-columns: 1fr 1fr; }
+      .arch-box { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="case-study-container">
-        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+  <div class="cs-wrap">
 
-        <header class="cs-header">
-            <h1 class="cs-title">Waste Management System</h1>
-            <p class="cs-subtitle">Optimizing municipal cleanliness through data-driven route planning and citizen
-                engagement.</p>
-            <div class="cs-meta">
-                <span class="role-badge">Full Stack Developer</span>
-                <span class="role-badge">Case Study</span>
-            </div>
-        </header>
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
 
-        <section class="cs-section">
-            <h3 class="cs-section-title">01. The Problem</h3>
-            <div class="cs-content">
-                <p>Municipal waste collection is often inefficient. Trucks follow static routes regardless of bin
-                    fullness, leading to <strong>wasted fuel</strong> on empty bins and <strong>health hazards</strong>
-                    from overflowing ones that were missed. Additionally, citizens lack a direct channel to report
-                    spot-dumps.</p>
-            </div>
-        </section>
-
-        <section class="cs-section">
-            <h3 class="cs-section-title">02. The Solution</h3>
-            <div class="cs-content">
-                <p>I developed a centralized <strong>Role-Based Ecosystem</strong> to handle the complex logistics of
-                    waste
-                    collection:</p>
-                <div style="margin-top: 1rem;">
-                    <ul class="cs-list">
-                        <li><strong>Admin Dashboard:</strong> A command center for logistics, assigning vehicles, and
-                            visualizing city-wide collection data.</li>
-                        <li><strong>Staff Interface:</strong> A dedicated portal for drivers to view daily schedules and
-                            update route completion status in real-time.</li>
-                        <li><strong>Citizen Portal:</strong> A simplified reporting tool allowing residents to flag
-                            missed collections and track resolution.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="cs-section">
-            <h3 class="cs-section-title">03. Tech Stack</h3>
-            <div class="cs-content">
-                <ul class="cs-list">
-                    <li><strong>React + Vite:</strong> For a high-performance, lag-free dashboard experience.</li>
-                    <li><strong>Node.js & Express:</strong> To handle concurrent requests from multiple users (citizens
-                        and admins) efficiently.</li>
-                    <li><strong>Context API:</strong> Used for global state management of user sessions and
-                        authentication flows without Redux bloat.</li>
-                    <li><strong>Leaflet Maps:</strong> For lightweight, open-source visualization of bin locations.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="cs-section">
-            <h3 class="cs-section-title">04. Key Features</h3>
-            <div class="cs-content">
-                <ul class="cs-list">
-                    <li><strong>Dynamic Reporting:</strong> Citizens can upload geo-tagged images of waste, instantly
-                        creating tickets for admins.</li>
-                    <li><strong>Role-Based Access Control (RBAC):</strong> Secure separation of driver, citizen, and
-                        admin privileges.</li>
-                    <li><strong>Status Tracking:</strong> Real-time updates on report resolution (Pending -> In Progress
-                        -> Resolved).</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="cs-section">
-            <h3 class="cs-section-title">05. Challenges & Learnings</h3>
-            <div class="cs-content">
-                <p><strong>Challenge: Concurrency Handling</strong><br>
-                    Multiple users reporting issues simultaneously caused database locks with the initial SQLite setup.
-                </p>
-                <p><em>Solution:</em> I migrated to a robust backend architecture using <strong>connection
-                        pooling</strong> in Node.js to manage high-throughput requests without latency.</p>
-            </div>
-        </section>
-
-        <section class="cs-section">
-            <h3 class="cs-section-title">06. Future Roadmap</h3>
-            <div class="cs-content">
-                <p><strong>IoT Integration (Planned):</strong> The next major iteration will introduce <strong>Smart
-                        Bins</strong> equipped with IoT ultrasonic sensors.</p>
-                <p>These sensors will transmit real-time fill-level data to the dashboard, allowing for <strong>fully
-                        automated route generation</strong>—dispatching trucks <em>only</em> when bins are near
-                    capacity, further reducing operational costs.</p>
-            </div>
-        </section>
-
-        <a href="index.html" class="btn btn-primary">View Other Projects</a>
+    <!-- HERO -->
+    <div class="cs-hero">
+      <p class="cs-label">Case Study</p>
+      <h1 class="cs-title">SthaniyaVendor</h1>
+      <p class="cs-subtitle">A hyperlocal vendor portal that helps local kirana stores and street merchants digitize their entire business — featuring AI voice + image inventory, UPI QR billing, barcode scanning, and an offline-first buyer discovery mobile app.</p>
+      <div class="cs-badges">
+        <span class="cs-badge accent">Full Stack Developer</span>
+        <span class="cs-badge">React · FastAPI · Python</span>
+        <span class="cs-badge">React Native · Expo</span>
+        <span class="cs-badge">Gemini AI · TensorFlow.js</span>
+        <span class="cs-badge">PostgreSQL</span>
+      </div>
     </div>
-</body>
 
+    <img src="assets/images/sthaniya_vendor.png" alt="SthaniyaVendor — Hyperlocal Vendor Dashboard" class="cs-hero-img">
+    <p class="cs-img-caption">SthaniyaVendor vendor dashboard — inventory, UPI QR billing, and AI-powered product entry</p>
+
+    <!-- IMPACT STATS -->
+    <div class="cs-stats">
+      <div class="cs-stat">
+        <div class="cs-stat-num">~0 min</div>
+        <div class="cs-stat-label">Setup time for a new vendor (phone auth only)</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">3-in-1</div>
+        <div class="cs-stat-label">Web dashboard + POS billing + Mobile buyer app</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-num">₹0</div>
+        <div class="cs-stat-label">Infrastructure cost for AI inference (runs on-device)</div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- PROBLEM -->
+    <div class="cs-section">
+      <p class="cs-section-num">01 — Problem</p>
+      <h2 class="cs-section-title">Local Shops vs. Quick Commerce Giants</h2>
+      <p class="cs-text">India's <strong>kirana stores, vegetable vendors, dairy booths, and street merchants</strong> are losing ground to quick-commerce platforms that have proprietary digital infrastructure. Despite serving millions of customers daily, local merchants have no affordable way to digitize.</p>
+
+      <div class="problem-grid">
+        <div class="problem-card">
+          <h4><i class="fas fa-graduation-cap" style="color:var(--accent)"></i> High Learning Curve</h4>
+          <p>Existing POS/billing systems are designed for large retailers, requiring high technical literacy that micro-merchants don't have.</p>
+        </div>
+        <div class="problem-card">
+          <h4><i class="fas fa-money-bill-wave" style="color:#f59e0b"></i> Expensive Hardware</h4>
+          <p>Traditional billing software requires upfront PC purchases, barcode guns, and licensing costs — unaffordable for small vendors.</p>
+        </div>
+        <div class="problem-card">
+          <h4><i class="fas fa-user-times" style="color:#ef4444"></i> High Sign-Up Friction</h4>
+          <p>Traditional portals need complex email registrations, business documents, or bank approvals before a vendor can start selling.</p>
+        </div>
+        <div class="problem-card">
+          <h4><i class="fas fa-language" style="color:#a855f7"></i> Language Barrier</h4>
+          <p>Most digital tools are English-only, making them inaccessible to elderly shop owners who speak Hindi, Gujarati, or regional dialects.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- SOLUTION -->
+    <div class="cs-section">
+      <p class="cs-section-num">02 — Solution</p>
+      <h2 class="cs-section-title">Zero-Setup, AI-First Digitization</h2>
+      <p class="cs-text">SthaniyaVendor provides a <strong>completely free, mobile-first, friction-free portal</strong> requiring zero technical training. Vendors sign up with their phone number, and their entire business is digitized in minutes.</p>
+
+      <div class="cs-callout">
+        <strong>Core Insight:</strong> The primary barrier for micro-merchants isn't cost — it's <em>friction</em>. By removing every form of manual data entry (using voice, camera, and barcode scanning) and replacing it with AI, even an elderly vendor with no smartphone experience can onboard their shop in under 5 minutes.
+      </div>
+
+      <p class="cs-text">The platform is split into two halves: a <strong>vendor web dashboard</strong> (React + Vite) for shop management and billing, and a <strong>buyer discovery mobile app</strong> (React Native + Expo) that lets customers find local shops and products on an interactive map.</p>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- FEATURES -->
+    <div class="cs-section">
+      <p class="cs-section-num">03 — Features</p>
+      <h2 class="cs-section-title">What SthaniyaVendor Does</h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-microphone"></i></div>
+          <h4>Hinglish Voice Inventory (Gemini AI)</h4>
+          <p>Vendors speak naturally in mixed Hindi-English — <em>"Ek kilo chawal 50 rupay"</em> — and Gemini AI parses it into structured database records: Product, Quantity, Price.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-camera"></i></div>
+          <h4>On-Device Image Recognition (TensorFlow.js)</h4>
+          <p>MobileNet model runs entirely in the browser. Point the camera at any product and the category auto-fills — zero cloud GPU costs, infinite scalability.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-qrcode"></i></div>
+          <h4>Dynamic UPI QR Billing</h4>
+          <p>Auto-generates secure scan-to-pay UPI QR codes bound to the vendor's bank VPA. Compatible with GPay, PhonePe, Paytm. Cart items + total calculated instantly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fab fa-whatsapp"></i></div>
+          <h4>One-Tap WhatsApp Receipts</h4>
+          <p>After payment, vendor taps once to send a beautifully formatted HTML receipt to the customer's WhatsApp — paperless, instant, professional.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-barcode"></i></div>
+          <h4>Barcode Scanning</h4>
+          <p>Uses the device camera to scan product barcodes and auto-pull product codes, dramatically accelerating inventory creation for packaged goods.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+          <h4>Offline-First Buyer Map App</h4>
+          <p>React Native + Expo mobile app shows nearby vendors as category-coded map pins. Buyers can search for specific products and get real-time directions — works offline too.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- TECH STACK -->
+    <div class="cs-section">
+      <p class="cs-section-num">04 — Tech Stack</p>
+      <h2 class="cs-section-title">Architecture & Technologies</h2>
+
+      <!-- Architecture diagram -->
+      <div class="arch-box">
+        <div class="arch-layer">
+          <h5>Web Frontend</h5>
+          <ul>
+            <li>React 18 + Vite</li>
+            <li>TypeScript</li>
+            <li>TensorFlow.js</li>
+            <li>Glassmorphism CSS</li>
+            <li>Lucide React</li>
+          </ul>
+        </div>
+        <div class="arch-layer">
+          <h5>Backend API</h5>
+          <ul>
+            <li>Python 3.9+</li>
+            <li>FastAPI</li>
+            <li>SQLAlchemy ORM</li>
+            <li>PostgreSQL</li>
+            <li>PyJWT · Uvicorn</li>
+          </ul>
+        </div>
+        <div class="arch-layer">
+          <h5>Mobile App</h5>
+          <ul>
+            <li>React Native</li>
+            <li>Expo + Expo Router</li>
+            <li>React Native Maps</li>
+            <li>Expo Camera</li>
+            <li>Local Storage Cache</li>
+          </ul>
+        </div>
+      </div>
+
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Technology</th>
+            <th>Why This Choice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AI / NLP</td>
+            <td>Gemini AI API</td>
+            <td>Handles Hinglish mixed-language voice parsing — converts unstructured speech to structured DB inserts</td>
+          </tr>
+          <tr>
+            <td>Image AI</td>
+            <td>TensorFlow.js (MobileNet)</td>
+            <td>Edge inference in-browser means ₹0 cloud GPU cost; works offline and scales infinitely</td>
+          </tr>
+          <tr>
+            <td>Database</td>
+            <td>PostgreSQL + SQLAlchemy</td>
+            <td>Strict relational schema ensures inventory integrity; ACID compliance for billing transactions</td>
+          </tr>
+          <tr>
+            <td>Auth</td>
+            <td>PyJWT + Phone Auth</td>
+            <td>Phone-first flow removes the biggest onboarding friction — no email, no documents needed</td>
+          </tr>
+          <tr>
+            <td>QR Payments</td>
+            <td>Client-side SVG QR Gen</td>
+            <td>Generated in-browser, not server-side — eliminates bandwidth cost and works without connectivity</td>
+          </tr>
+          <tr>
+            <td>Mobile</td>
+            <td>React Native + Expo</td>
+            <td>Single codebase for iOS + Android; Expo Camera enables barcode scan without native modules</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- CHALLENGES -->
+    <div class="cs-section">
+      <p class="cs-section-num">05 — Challenges & Learnings</p>
+      <h2 class="cs-section-title">Hard Problems Solved</h2>
+
+      <div class="challenge-item">
+        <h4>Hinglish NLP Parsing Accuracy</h4>
+        <p class="cs-text">Vendors mix Hindi, English, and transliterated terms arbitrarily — <em>"5 packet biscuit teen sau mein"</em>. Standard NLP models trained on clean English failed entirely.</p>
+        <div class="cs-callout">
+          <strong>Solution:</strong> Engineered a Gemini AI prompt with few-shot examples covering common Indian product categories, units (kilo, litre, dozen, packet), and price patterns. Added a validation layer that re-asks Gemini for clarification if confidence in unit/price parsing is below threshold.
+        </div>
+      </div>
+
+      <div class="challenge-item">
+        <h4>TensorFlow.js MobileNet Load Time on Low-End Devices</h4>
+        <p class="cs-text">Many kirana store owners use entry-level Android devices with 2GB RAM. Loading the full MobileNet model (4MB+) blocked the UI for 6–8 seconds on first load.</p>
+        <div class="cs-callout">
+          <strong>Solution:</strong> Implemented progressive model loading — the UI is fully usable immediately while the model loads in a background web worker. A subtle indicator shows model readiness. Used MobileNet v2 (smaller) instead of v3 for an additional 30% size reduction.
+        </div>
+      </div>
+
+      <div class="challenge-item">
+        <h4>Offline Map Caching on Spotty Connections</h4>
+        <p class="cs-text">Market lanes have inconsistent 4G coverage. Buyers couldn't discover vendors when connectivity dropped mid-session.</p>
+        <div class="cs-callout">
+          <strong>Solution:</strong> Implemented a local-first caching strategy in the React Native app. Vendor profiles and product lists within a 5km radius are pre-fetched and stored in AsyncStorage when the app first loads on strong connectivity. Subsequent sessions render from cache instantly, syncing delta updates in the background.
+        </div>
+      </div>
+
+      <div class="challenge-item">
+        <h4>UPI Deep-Link QR Compatibility</h4>
+        <p class="cs-text">Different payment apps (GPay, PhonePe, Paytm) parse UPI deep-link parameters inconsistently, especially around currency formatting and merchant name encoding.</p>
+        <div class="cs-callout">
+          <strong>Solution:</strong> Tested against the UPI specification v2.0 and built a sanitizer that normalizes all merchant names (strips special characters, encodes Unicode), validates VPA format, and formats amounts to exactly 2 decimal places — achieving compatibility across all major Indian payment apps.
+        </div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- IMPACT -->
+    <div class="cs-section">
+      <p class="cs-section-num">06 — Impact</p>
+      <h2 class="cs-section-title">What SthaniyaVendor Achieves</h2>
+      <p class="cs-text">SthaniyaVendor compresses a process that used to take a local vendor <strong>days of paperwork and training</strong> into a <strong>sub-5-minute phone-based onboarding</strong>. An elderly vegetable seller can speak their inventory in Hindi and begin accepting UPI payments within the same session — with no computer, no technical training, and no upfront cost.</p>
+      <p class="cs-text">This project sharpened my expertise in <strong>edge AI deployment</strong> (running ML models on resource-constrained devices), <strong>multilingual NLP prompt engineering</strong>, <strong>cross-platform mobile development</strong> with React Native, and <strong>building for Bharat</strong> — designing for users with low digital literacy and inconsistent connectivity.</p>
+
+      <div class="cs-callout">
+        <strong>Key Technical Achievement:</strong> The entire AI stack (voice NLP via Gemini + image classification via TensorFlow.js) operates at <strong>zero marginal infrastructure cost</strong> per vendor — Gemini handles NLP via API calls on user action, and TensorFlow.js runs purely client-side. This makes the platform economically viable as a free service at any scale.
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="cs-actions">
+      <a href="https://github.com/atulsingh1501/SthaniyaVendor" target="_blank" class="btn-ghost">
+        <i class="fab fa-github"></i> View on GitHub
+      </a>
+      <a href="index.html" class="btn-ghost">
+        <i class="fas fa-arrow-left"></i> View Other Projects
+      </a>
+    </div>
+
+  </div>
+</body>
 </html>

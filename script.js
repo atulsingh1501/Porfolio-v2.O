@@ -1,348 +1,218 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Static Metrics (No JS Required) ---
-    // The stats section is now fully static HTML for instant loading and reliability.
-    // Dynamic fetchers have been removed to prevent 'Loading...' states.
 
-    // --- Smooth Scrolling for Anchor Links ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId && targetId !== '#') {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
+  // ---- Smooth Scrolling ----
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id && id !== '#') {
+        e.preventDefault();
+        const el = document.querySelector(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
     });
+  });
 
-    // --- Active Navigation Link Highlighting ---
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - sectionHeight / 3)) {
-                current = section.getAttribute('id');
-            }
+  // ---- Active Nav Highlight ----
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`);
         });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
+      }
     });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
 
-    // --- LeetCode Stats (Real-time) ---
-    async function fetchLeetCodeStats() {
-        try {
-            const username = "Atulya_15";
-            const response = await fetch(`https://alfa-leetcode-api.onrender.com/${username}/solved`);
-            const data = await response.json();
+  // ---- Mobile Nav ----
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const closeBtn = document.getElementById('close-mobile-nav');
 
-            // alfa-leetcode-api returns: solvedProblem, easySolved, mediumSolved, hardSolved
-            if (data && data.solvedProblem !== undefined) {
-                document.getElementById('leetcode-total').innerText = data.solvedProblem;
+  menuBtn?.addEventListener('click', () => overlay?.classList.add('active'));
+  closeBtn?.addEventListener('click', () => overlay?.classList.remove('active'));
+  overlay?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => overlay.classList.remove('active'));
+  });
 
-                // Update text counts
-                document.getElementById('leetcode-easy-count').innerText = data.easySolved;
-                document.getElementById('leetcode-medium-count').innerText = data.mediumSolved;
-                document.getElementById('leetcode-hard-count').innerText = data.hardSolved;
+  // ---- Achievements accordion ----
+  window.toggleExp = function(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('open');
+  };
 
-                // Update bars
-                const total = data.solvedProblem;
-                document.getElementById('leetcode-easy-bar').style.width = `${(data.easySolved / total) * 100}%`;
-                document.getElementById('leetcode-medium-bar').style.width = `${(data.mediumSolved / total) * 100}%`;
-                document.getElementById('leetcode-hard-bar').style.width = `${(data.hardSolved / total) * 100}%`;
-            } else {
-                document.getElementById('leetcode-total').innerText = "250+"; // Fallback static
-            }
-        } catch (error) {
-            console.error("LeetCode fetch failed:", error);
-            document.getElementById('leetcode-total').innerText = "250+"; // Fallback static
-        }
+  // ---- LeetCode Stats ----
+  async function fetchLeetCode() {
+    try {
+      const res = await fetch('https://alfa-leetcode-api.onrender.com/Atulya_15/solved');
+      const data = await res.json();
+      if (data && data.solvedProblem !== undefined) {
+        document.getElementById('leetcode-total').innerText = data.solvedProblem;
+        document.getElementById('leetcode-easy-count').innerText = data.easySolved;
+        document.getElementById('leetcode-medium-count').innerText = data.mediumSolved;
+        document.getElementById('leetcode-hard-count').innerText = data.hardSolved;
+        const total = data.solvedProblem || 1;
+        document.getElementById('leetcode-easy-bar').style.width = `${(data.easySolved / total) * 100}%`;
+        document.getElementById('leetcode-medium-bar').style.width = `${(data.mediumSolved / total) * 100}%`;
+        document.getElementById('leetcode-hard-bar').style.width = `${(data.hardSolved / total) * 100}%`;
+      } else {
+        document.getElementById('leetcode-total').innerText = '250+';
+      }
+    } catch {
+      document.getElementById('leetcode-total').innerText = '250+';
     }
-    fetchLeetCodeStats();
+  }
+  fetchLeetCode();
 
-    // --- GitHub Streak (Real-time) ---
-    async function fetchGitHubStreak() {
-        try {
-            const username = "atulsingh1501";
-            // Using a public API proxy for contributions (cors-enabled)
-            const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`);
-            const data = await response.json();
+  // ---- GitHub Contributions ----
+  async function fetchGitHub() {
+    try {
+      const res = await fetch('https://github-contributions-api.jogruber.de/v4/atulsingh1501');
+      const data = await res.json();
+      if (!data.contributions) return;
 
-            if (data.contributions) {
-                const contribMap = new Map();
-                data.contributions.forEach(c => contribMap.set(c.date, c.count));
+      const contribMap = new Map();
+      data.contributions.forEach(c => contribMap.set(c.date, c.count));
 
-                const formatDate = (date) => {
-                    const offset = date.getTimezoneOffset();
-                    const localDate = new Date(date.getTime() - (offset * 60 * 1000));
-                    return localDate.toISOString().split('T')[0];
-                };
+      const fmt = d => {
+        const off = d.getTimezoneOffset();
+        return new Date(d.getTime() - off * 60000).toISOString().split('T')[0];
+      };
 
-                let d = new Date();
-                let streak = 0;
-                let dateStr = formatDate(d);
+      let d = new Date(), streak = 0, dateStr = fmt(d);
+      if (!contribMap.get(dateStr)) { d.setDate(d.getDate() - 1); dateStr = fmt(d); }
+      while ((contribMap.get(dateStr) || 0) > 0) {
+        streak++;
+        d.setDate(d.getDate() - 1);
+        dateStr = fmt(d);
+      }
 
-                // If today has 0, check yesterday (streak is preserved if missed today but active yesterday)
-                if (!contribMap.has(dateStr) || contribMap.get(dateStr) === 0) {
-                    d.setDate(d.getDate() - 1);
-                    dateStr = formatDate(d);
-                }
+      let totalContribs = data.total
+        ? Object.values(data.total).reduce((a, v) => a + v, 0)
+        : data.contributions.reduce((a, c) => a + c.count, 0);
 
-                while (contribMap.get(dateStr) > 0) {
-                    streak++;
-                    d.setDate(d.getDate() - 1);
-                    dateStr = formatDate(d);
-                }
+      const streakEl = document.getElementById('github-streak');
+      if (streakEl) {
+        streakEl.innerHTML = `<span style="color:var(--fg-muted)">Total: <strong style="color:var(--fg)">${totalContribs}</strong></span> &nbsp;|&nbsp; Streak: <strong style="color:var(--accent)">${streak}</strong>`;
+      }
 
-                const streakEl = document.getElementById('github-streak');
-                // Calculate Total Contributions for all years
-                let totalContribs = 0;
-                if (data.total) {
-                    Object.values(data.total).forEach(val => totalContribs += val);
-                } else {
-                    // Fallback if total object isn't as expected, sum array
-                    totalContribs = data.contributions.reduce((acc, curr) => acc + curr.count, 0);
-                }
+      // Build calendar
+      const calendarEl = document.querySelector('.calendar');
+      if (!calendarEl) return;
+      calendarEl.innerHTML = '<div class="calendar-main-wrapper"><div class="year-selector" id="year-selector"></div><div class="calendar-grid-wrapper" id="graph-content"></div></div>';
 
-                if (streakEl) {
-                    streakEl.innerHTML = `<span style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">Total: <span style="color: var(--text-primary);">${totalContribs}</span></span> &nbsp;|&nbsp; Streak: <div class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--success-color); border: 1px solid rgba(16, 185, 129, 0.2); margin-left: 4px;"><span class="live-dot"></span> ${streak}</div>`;
-                }
+      const allContribs = data.contributions;
+      const yearsSet = new Set(allContribs.map(c => new Date(c.date).getFullYear()));
+      const years = Array.from(yearsSet).sort();
+      let activeYear = years[years.length - 1];
 
-                // --- Year Filtering Logic ---
-                const graphContainer = document.getElementById('graph-weeks');
-                // Note: The graph container usually exists inside .calendar div. We need to make sure basic structure exists.
-                // The structure is usually injected by the HTML replace we did? No, the HTML has <div class="calendar">Loading...</div>
-                // So we need to inject the skeleton first.
+      const yearSelector = document.getElementById('year-selector');
+      const graphContent = document.getElementById('graph-content');
 
-                const calendarEl = document.querySelector(".calendar");
-                if (calendarEl) {
-                    calendarEl.innerHTML = '<div class="custom-calendar"><div class="graph-weeks" id="graph-weeks"></div><div class="graph-footer"><span>Learn how we count contributions</span><div style="display:flex; gap:3px; align-items: center"><span>Less</span><div style="display:flex; gap:3px;"><span class="graph-day" data-level="0"></span><span class="graph-day" data-level="1"></span><span class="graph-day" data-level="2"></span><span class="graph-day" data-level="3"></span><span class="graph-day" data-level="4"></span></div><span>More</span></div></div></div>';
-                }
+      const renderYear = (yr) => {
+        activeYear = yr;
 
-                const graphContainerRecheck = document.getElementById('graph-weeks');
+        // --- Compute responsive cell size BEFORE building DOM ---
+        const wrap = document.querySelector('.github-cal-wrap');
+        const containerW = wrap ? wrap.clientWidth - 2 : 300;
+        const weeksInYear = 53; // max weeks per year
+        const gap = 2;
+        // cellSize = (available width - gaps) / number of weeks
+        const cellSize = Math.max(5, Math.floor((containerW - (weeksInYear * gap)) / weeksInYear));
+        const fontSize = Math.max(8, cellSize - 2);
 
-                if (graphContainerRecheck) {
-                    graphContainerRecheck.innerHTML = '';
+        // Render year tabs
+        yearSelector.innerHTML = '';
+        years.forEach(y => {
+          const btn = document.createElement('button');
+          btn.innerText = y;
+          btn.style.cssText = `background:${y === yr ? 'rgba(0,199,88,0.15)' : 'transparent'};color:${y === yr ? 'var(--accent)' : 'var(--fg-muted)'};border:1px solid ${y === yr ? 'var(--accent)' : 'var(--border)'};border-radius:99px;padding:4px 12px;font-size:0.72rem;cursor:pointer;font-family:var(--font-body)`;
+          btn.onclick = () => renderYear(y);
+          yearSelector.appendChild(btn);
+        });
+        yearSelector.style.cssText = 'display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap';
 
-                    // 1. Create Layout Structure
-                    const mainWrapper = document.createElement('div');
-                    mainWrapper.className = 'calendar-main-wrapper';
+        // Render graph
+        graphContent.innerHTML = '';
+        const yearData = allContribs.filter(c => new Date(c.date).getFullYear() === yr);
 
-                    // Year Selector (Tabs)
-                    const yearSelector = document.createElement('div');
-                    yearSelector.className = 'year-selector';
-                    mainWrapper.appendChild(yearSelector);
-
-                    // Graph Wrapper (Content)
-                    const graphContent = document.createElement('div');
-                    graphContent.className = 'calendar-grid-wrapper';
-                    mainWrapper.appendChild(graphContent);
-
-                    graphContainerRecheck.appendChild(mainWrapper);
-
-                    const allContribs = data.contributions;
-
-                    // Identify available years
-                    const yearsSet = new Set();
-                    allContribs.forEach(d => yearsSet.add(new Date(d.date).getFullYear()));
-                    const years = Array.from(yearsSet).sort((a, b) => a - b); // Ascending
-
-                    let activeYear = years[years.length - 1]; // Default to latest
-
-                    // Function to render graph for a specific year
-                    const renderYear = (targetYear) => {
-                        graphContent.innerHTML = ''; // Clear previous
-
-                        // Filter data
-                        const yearData = allContribs.filter(d => new Date(d.date).getFullYear() === targetYear);
-                        const yearTotal = yearData.reduce((acc, curr) => acc + curr.count, 0);
-
-                        // Update Year Total display if needed
-                        if (streakEl) {
-                            streakEl.innerHTML = `<span style="font-weight: 500; font-size: 0.85rem; color: var(--text-secondary);">${targetYear}: <span style="color: var(--text-primary);">${yearTotal}</span></span> &nbsp;|&nbsp; Streak: <div class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--success-color); border: 1px solid rgba(16, 185, 129, 0.2); margin-left: 4px;"><span class="live-dot"></span> ${streak}</div>`;
-                        }
-
-                        // --- Render Tabs ---
-                        yearSelector.innerHTML = '';
-                        years.forEach(y => {
-                            const btn = document.createElement('button');
-                            btn.className = `year-btn ${y === targetYear ? 'active' : ''}`;
-                            btn.innerText = y;
-                            btn.onclick = () => renderYear(y);
-                            yearSelector.appendChild(btn);
-                        });
-
-                        // --- Render Graph ---
-                        // 1. Months Header
-                        const monthsHeader = document.createElement('div');
-                        monthsHeader.className = 'months-header';
-                        monthsHeader.style.display = 'flex';
-                        monthsHeader.style.gap = '3px';
-                        monthsHeader.style.marginBottom = '4px';
-                        monthsHeader.style.height = '15px'; // Ensure height for labels
-                        monthsHeader.style.fontSize = '0.75rem';
-                        monthsHeader.style.color = 'var(--text-secondary)';
-
-                        // 2. Main Body (Grid)
-                        const calendarBody = document.createElement('div');
-                        calendarBody.className = 'calendar-body';
-
-                        // Group by weeks
-                        const weeks = [];
-                        let currentWeek = [];
-                        yearData.forEach((d, i) => {
-                            currentWeek.push(d);
-                            if (new Date(d.date).getDay() === 6 || i === yearData.length - 1) {
-                                weeks.push(currentWeek);
-                                currentWeek = [];
-                            }
-                        });
-
-                        // Render Months and Weeks
-                        let lastMonth = -1;
-
-                        weeks.forEach((week, index) => {
-                            // Month Label Logic
-                            const firstDayOfWeek = new Date(week[0].date);
-                            const monthIndex = firstDayOfWeek.getMonth();
-                            const monthName = firstDayOfWeek.toLocaleString('default', { month: 'short' });
-
-                            const monthLabelSlot = document.createElement('div');
-                            monthLabelSlot.style.width = '10px'; // Match week column width
-                            monthLabelSlot.style.textAlign = 'left';
-                            monthLabelSlot.style.position = 'relative';
-                            monthLabelSlot.style.flexShrink = '0'; // Prevent shrinking
-
-                            // Only show label if month changed and we have enough space (e.g. at least 2 weeks till next label or end)
-                            if (monthIndex !== lastMonth) {
-                                const label = document.createElement('span');
-                                label.innerText = monthName;
-                                label.style.position = 'absolute'; // Overflow to right
-                                monthLabelSlot.appendChild(label);
-                                lastMonth = monthIndex;
-                            }
-
-                            monthsHeader.appendChild(monthLabelSlot);
-
-                            // Week Column Render
-                            const weekCol = document.createElement('div');
-                            weekCol.style.display = 'flex';
-                            weekCol.style.flexDirection = 'column';
-                            weekCol.style.gap = '3px';
-                            weekCol.style.flexShrink = '0'; // Prevent shrinking
-
-                            week.forEach(day => {
-                                const dayEl = document.createElement('div');
-                                dayEl.className = 'graph-day';
-                                dayEl.style.width = '10px';
-                                dayEl.style.height = '10px';
-                                dayEl.style.borderRadius = '2px';
-
-                                // Level Logic
-                                let level = 0;
-                                if (day.count > 0) level = 1;
-                                if (day.count >= 3) level = 2;
-                                if (day.count >= 6) level = 3;
-                                if (day.count >= 10) level = 4;
-
-                                dayEl.setAttribute('data-level', level);
-                                dayEl.title = `${day.date}: ${day.count} contributions`;
-                                weekCol.appendChild(dayEl);
-                            });
-                            calendarBody.appendChild(weekCol);
-                        });
-
-                        calendarBody.style.display = 'flex';
-                        calendarBody.style.gap = '3px';
-
-                        graphContent.appendChild(monthsHeader);
-                        graphContent.appendChild(calendarBody);
-                    };
-
-                    renderYear(activeYear);
-                }
-            }
-        } catch (error) {
-            console.error("GitHub fetch failed:", error);
-            const calendarEl = document.querySelector(".calendar");
-            if (calendarEl) calendarEl.innerText = "Unable to load contributions.";
-        }
-    }
-    fetchGitHubStreak();
-
-
-    // --- Sidebar Toggle for Mobile ---
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-
-    if (mobileMenuBtn && mobileNavOverlay) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileNavOverlay.classList.toggle('active');
-
-            // Toggle icon between bars and times (X)
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mobileNavOverlay.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+        // Group into weeks
+        const weeks = [];
+        let week = [];
+        yearData.forEach((c, i) => {
+          week.push(c);
+          if (new Date(c.date).getDay() === 6 || i === yearData.length - 1) {
+            weeks.push(week); week = [];
+          }
         });
 
-        // Close menu when a link is clicked
-        const mobileLinks = mobileNavOverlay.querySelectorAll('.nav-item-mobile');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNavOverlay.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-    }
+        // Months header
+        const monthsHeader = document.createElement('div');
+        monthsHeader.style.cssText = `display:flex;gap:${gap}px;margin-bottom:4px;height:${fontSize + 2}px;font-size:${fontSize}px;color:var(--fg-muted);`;
 
-    // --- Profile Picture Modal Logic (WhatsApp Style) ---
-    const profilePicContainer = document.querySelector('.profile-pic-container');
-    const profileModal = document.getElementById('profile-modal');
-    const modalImg = document.getElementById('profile-modal-img');
-    const closeModal = document.querySelector('.close-modal');
+        // Calendar body
+        const calBody = document.createElement('div');
+        calBody.className = 'calendar-body';
 
-    if (profilePicContainer && profileModal && modalImg) {
-        profilePicContainer.addEventListener('click', (e) => {
-            e.preventDefault();
-            profileModal.classList.add('active');
-            // Sync image source just in case
-            const currentPic = document.querySelector('.profile-pic');
-            if (currentPic) {
-                modalImg.src = currentPic.src;
-            }
-        });
-    }
+        let lastMonth = -1;
+        weeks.forEach(w => {
+          const firstDay = new Date(w[0].date);
+          const mon = firstDay.getMonth();
+          const slot = document.createElement('div');
+          slot.style.cssText = `width:${cellSize}px;flex-shrink:0;position:relative;`;
+          if (mon !== lastMonth) {
+            const lbl = document.createElement('span');
+            lbl.innerText = firstDay.toLocaleString('default', { month: 'short' });
+            lbl.style.cssText = `position:absolute;white-space:nowrap;font-size:${fontSize}px;`;
+            slot.appendChild(lbl);
+            lastMonth = mon;
+          }
+          monthsHeader.appendChild(slot);
 
-    if (closeModal && profileModal) {
-        closeModal.addEventListener('click', () => {
-            profileModal.classList.remove('active');
+          const col = document.createElement('div');
+          col.style.cssText = `display:flex;flex-direction:column;gap:${gap}px;flex-shrink:0;`;
+          w.forEach(day => {
+            const cell = document.createElement('div');
+            cell.className = 'graph-day';
+            let lv = 0;
+            if (day.count > 0) lv = 1;
+            if (day.count >= 3) lv = 2;
+            if (day.count >= 6) lv = 3;
+            if (day.count >= 10) lv = 4;
+            cell.setAttribute('data-level', lv);
+            cell.style.cssText = `width:${cellSize}px;height:${cellSize}px;border-radius:${Math.max(1, Math.floor(cellSize / 5))}px;flex-shrink:0;`;
+            cell.title = `${day.date}: ${day.count}`;
+            col.appendChild(cell);
+          });
+          calBody.appendChild(col);
         });
-    }
 
-    if (profileModal) {
-        profileModal.addEventListener('click', (e) => {
-            if (e.target === profileModal) {
-                profileModal.classList.remove('active');
-            }
-        });
+        calBody.style.cssText = `display:flex;gap:${gap}px;overflow:visible;`;
+        graphContent.style.cssText = `overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;`;
+        graphContent.appendChild(monthsHeader);
+        graphContent.appendChild(calBody);
+
+        // Reset any previous scale/height overrides
+        const calWrap = document.querySelector('.calendar-main-wrapper');
+        if (calWrap) { calWrap.style.transform = ''; }
+        if (wrap) { wrap.style.height = ''; }
+      };
+
+      // Re-render on resize (recalculates cell size for new viewport)
+      if (window._calResizeHandler) window.removeEventListener('resize', window._calResizeHandler);
+      window._calResizeHandler = () => renderYear(activeYear);
+      window.addEventListener('resize', window._calResizeHandler);
+
+      renderYear(activeYear);
+
+    } catch (err) {
+      console.error('GitHub fetch failed:', err);
+      const c = document.querySelector('.calendar');
+      if (c) c.innerText = 'Unable to load contributions.';
     }
+  }
+  fetchGitHub();
+
 });

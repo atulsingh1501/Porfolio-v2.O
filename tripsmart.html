@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Study: TripSmart AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Parkinsans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
@@ -98,11 +98,68 @@
             color: var(--accent-color);
         }
 
-        /* Override global app styles for standalone page */
         body {
             overflow: auto !important;
             display: block !important;
             height: auto !important;
+            font-family: var(--font-body);
+        }
+        .case-study-container { max-width: 800px; margin: 0 auto; padding: 80px 20px; }
+        .cs-header { margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
+        .cs-title {
+            font-family: var(--font-head);
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            color: var(--fg);
+        }
+        .cs-subtitle { font-size: 1.05rem; color: var(--fg-muted); line-height: 1.7; margin-bottom: 24px; }
+        .cs-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+        .cs-badge {
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--fg-muted); border: 1px solid var(--border);
+            border-radius: 99px; padding: 4px 14px;
+        }
+        .cs-section { margin-bottom: 56px; }
+        .cs-section-title {
+            font-size: 0.72rem; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--accent);
+            margin-bottom: 16px; font-weight: 600;
+        }
+        .cs-content { font-size: 1rem; color: var(--fg-muted); line-height: 1.75; }
+        .cs-content strong { color: var(--fg); }
+        .cs-content p + p { margin-top: 1rem; }
+        .cs-list { list-style: none; padding: 0; }
+        .cs-list li {
+            position: relative; padding-left: 20px;
+            margin-bottom: 12px; color: var(--fg-muted);
+            font-size: 1rem; line-height: 1.7;
+        }
+        .cs-list li::before {
+            content: ""; position: absolute;
+            left: 0; top: 10px; width: 6px; height: 6px;
+            background: var(--accent); border-radius: 50%;
+        }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--fg-muted); text-decoration: none;
+            margin-bottom: 40px; font-weight: 500;
+            font-size: 0.9rem; transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--fg); }
+        .cs-callout {
+            background: rgba(0,199,88,0.06);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 16px 20px; margin: 20px 0;
+            font-size: 0.95rem; color: var(--fg-muted); line-height: 1.65;
+        }
+        .cs-callout strong { color: var(--fg); }
+        .cs-actions {
+            display: flex; gap: 12px; flex-wrap: wrap;
+            margin-top: 32px; padding-top: 32px;
+            border-top: 1px solid var(--border);
         }
     </style>
 </head>
@@ -196,8 +253,17 @@
             </div>
         </section>
 
-        <a href="index.html" class="btn btn-primary">View Other Projects</a>
+        <div class="cs-actions">
+            <a href="https://github.com/atulsingh1501/TripSmart_Deploy" target="_blank" class="btn-ghost">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <a href="https://trip-smart-tau.vercel.app/" target="_blank" class="btn-primary">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="index.html" class="btn-ghost">
+                <i class="fas fa-arrow-left"></i> View Other Projects
+            </a>
+        </div>
     </div>
 </body>
-
 </html>
