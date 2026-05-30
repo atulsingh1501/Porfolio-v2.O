@@ -674,13 +674,15 @@ body::after {
 }
 .stat-sub { font-size: 0.8rem; color: var(--fg-muted); margin-top: 4px; }
 
-.lc-bars { margin-top: 16px; }
-.lc-bar-row {
+.lc-bars { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.lc-diff-item {}
+.lc-diff-label {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.78rem;
-  margin-bottom: 6px;
+  font-weight: 500;
+  margin-bottom: 5px;
 }
 .bar-track {
   width: 100%;

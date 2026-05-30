@@ -335,15 +335,32 @@
           <div class="stat-big" id="leetcode-total">—</div>
           <div class="stat-sub">Problems Solved</div>
           <div class="lc-bars">
-            <div class="lc-bar-row">
-              <span style="color:#22c55e">Easy <span id="leetcode-easy-count">-</span></span>
-              <span style="color:#f59e0b">Med <span id="leetcode-medium-count">-</span></span>
-              <span style="color:#ef4444">Hard <span id="leetcode-hard-count">-</span></span>
+            <div class="lc-diff-item">
+              <div class="lc-diff-label">
+                <span style="color:#22c55e">Easy</span>
+                <span id="leetcode-easy-count" style="color:var(--fg)">-</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="leetcode-easy-bar" style="width:0%;background:#22c55e"></div>
+              </div>
             </div>
-            <div class="bar-track">
-              <div class="bar-fill" id="leetcode-easy-bar" style="width:0%;background:#22c55e"></div>
-              <div class="bar-fill" id="leetcode-medium-bar" style="width:0%;background:#f59e0b"></div>
-              <div class="bar-fill" id="leetcode-hard-bar" style="width:0%;background:#ef4444"></div>
+            <div class="lc-diff-item">
+              <div class="lc-diff-label">
+                <span style="color:#f59e0b">Med</span>
+                <span id="leetcode-medium-count" style="color:var(--fg)">-</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="leetcode-medium-bar" style="width:0%;background:#f59e0b"></div>
+              </div>
+            </div>
+            <div class="lc-diff-item">
+              <div class="lc-diff-label">
+                <span style="color:#ef4444">Hard</span>
+                <span id="leetcode-hard-count" style="color:var(--fg)">-</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" id="leetcode-hard-bar" style="width:0%;background:#ef4444"></div>
+              </div>
             </div>
           </div>
         </div>
