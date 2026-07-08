@@ -727,47 +727,90 @@ body::after {
 .calendar-body { display: flex; gap: 3px; }
 .months-header { display: flex; gap: 3px; margin-bottom: 4px; height: 15px; font-size: 0.7rem; color: var(--fg-muted); }
 
-/* ---- Contact Section ---- */
-.contact-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 60px 40px;
+/* ---- Nishul-style Contact Section ---- */
+.nishul-contact {
   text-align: center;
+  padding: 60px 20px;
 }
-.contact-box h2 {
+.nishul-contact-heading {
   font-family: var(--font-head);
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
   font-weight: 700;
+  color: var(--fg);
   letter-spacing: -0.03em;
-  margin-bottom: 12px;
+  margin-bottom: 32px;
+  line-height: 1.3;
 }
-.contact-box p { color: var(--fg-muted); font-size: 1rem; max-width: 440px; margin: 0 auto 32px; line-height: 1.6; }
-
-.contact-socials { display: flex; justify-content: center; gap: 14px; margin-top: 32px; }
-.social-icon {
-  width: 40px; height: 40px;
+.nishul-contact-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.nishul-pill {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+  background: rgba(255,255,255,0.03);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--fg-muted);
-  font-size: 1.1rem;
+  border-radius: 99px;
+  padding: 10px 20px;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
 }
-.social-icon:hover { border-color: var(--border-hover); color: var(--fg); background: rgba(255,255,255,0.04); }
+.nishul-pill:hover {
+  color: var(--fg);
+  border-color: var(--border-hover);
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-2px);
+}
 
-/* ---- Footer ---- */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 28px clamp(16px,4vw,48px);
-  text-align: center;
-  font-size: 0.82rem;
-  color: var(--fg-muted);
+/* ---- Illustrated Footer ---- */
+.illustrated-footer {
   position: relative;
   z-index: 1;
+  padding: 0 clamp(16px, 4vw, 48px) 0;
+  margin-top: 0;
+}
+.footer-banner {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.footer-banner-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+.footer-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 40%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 24px;
+  text-align: center;
+  border-radius: 16px;
+}
+.footer-credit {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 4px;
+}
+.footer-credit strong { color: #fff; }
+.footer-copy {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
 }
 
 /* ---- Mobile Overlay Nav ---- */
