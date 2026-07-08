@@ -15,6 +15,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Parkinsans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Devicon (colored tech logos) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
   <!-- Main Styles -->
   <link rel="stylesheet" href="style.css">
 
@@ -23,16 +25,39 @@
        ALL PROJECTS PAGE — EXTRA STYLES
        ============================================= */
 
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--fg-muted);
+      text-decoration: none;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--fg); }
+    .back-link i { font-size: 0.72rem; }
+
     /* Hero Header */
     .projects-hero {
-      padding: 28px 0 20px;
+      padding: 28px 0 24px;
       text-align: center;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .projects-hero .hero-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
     .projects-hero h1 {
       font-family: var(--font-head);
-      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-size: clamp(2rem, 5vw, 3.2rem);
       font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 1.1;
@@ -40,7 +65,7 @@
     }
     .projects-hero p {
       color: var(--fg-muted);
-      font-size: 1rem;
+      font-size: 0.95rem;
       max-width: 480px;
       margin: 0 auto;
       line-height: 1.6;
@@ -52,7 +77,7 @@
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .filter-tab {
       display: inline-flex;
@@ -72,8 +97,7 @@
     }
     .filter-tab .count {
       font-size: 0.72rem;
-      color: var(--fg-muted);
-      opacity: 0.7;
+      opacity: 0.65;
     }
     .filter-tab:hover {
       color: var(--fg);
@@ -85,17 +109,15 @@
       background: var(--fg);
       border-color: var(--fg);
     }
-    .filter-tab.active .count {
-      color: rgba(0,0,0,0.5);
-    }
+    .filter-tab.active .count { color: rgba(0,0,0,0.45); }
 
-    /* Section header */
+    /* Section count header */
     .all-projects-header {
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
     .all-projects-header h2 {
       font-family: var(--font-head);
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--fg);
     }
@@ -106,51 +128,39 @@
       margin-left: 8px;
     }
 
-    /* Full Projects Grid — 2 cols */
+    /* Projects grid */
     .all-projects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 24px;
     }
 
-    /* Project Card — extended for all-projects page */
+    /* Project card — reuse index.html styles via shared CSS,
+       override only the class name mapping */
     .all-project-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 16px;
       overflow: hidden;
-      transition: border-color 0.25s, transform 0.25s;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       display: flex;
       flex-direction: column;
     }
     .all-project-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
     }
-    .all-project-card .project-screenshot {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-      border-bottom: 1px solid var(--border);
+    .all-project-card .project-cover-wrap {
+      border-radius: 16px 16px 0 0;
     }
-    .all-project-card:hover .project-screenshot {
-      transform: scale(1.03);
+    .all-project-card .project-cover {
+      height: 200px;
     }
-    /* Placeholder for projects without images */
-    .project-img-placeholder {
-      width: 100%;
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid var(--border);
-      font-size: 2.4rem;
-    }
+    .all-project-card:hover .project-cover { transform: scale(1.05); }
 
     .all-project-body {
-      padding: 18px 20px 20px;
+      padding: 18px 20px 22px;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -160,31 +170,78 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .all-project-name {
       font-family: var(--font-head);
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 700;
       color: var(--fg);
+      letter-spacing: -0.02em;
     }
     .all-project-links {
       display: flex;
       gap: 6px;
       flex-shrink: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
     .all-project-desc {
       font-size: 0.82rem;
       color: var(--fg-muted);
-      line-height: 1.6;
-      margin-bottom: 14px;
+      line-height: 1.65;
+      margin-bottom: 16px;
       flex: 1;
     }
 
-    /* Hidden state */
-    .all-project-card.hidden {
-      display: none;
+    /* Portfolio placeholder card */
+    .portfolio-placeholder {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px 16px 0 0;
+      height: 200px;
+      background: linear-gradient(135deg, #0a0a0a 0%, #0d1117 50%, #111 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .portfolio-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .portfolio-placeholder::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 70px;
+      background: linear-gradient(to bottom, transparent, rgba(10,10,10,0.95));
+    }
+    .portfolio-placeholder-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .portfolio-placeholder-logo {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: -0.04em;
+    }
+    .portfolio-placeholder-logo span { color: var(--accent); }
+    .portfolio-placeholder-sub {
+      font-size: 0.68rem;
+      color: var(--fg-muted);
+      margin-top: 6px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Hidden state */
+    .all-project-card.hidden { display: none; }
 
     /* Empty state */
     .empty-state {
@@ -196,25 +253,12 @@
     }
     .empty-state i { font-size: 2rem; margin-bottom: 12px; display: block; }
 
-    /* Back link */
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      color: var(--fg-muted);
-      text-decoration: none;
-      margin-bottom: 32px;
-      transition: color 0.2s;
-    }
-    .back-link:hover { color: var(--fg); }
-    .back-link i { font-size: 0.72rem; }
-
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
       .all-projects-grid { grid-template-columns: 1fr; }
-      .projects-hero { padding: 20px 0 16px; }
-      .filter-bar { gap: 6px; }
+      .projects-hero { padding: 16px 0 20px; }
+      .all-project-top { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .all-project-links { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -255,20 +299,21 @@
   <main class="page-wrap">
 
     <!-- Back link -->
-    <a href="index.html" class="back-link" style="display:inline-flex; margin-top:16px; margin-bottom:8px;">
+    <a href="index.html" class="back-link">
       <i class="fas fa-arrow-left"></i> Back to home
     </a>
 
     <!-- Page Hero -->
     <div class="projects-hero">
-      <h1>Projects</h1>
-      <p>My projects and work across different technologies and domains.</p>
+      <p class="hero-label">Portfolio</p>
+      <h1>Things I've built</h1>
+      <p>A complete showcase of projects across full-stack, AI, and frontend — from idea to production.</p>
     </div>
 
     <!-- Filter Tabs -->
     <div class="filter-bar" id="filter-bar" role="tablist" aria-label="Project categories">
       <button class="filter-tab active" data-filter="all" id="filter-all" role="tab" aria-selected="true">
-        All <span class="count">6</span>
+        All <span class="count">7</span>
       </button>
       <button class="filter-tab" data-filter="fullstack" id="filter-fullstack" role="tab" aria-selected="false">
         Full-Stack <span class="count">4</span>
@@ -284,9 +329,9 @@
       </button>
     </div>
 
-    <!-- All Projects Count Header -->
+    <!-- Count Header -->
     <div class="all-projects-header">
-      <h2 id="section-heading">All Projects <span id="visible-count">(6 projects)</span></h2>
+      <h2 id="section-heading">All Projects <span id="visible-count">(7 projects)</span></h2>
     </div>
 
     <!-- Projects Grid -->
@@ -294,7 +339,9 @@
 
       <!-- 1. Digital RX -->
       <div class="all-project-card" data-category="fullstack ai">
-        <img src="assets/images/digitalrx_ui_preview.png" alt="Digital RX Dashboard" class="project-screenshot">
+        <div class="project-cover-wrap">
+          <img src="assets/images/cover_digitalrx.png" alt="Digital RX" class="project-cover">
+        </div>
         <div class="all-project-body">
           <div class="all-project-top">
             <h3 class="all-project-name">Digital RX</h3>
@@ -306,19 +353,21 @@
           </div>
           <p class="all-project-desc">Digitalizes busy clinic workflows enabling doctors to create NMC-compliant prescriptions and silently deliver them to patients via WhatsApp — with zero paperwork.</p>
           <div class="tech-bubbles">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">Vite</span>
-            <span class="tech-pill">Node.js</span>
-            <span class="tech-pill">Express</span>
-            <span class="tech-pill">Baileys</span>
-            <span class="tech-pill">Electron</span>
+            <span class="tech-pill"><i class="devicon-react-original colored"></i> React</span>
+            <span class="tech-pill"><i class="devicon-vitejs-plain colored"></i> Vite</span>
+            <span class="tech-pill"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+            <span class="tech-pill"><i class="devicon-express-original" style="filter:invert(1);"></i> Express</span>
+            <span class="tech-pill"><i class="fab fa-whatsapp" style="color:#25d366;"></i> Baileys</span>
+            <span class="tech-pill"><i class="devicon-electron-original colored"></i> Electron</span>
           </div>
         </div>
       </div>
 
       <!-- 2. TripSmart AI -->
       <div class="all-project-card" data-category="fullstack ai">
-        <img src="assets/images/tripsmart_real.png" alt="TripSmart AI" class="project-screenshot">
+        <div class="project-cover-wrap">
+          <img src="assets/images/cover_tripsmart.png" alt="TripSmart AI" class="project-cover">
+        </div>
         <div class="all-project-body">
           <div class="all-project-top">
             <h3 class="all-project-name">TripSmart AI</h3>
@@ -330,17 +379,19 @@
           </div>
           <p class="all-project-desc">Eliminates travel planning fragmentation by unifying budgeting, scheduling, and booking in one intelligent AI-powered platform with real-time currency conversion.</p>
           <div class="tech-bubbles">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">Redux</span>
-            <span class="tech-pill">Node.js</span>
-            <span class="tech-pill">PostgreSQL</span>
+            <span class="tech-pill"><i class="devicon-react-original colored"></i> React</span>
+            <span class="tech-pill"><i class="devicon-redux-original colored"></i> Redux</span>
+            <span class="tech-pill"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+            <span class="tech-pill"><i class="devicon-postgresql-original colored"></i> PostgreSQL</span>
           </div>
         </div>
       </div>
 
       <!-- 3. PrepTrack -->
       <div class="all-project-card" data-category="fullstack">
-        <img src="assets/images/preptrack_ui_preview.png" alt="PrepTrack Dashboard" class="project-screenshot">
+        <div class="project-cover-wrap">
+          <img src="assets/images/cover_preptrack.png" alt="PrepTrack" class="project-cover">
+        </div>
         <div class="all-project-body">
           <div class="all-project-top">
             <h3 class="all-project-name">PrepTrack</h3>
@@ -351,19 +402,21 @@
           </div>
           <p class="all-project-desc">Unifies the entire placement preparation workflow — LeetCode tracking, daily tasks, goals, study resources, and Kanban interview boards — in one MERN platform.</p>
           <div class="tech-bubbles">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">MongoDB</span>
-            <span class="tech-pill">Node.js</span>
-            <span class="tech-pill">Express</span>
-            <span class="tech-pill">Zustand</span>
-            <span class="tech-pill">JWT</span>
+            <span class="tech-pill"><i class="devicon-react-original colored"></i> React</span>
+            <span class="tech-pill"><i class="devicon-mongodb-original colored"></i> MongoDB</span>
+            <span class="tech-pill"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+            <span class="tech-pill"><i class="devicon-express-original" style="filter:invert(1);"></i> Express</span>
+            <span class="tech-pill"><i class="fas fa-atom" style="color:#8b5cf6;"></i> Zustand</span>
+            <span class="tech-pill"><i class="fas fa-key" style="color:#f59e0b;"></i> JWT</span>
           </div>
         </div>
       </div>
 
       <!-- 4. SthaniyaVendor -->
       <div class="all-project-card" data-category="fullstack ai">
-        <img src="assets/images/sthaniya_vendor.png" alt="SthaniyaVendor" class="project-screenshot">
+        <div class="project-cover-wrap">
+          <img src="assets/images/cover_sthaniya.png" alt="SthaniyaVendor" class="project-cover">
+        </div>
         <div class="all-project-body">
           <div class="all-project-top">
             <h3 class="all-project-name">SthaniyaVendor</h3>
@@ -374,19 +427,21 @@
           </div>
           <p class="all-project-desc">Hyperlocal vendor portal — helps kirana stores digitize with AI voice + image inventory (Gemini + TensorFlow.js), UPI QR billing, barcode scanning, and an offline-first buyer discovery mobile app.</p>
           <div class="tech-bubbles">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">FastAPI</span>
-            <span class="tech-pill">Python</span>
-            <span class="tech-pill">React Native</span>
-            <span class="tech-pill">Gemini AI</span>
-            <span class="tech-pill">PostgreSQL</span>
+            <span class="tech-pill"><i class="devicon-react-original colored"></i> React</span>
+            <span class="tech-pill"><i class="devicon-fastapi-plain colored"></i> FastAPI</span>
+            <span class="tech-pill"><i class="devicon-python-original colored"></i> Python</span>
+            <span class="tech-pill"><i class="devicon-react-original colored"></i> React Native</span>
+            <span class="tech-pill"><i class="fas fa-wand-magic-sparkles" style="color:#818cf8;"></i> Gemini AI</span>
+            <span class="tech-pill"><i class="devicon-postgresql-original colored"></i> PostgreSQL</span>
           </div>
         </div>
       </div>
 
       <!-- 5. KavachPay -->
       <div class="all-project-card" data-category="hackathon">
-        <img src="assets/images/kavachpay_ui_preview.png" alt="KavachPay" class="project-screenshot">
+        <div class="project-cover-wrap">
+          <img src="assets/images/cover_kavachpay.png" alt="KavachPay" class="project-cover">
+        </div>
         <div class="all-project-body">
           <div class="all-project-top">
             <h3 class="all-project-name">KavachPay</h3>
@@ -397,17 +452,19 @@
           </div>
           <p class="all-project-desc">Work-Proof Protocol — a parametric insurance innovation built for Guidewire DEVTrails Hackathon. Qualified for Phase 3 (Soar Phase). Smart contracts meet InsurTech.</p>
           <div class="tech-bubbles">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">Smart Contracts</span>
-            <span class="tech-pill">InsurTech</span>
-            <span class="tech-pill">Vite</span>
+            <span class="tech-pill"><i class="devicon-react-original colored"></i> React</span>
+            <span class="tech-pill"><i class="fas fa-link" style="color:#f59e0b;"></i> Smart Contracts</span>
+            <span class="tech-pill"><i class="fas fa-shield-alt" style="color:#ef4444;"></i> InsurTech</span>
+            <span class="tech-pill"><i class="devicon-vitejs-plain colored"></i> Vite</span>
           </div>
         </div>
       </div>
 
-      <!-- 6. Waste Management (SwachhNagar) -->
+      <!-- 6. SwachhNagar -->
       <div class="all-project-card" data-category="fullstack hackathon">
-        <img src="assets/images/waste_management.png" alt="SwachhNagar Waste Management" class="project-screenshot">
+        <div class="project-cover-wrap">
+          <img src="assets/images/cover_swachhnagar.png" alt="SwachhNagar" class="project-cover">
+        </div>
         <div class="all-project-body">
           <div class="all-project-top">
             <h3 class="all-project-name">SwachhNagar</h3>
@@ -418,22 +475,22 @@
           </div>
           <p class="all-project-desc">Civic tech platform for smart waste management — real-time garbage tracking, complaint routing, and route optimization for municipal corporations. Built for SIH 2024.</p>
           <div class="tech-bubbles">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">Node.js</span>
-            <span class="tech-pill">MongoDB</span>
-            <span class="tech-pill">Maps API</span>
+            <span class="tech-pill"><i class="devicon-react-original colored"></i> React</span>
+            <span class="tech-pill"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+            <span class="tech-pill"><i class="devicon-mongodb-original colored"></i> MongoDB</span>
+            <span class="tech-pill"><i class="fas fa-map-marker-alt" style="color:#14b8a6;"></i> Maps API</span>
           </div>
         </div>
       </div>
 
-      <!-- 6. Portfolio v2 -->
+      <!-- 7. Portfolio v2 -->
       <div class="all-project-card" data-category="frontend">
-        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0d1117 100%); border-bottom: 1px solid var(--border); position: relative; overflow: hidden;">
-          <div style="position:absolute;inset:0;background-image:radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:18px 18px;"></div>
-          <div style="position:relative;text-align:center;">
-            <div style="font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--fg);letter-spacing:-0.04em;">Atul<span style="color:var(--accent);">.</span></div>
-            <div style="font-size:0.72rem;color:var(--fg-muted);margin-top:6px;letter-spacing:0.06em;">PORTFOLIO V2</div>
+        <div class="portfolio-placeholder">
+          <div class="portfolio-placeholder-inner">
+            <div class="portfolio-placeholder-logo">Atul<span>.</span></div>
+            <div class="portfolio-placeholder-sub">Portfolio v2.0</div>
           </div>
+          <span class="project-badge badge-frontend" style="position:absolute;top:14px;left:14px;z-index:2;">Frontend</span>
         </div>
         <div class="all-project-body">
           <div class="all-project-top">
@@ -443,20 +500,19 @@
               <a href="https://github.com/atulsingh1501/Porfolio-v2.O" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
             </div>
           </div>
-          <p class="all-project-desc">Personal developer portfolio built from scratch with pure HTML, CSS &amp; JS — featuring dark mode, animated GitHub contribution graph, LeetCode stats, and a premium Nishul.dev-inspired design system.</p>
+          <p class="all-project-desc">Personal developer portfolio built from scratch with pure HTML, CSS &amp; JS — featuring dark mode, animated GitHub contribution graph, LeetCode stats, and a Nishul.dev-inspired design system.</p>
           <div class="tech-bubbles">
-            <span class="tech-pill">HTML5</span>
-            <span class="tech-pill">CSS3</span>
-            <span class="tech-pill">JavaScript</span>
-            <span class="tech-pill">GitHub API</span>
-            <span class="tech-pill">LeetCode API</span>
+            <span class="tech-pill"><i class="devicon-html5-plain colored"></i> HTML5</span>
+            <span class="tech-pill"><i class="devicon-css3-plain colored"></i> CSS3</span>
+            <span class="tech-pill"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+            <span class="tech-pill"><i class="devicon-github-original" style="filter:invert(1);"></i> GitHub API</span>
+            <span class="tech-pill"><i class="fas fa-code" style="color:#f97316;"></i> LeetCode API</span>
           </div>
         </div>
       </div>
 
     </div><!-- /all-projects-grid -->
 
-    <!-- Spacer -->
     <div style="height: 80px;"></div>
 
   </main>
@@ -469,19 +525,13 @@
   <script>
     // ---- Filter Logic ----
     const filterBar = document.getElementById('filter-bar');
-    const cards = document.querySelectorAll('.all-project-card');
-    const visibleCount = document.getElementById('visible-count');
-    const sectionHeading = document.getElementById('section-heading');
-
-    function updateCount(count, label) {
-      visibleCount.textContent = `(${count} project${count !== 1 ? 's' : ''})`;
-    }
+    const cards     = document.querySelectorAll('.all-project-card');
+    const visibleCount  = document.getElementById('visible-count');
 
     filterBar.addEventListener('click', (e) => {
       const tab = e.target.closest('.filter-tab');
       if (!tab) return;
 
-      // Update active tab
       document.querySelectorAll('.filter-tab').forEach(t => {
         t.classList.remove('active');
         t.setAttribute('aria-selected', 'false');
@@ -499,15 +549,15 @@
         if (matches) visible++;
       });
 
-      updateCount(visible);
+      visibleCount.textContent = `(${visible} project${visible !== 1 ? 's' : ''})`;
     });
 
     // ---- Mobile Nav ----
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const overlay = document.getElementById('mobile-nav-overlay');
+    const menuBtn  = document.getElementById('mobile-menu-btn');
+    const overlay  = document.getElementById('mobile-nav-overlay');
     const closeBtn = document.getElementById('close-mobile-nav');
 
-    if (menuBtn) menuBtn.addEventListener('click', () => overlay.classList.add('active'));
+    if (menuBtn)  menuBtn.addEventListener('click',  () => overlay.classList.add('active'));
     if (closeBtn) closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
     overlay.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => overlay.classList.remove('active'));
