@@ -829,44 +829,45 @@ body::after {
 .illustrated-footer {
   position: relative;
   z-index: 1;
-  padding: 0 clamp(16px, 4vw, 48px) 0;
-  margin-top: 0;
+  padding: 40px clamp(16px, 4vw, 40px) 40px;
 }
 .footer-banner {
   position: relative;
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
   max-width: 860px;
   margin: 0 auto;
+  background: #0d1b1a;
 }
 .footer-banner-img {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
+  object-position: center 30%;
   display: block;
-  border-radius: 16px;
 }
 .footer-banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.72) 40%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.78) 35%, rgba(0,0,0,0.1) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 24px;
+  padding-bottom: 28px;
   text-align: center;
-  border-radius: 16px;
 }
 .footer-credit {
-  font-size: 0.88rem;
-  color: rgba(255,255,255,0.85);
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.8);
   margin-bottom: 4px;
+  font-family: var(--font-body);
 }
-.footer-credit strong { color: #fff; }
+.footer-credit strong { color: #fff; font-weight: 600; }
 .footer-copy {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.45);
+  font-family: var(--font-body);
 }
 
 /* ---- Mobile Overlay Nav ---- */
