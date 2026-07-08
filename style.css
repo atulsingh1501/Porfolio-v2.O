@@ -825,67 +825,70 @@ body::after {
   transform: translateY(-2px);
 }
 
-/* ---- Illustrated Footer ---- */
+/* ---- Illustrated Footer (Nishul.dev style) ---- */
 .illustrated-footer {
   position: relative;
   z-index: 1;
-  /* Match page-wrap horizontal padding exactly */
-  padding: 0 clamp(16px, 4vw, 40px) 32px;
-  margin-top: 40px;
+  /* 28px gap above, 60px breathing room below — matches Nishul's spacing */
+  padding: 28px clamp(16px, 4vw, 40px) 60px;
 }
 .footer-banner {
   position: relative;
-  border-radius: 14px;
+  border-radius: 18px;   /* Nishul uses rounded-2xl = 18px */
   overflow: hidden;
-  max-width: 860px;   /* same as page-wrap */
+  max-width: 860px;      /* matches page-wrap */
   margin: 0 auto;
 }
 .footer-banner-img {
   width: 100%;
-  height: 240px;
+  height: 160px;         /* Nishul's h-40 = 160px */
   object-fit: cover;
   object-position: center center;
   display: block;
-  border-radius: 14px;
 }
 .footer-banner-overlay {
   position: absolute;
   inset: 0;
-  border-radius: 14px;
+  /* Nishul: from-black/80 via-black/40 to-transparent */
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.82) 0%,
-    rgba(0,0,0,0.2) 50%,
+    rgba(0,0,0,0.80) 0%,
+    rgba(0,0,0,0.40) 45%,
     transparent 100%
   );
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 28px;
+  padding-bottom: 20px;
+  gap: 3px;
   text-align: center;
 }
 .footer-credit {
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.85);
-  margin-bottom: 5px;
+  font-size: 0.875rem;   /* 14px — matches Nishul's text-sm */
+  color: rgba(255,255,255,0.9);
   font-family: var(--font-body);
 }
-.footer-credit strong { color: #fff; font-weight: 600; }
+.footer-credit a,
+.footer-credit strong {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255,255,255,0.5);
+}
+.footer-credit a:hover { text-decoration-color: #fff; }
 .footer-copy {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.45);
+  font-size: 0.875rem;   /* same size as credit line */
+  color: rgba(255,255,255,0.85);
   font-family: var(--font-body);
 }
 
 @media (max-width: 640px) {
-  .illustrated-footer { margin-top: 24px; }
-  .footer-banner-img { height: 180px; }
-}
-@media (max-width: 480px) {
-  .footer-banner-img { height: 150px; }
-  .footer-banner-overlay { padding-bottom: 18px; }
-  .footer-credit { font-size: 0.78rem; }
+  .illustrated-footer { padding: 20px clamp(16px, 4vw, 40px) 40px; }
+  .footer-banner-img { height: 128px; }  /* Nishul's sm fallback */
+  .footer-credit, .footer-copy { font-size: 0.78rem; }
+  .footer-banner-overlay { padding-bottom: 14px; }
 }
 
 /* ---- Mobile Overlay Nav ---- */
