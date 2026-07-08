@@ -401,8 +401,9 @@ body::after {
 }
 .show-all-btn:hover i { transform: translateX(3px); }
 
-/* --- Nishul.dev-style project cards --- */
-.project-card {
+/* ===== Nishul.dev-style project cards (shared by index + projects page) ===== */
+.project-card,
+.all-project-card {
   background: #111;
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 14px;
@@ -411,101 +412,125 @@ body::after {
   display: flex;
   flex-direction: column;
 }
-.project-card:hover {
-  border-color: rgba(255,255,255,0.15);
+.project-card:hover,
+.all-project-card:hover {
+  border-color: rgba(255,255,255,0.16);
   transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
-/* Cover image area */
+/* Cover image */
 .project-cover-wrap {
-  position: relative;
   overflow: hidden;
   background: #0d0d0d;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
 }
 .project-cover {
   width: 100%;
-  height: 200px;
+  height: 190px;
   object-fit: cover;
   display: block;
   transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-.project-card:hover .project-cover { transform: scale(1.04); }
+.project-card:hover .project-cover,
+.all-project-card:hover .project-cover { transform: scale(1.04); }
 
 /* Card body */
-.project-body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 0; }
+.project-body,
+.all-project-body {
+  padding: 16px 18px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
-.project-top {
+/* Name + links row */
+.project-top,
+.all-project-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 }
-.project-name {
+.project-name,
+.all-project-name {
   font-family: var(--font-head);
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--fg);
   letter-spacing: -0.02em;
+  line-height: 1.3;
 }
-.project-links { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+.project-links,
+.all-project-links {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 
+/* Pill links (Case Study / Live / Code) */
 .pill-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.7rem;
+  gap: 4px;
+  font-size: 0.68rem;
   font-weight: 600;
-  color: var(--fg-muted);
-  border: 1px solid var(--border);
+  color: rgba(255,255,255,0.45);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 99px;
-  padding: 4px 11px;
+  padding: 3px 10px;
   text-decoration: none;
   transition: all 0.2s;
   white-space: nowrap;
+  line-height: 1.4;
 }
+.pill-link i { font-size: 0.62rem; }
 .pill-link:hover {
   color: var(--fg);
   background: rgba(255,255,255,0.07);
-  border-color: var(--border-hover);
+  border-color: rgba(255,255,255,0.2);
 }
 
-.project-desc {
-  font-size: 0.83rem;
-  color: var(--fg-muted);
+/* Description */
+.project-desc,
+.all-project-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
   line-height: 1.65;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   flex: 1;
 }
 
-.tech-bubbles { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; padding-top: 4px; }
+/* Tech pills with brand icons */
+.tech-bubbles { display: flex; gap: 5px; flex-wrap: wrap; margin-top: auto; }
 .tech-pill {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.68rem;
+  gap: 4px;
+  font-size: 0.64rem;
   font-weight: 500;
-  color: rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 6px;
-  padding: 3px 9px;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 5px;
+  padding: 2px 8px;
+  line-height: 1.6;
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
 .tech-pill i {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   line-height: 1;
   flex-shrink: 0;
 }
-/* Devicon colored icons: restore their real colors */
 .tech-pill .colored { filter: none; }
 .project-card:hover .tech-pill,
 .all-project-card:hover .tech-pill {
-  color: rgba(255,255,255,0.75);
-  border-color: rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.7);
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
 }
 
 /* ---- About / Skills Section ---- */
@@ -727,7 +752,38 @@ body::after {
 .calendar-body { display: flex; gap: 3px; }
 .months-header { display: flex; gap: 3px; margin-bottom: 4px; height: 15px; font-size: 0.7rem; color: var(--fg-muted); }
 
-/* ---- Nishul-style Contact Section ---- */
+/* ---- Contact Section ---- */
+.contact-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 60px 40px;
+  text-align: center;
+}
+.contact-box h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.contact-box p { color: var(--fg-muted); font-size: 1rem; max-width: 440px; margin: 0 auto 32px; line-height: 1.6; }
+.contact-socials { display: flex; justify-content: center; gap: 14px; margin-top: 32px; }
+.social-icon {
+  width: 40px; height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--fg-muted);
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.social-icon:hover { border-color: var(--border-hover); color: var(--fg); background: rgba(255,255,255,0.04); }
+
+/* ---- Nishul-style Contact Section (kept for reference) ---- */
 .nishul-contact {
   text-align: center;
   padding: 60px 20px;
@@ -846,36 +902,56 @@ body::after {
   cursor: pointer;
 }
 
-/* ---- Responsive ---- */
+/* ===== RESPONSIVE ===== */
+
+/* Tablet (≤768px) */
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .mobile-menu-btn { display: inline-flex; }
-  .projects-grid { grid-template-columns: 1fr; }
+
+  /* Projects: 2-col on tablet is fine; only collapse at 640px */
   .skills-grid { grid-template-columns: 1fr 1fr; }
-  /* Stats: GitHub full-width, LeetCode + Competitive side by side */
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .stat-card.github-span { grid-column: span 2; }
-  .contact-box { padding: 40px 24px; }
+
   .hero { padding: 40px 0 60px; }
-  /* Hero card mobile */
   .hero-banner { height: 120px; }
   .hero-avatar-wrap { margin-left: 20px; margin-top: -44px; }
   .hero-avatar { width: 84px; height: 84px; }
   .hero-card-body { padding: 10px 20px 24px; }
   .hero-name { font-size: 1.2rem; }
   .hero-socials { gap: 6px; }
-  /* Project card mobile: stack links below name */
-  .project-top { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .project-links { flex-wrap: wrap; justify-content: flex-start; }
-  .project-cover { height: 180px; }
+
+  .nishul-contact-heading { font-size: 1.3rem; }
+  .footer-banner-img { height: 160px; }
 }
+
+/* Large phone / small tablet (≤640px): single column cards */
+@media (max-width: 640px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-cover { height: 200px; }
+
+  /* Let project-top wrap: name first, then links below */
+  .project-top,
+  .all-project-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .project-links,
+  .all-project-links { justify-content: flex-start; }
+
+  .section { padding: 60px 0; }
+  .nishul-contact { padding: 40px 16px; }
+  .nishul-contact-pills { gap: 8px; }
+  .nishul-pill { font-size: 0.82rem; padding: 8px 16px; }
+}
+
+/* Phone (≤480px) */
 @media (max-width: 480px) {
   .skills-grid { grid-template-columns: 1fr; }
-  /* Stack all stats vertically */
   .stats-grid { grid-template-columns: 1fr; }
   .stat-card.github-span { grid-column: span 1; }
-
-  /* GitHub card label: keep icon+title LEFT, streak badge RIGHT on same row */
   .stat-card.github-span .stat-card-label {
     flex-direction: row;
     flex-wrap: nowrap;
@@ -888,6 +964,11 @@ body::after {
     gap: 6px;
     white-space: nowrap;
   }
-  /* Compact the stat card padding on very small screens */
   .stat-card { padding: 18px 16px; }
+
+  .project-body,
+  .all-project-body { padding: 14px 16px 18px; }
+  .project-cover { height: 175px; }
+  .footer-banner-img { height: 140px; }
+  .hero-card-body { padding: 10px 16px 20px; }
 }
