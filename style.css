@@ -829,27 +829,35 @@ body::after {
 .illustrated-footer {
   position: relative;
   z-index: 1;
-  padding: 40px clamp(16px, 4vw, 40px) 40px;
+  /* Match page-wrap horizontal padding exactly */
+  padding: 0 clamp(16px, 4vw, 40px) 32px;
+  margin-top: 40px;
 }
 .footer-banner {
   position: relative;
   border-radius: 14px;
   overflow: hidden;
-  max-width: 860px;
+  max-width: 860px;   /* same as page-wrap */
   margin: 0 auto;
-  background: #0d1b1a;
 }
 .footer-banner-img {
   width: 100%;
-  height: 220px;
+  height: 240px;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center center;
   display: block;
+  border-radius: 14px;
 }
 .footer-banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.78) 35%, rgba(0,0,0,0.1) 100%);
+  border-radius: 14px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.82) 0%,
+    rgba(0,0,0,0.2) 50%,
+    transparent 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -859,8 +867,8 @@ body::after {
 }
 .footer-credit {
   font-size: 0.875rem;
-  color: rgba(255,255,255,0.8);
-  margin-bottom: 4px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 5px;
   font-family: var(--font-body);
 }
 .footer-credit strong { color: #fff; font-weight: 600; }
@@ -868,6 +876,16 @@ body::after {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.45);
   font-family: var(--font-body);
+}
+
+@media (max-width: 640px) {
+  .illustrated-footer { margin-top: 24px; }
+  .footer-banner-img { height: 180px; }
+}
+@media (max-width: 480px) {
+  .footer-banner-img { height: 150px; }
+  .footer-banner-overlay { padding-bottom: 18px; }
+  .footer-credit { font-size: 0.78rem; }
 }
 
 /* ---- Mobile Overlay Nav ---- */
