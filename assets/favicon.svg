@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#0a0a0a"/>
+  <!-- Letter A in white -->
+  <text x="7" y="24" font-family="'Arial Black', 'Arial', sans-serif" font-weight="900" font-size="22" fill="#ffffff">A</text>
+  <!-- Green dot matching accent color -->
+  <circle cx="26" cy="23" r="3.5" fill="#00c758"/>
+</svg>
