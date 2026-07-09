@@ -422,18 +422,19 @@ body::after {
 /* Cover image */
 .project-cover-wrap {
   overflow: hidden;
-  background: #0d0d0d;
   flex-shrink: 0;
+  border-radius: 14px 14px 0 0;
 }
 .project-cover {
   width: 100%;
-  height: 190px;
+  height: 192px;
   object-fit: cover;
+  object-position: center center;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  transition: transform 0.5s ease;
 }
 .project-card:hover .project-cover,
-.all-project-card:hover .project-cover { transform: scale(1.04); }
+.all-project-card:hover .project-cover { transform: scale(1.05); }
 
 /* Card body */
 .project-body,
@@ -951,7 +952,7 @@ body::after {
 /* Large phone / small tablet (≤640px): single column cards */
 @media (max-width: 640px) {
   .projects-grid { grid-template-columns: 1fr; }
-  .project-cover { height: 200px; }
+  .project-cover { height: 195px; }
 
   /* Let project-top wrap: name first, then links below */
   .project-top,
@@ -990,7 +991,7 @@ body::after {
 
   .project-body,
   .all-project-body { padding: 14px 16px 18px; }
-  .project-cover { height: 175px; }
+  .project-cover { height: 160px; }
   .footer-banner-img { height: 140px; }
   .hero-card-body { padding: 10px 16px 20px; }
 }
