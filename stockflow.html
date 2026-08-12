@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: StockFlow ERP | Atul Singh</title>
+    <meta name="description" content="A deep-dive into StockFlow ERP, a full-stack ERP and CRM application built with React, Node.js, and PostgreSQL by Atul Singh.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .case-study-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .cs-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 40px;
+        }
+
+        .cs-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .cs-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .cs-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cs-section {
+            margin-bottom: 60px;
+        }
+
+        .cs-section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .cs-content {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .cs-content strong {
+            color: var(--text-primary);
+        }
+
+        .cs-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cs-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .cs-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 6px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 40px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        .cs-image {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            margin: 24px 0 40px;
+            display: block;
+        }
+
+        .cs-image-caption {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            margin-top: -32px;
+            margin-bottom: 40px;
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        .cs-callout {
+            background: rgba(var(--accent-rgb, 99, 102, 241), 0.08);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cs-callout strong {
+            color: var(--text-primary);
+        }
+
+        .cs-screenshots-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0 40px;
+        }
+
+        .cs-screenshots-grid img {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+            display: block;
+        }
+
+        /* Override global app styles for standalone page */
+        body {
+            overflow: auto !important;
+            display: block !important;
+            height: auto !important;
+        }
+
+        @media (max-width: 600px) {
+            .cs-screenshots-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="case-study-container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+        <header class="cs-header">
+            <h1 class="cs-title">StockFlow ERP</h1>
+            <p class="cs-subtitle">A lightweight full-stack ERP and CRM system for wholesale and distribution businesses — managing customers, products, inventory, sales challans, and follow-up activities across internal teams.</p>
+            <div class="cs-meta">
+                <span class="role-badge">Full Stack Developer</span>
+                <span class="role-badge">React · Node.js · PostgreSQL</span>
+                <span class="role-badge">Case Study</span>
+            </div>
+        </header>
+
+        <img src="assets/images/dashboard.png" alt="StockFlow ERP Dashboard" class="cs-image">
+        <p class="cs-image-caption">StockFlow ERP — Business summary dashboard with KPIs, recent activity, and low stock alerts.</p>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">01. Project Overview</h3>
+            <div class="cs-content">
+                <p><strong>StockFlow ERP</strong> is a comprehensive production-grade solution designed to handle core business operations for a wholesale/distribution enterprise. Built as a full-stack developer case study, it showcases REST API design, complex database modeling, role-based authentication, and real inventory business logic wrapped in a modern SaaS-style UI built with Tailwind CSS v4.</p>
+                <p style="margin-top:1rem;">The system manages customers, products, inventory, sales challans, and follow-up activities for internal teams such as <strong>Sales, Warehouse, and Accounts</strong> — each with role-specific access.</p>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">02. Tech Stack</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>Frontend:</strong> React + TypeScript + Vite — fast HMR during development; React Router for multi-page navigation.</li>
+                    <li><strong>Styling:</strong> Tailwind CSS v4 for a consistent, responsive SaaS design system.</li>
+                    <li><strong>Backend:</strong> Node.js + Express.js (TypeScript) — RESTful API with modular routes, controllers, services, and middleware layers.</li>
+                    <li><strong>Database & ORM:</strong> PostgreSQL with Prisma ORM — type-safe, migration-driven schema management.</li>
+                    <li><strong>Auth & Validation:</strong> JWT Authentication, Zod schema validation on all API inputs, role-based middleware on every protected route.</li>
+                    <li><strong>Deployment:</strong> Vercel (Frontend), Render (Backend), GitHub Actions CI/CD pipeline.</li>
+                </ul>
+                <div class="cs-callout">
+                    <strong>Architectural Decision:</strong> Using <strong>TypeScript</strong> across the entire stack alongside <strong>Prisma ORM</strong> ensured type safety from database schema through to API responses and frontend components — drastically reducing runtime errors during development and making the codebase self-documenting.
+                </div>
+            </div>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">03. Authentication & CRM</h3>
+            <div class="cs-content">
+                <p>The system implements <strong>JWT-based authentication</strong> with distinct role access levels. A single <code>requireRole()</code> middleware guards every protected route, ensuring each team sees only what's relevant to them:</p>
+                <ul class="cs-list">
+                    <li><strong>Admin:</strong> Full access — users, products, customers, challans, reports.</li>
+                    <li><strong>Sales:</strong> Manage customers and create/view challans.</li>
+                    <li><strong>Warehouse:</strong> View and manage inventory and stock movements.</li>
+                    <li><strong>Accounts:</strong> View challans, financial summaries, and reports.</li>
+                </ul>
+            </div>
+
+            <div class="cs-screenshots-grid" style="margin-top: 24px;">
+                <img src="assets/images/login.png" alt="StockFlow ERP Login Screen">
+                <img src="assets/images/customers.png" alt="StockFlow ERP Customer CRM">
+            </div>
+            <p class="cs-image-caption">Login screen (left) and Customer CRM with follow-up notes and status tracking (right).</p>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">04. Inventory Management</h3>
+            <div class="cs-content">
+                <p>The inventory module handles complete product lifecycle management with built-in safeguards:</p>
+                <ul class="cs-list">
+                    <li><strong>Product & SKU Management:</strong> Add, edit, and categorize products with full SKU assignment.</li>
+                    <li><strong>Real-Time Stock Tracking:</strong> Live stock levels with configurable minimum stock alerts for low inventory warnings.</li>
+                    <li><strong>Immutable Movement Log:</strong> Every stock change (IN/OUT) creates a timestamped, paginated audit log — capturing the product, quantity, reason, responsible user, and timestamp.</li>
+                </ul>
+            </div>
+
+            <img src="assets/images/inventory.png" alt="StockFlow ERP Inventory Management" class="cs-image">
+            <p class="cs-image-caption">Inventory page — product list with stock levels, SKUs, and minimum stock alert indicators.</p>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">05. Sales Challan Flow</h3>
+            <div class="cs-content">
+                <p>The challan system is the core business workflow of StockFlow ERP, requiring precise implementation of business rules:</p>
+                <ul class="cs-list">
+                    <li><strong>Sequential Numbering:</strong> Challans are auto-assigned a sequential ID in the format <code>CH-YYYY-NNNNN</code>, auto-incremented at the database level to prevent duplicates.</li>
+                    <li><strong>Draft → Confirmed → Cancelled:</strong> Challans go through a state machine; stock is only deducted on confirmation.</li>
+                    <li><strong>Product Snapshot:</strong> Product name, SKU, unit price, and quantity are snapshotted at time of sale in a <code>JSONB</code> column — preserving historical accuracy even if product details change later.</li>
+                </ul>
+                <div class="cs-callout">
+                    <strong>Critical Business Rule — Preventing Negative Stock:</strong> Confirming a challan with insufficient stock is blocked at the database level using PostgreSQL row-level locking (<code>SELECT ... FOR UPDATE</code>) before the quantity check and deduction, eliminating race conditions entirely.
+                </div>
+            </div>
+
+            <img src="assets/images/sales-challan.png" alt="StockFlow ERP Sales Challan" class="cs-image">
+            <p class="cs-image-caption">Sales challan creation — multi-product selection, automatic numbering, and state management.</p>
+        </section>
+
+        <section class="cs-section">
+            <h3 class="cs-section-title">06. CI/CD & Deployment</h3>
+            <div class="cs-content">
+                <ul class="cs-list">
+                    <li><strong>GitHub Actions:</strong> A CI pipeline (<code>.github/workflows/ci.yml</code>) runs on every push — linting, type-checking, and building both frontend and backend to catch regressions early.</li>
+                    <li><strong>Vercel:</strong> Frontend is deployed with <code>VITE_API_URL</code> pointing to the production backend — zero config, instant CDN distribution.</li>
+                    <li><strong>Render:</strong> Backend runs with environment variables for database, JWT secret, and CORS origin — <code>npx prisma migrate deploy</code> runs automatically on startup to keep schema in sync.</li>
+                </ul>
+                <div class="cs-callout">
+                    <strong>Note for Reviewers:</strong> The backend is hosted on Render's free tier, which sleeps after 15 minutes of inactivity. The first login may take 45–50 seconds for the server to wake up. All subsequent requests are instant.
+                </div>
+            </div>
+        </section>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px;">
+            <a href="https://stock-flow-erp-tau.vercel.app/" target="_blank" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border-radius:8px; text-decoration:none; font-weight:500;">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="https://github.com/atulsingh1501/StockFlow-ERP" target="_blank" class="btn-ghost">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <a href="projects.html" class="btn-ghost">
+                <i class="fas fa-arrow-left"></i> All Projects
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

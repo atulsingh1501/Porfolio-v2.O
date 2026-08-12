@@ -320,10 +320,10 @@
     <!-- Filter Tabs -->
     <div class="filter-bar" id="filter-bar" role="tablist" aria-label="Project categories">
       <button class="filter-tab active" data-filter="all" id="filter-all" role="tab" aria-selected="true">
-        All <span class="count">7</span>
+        All <span class="count">8</span>
       </button>
       <button class="filter-tab" data-filter="fullstack" id="filter-fullstack" role="tab" aria-selected="false">
-        Full-Stack <span class="count">4</span>
+        Full-Stack <span class="count">5</span>
       </button>
       <button class="filter-tab" data-filter="ai" id="filter-ai" role="tab" aria-selected="false">
         AI Products <span class="count">2</span>
@@ -338,13 +338,39 @@
 
     <!-- Count Header -->
     <div class="all-projects-header">
-      <h2 id="section-heading">All Projects <span id="visible-count">(7 projects)</span></h2>
+      <h2 id="section-heading">All Projects <span id="visible-count">(8 projects)</span></h2>
     </div>
 
     <!-- Projects Grid -->
     <div class="all-projects-grid" id="projects-grid">
 
-      <!-- 1. Digital RX -->
+      <!-- 1. StockFlow ERP -->
+      <div class="all-project-card" data-category="fullstack">
+        <div class="project-cover-wrap">
+          <img src="assets/images/cover_stockflow.png" alt="StockFlow ERP" class="project-cover">
+        </div>
+        <div class="all-project-body">
+          <div class="all-project-top">
+            <h3 class="all-project-name">StockFlow ERP</h3>
+            <div class="all-project-links">
+              <a href="stockflow.html" class="pill-link"><i class="fas fa-book-open"></i> Case Study</a>
+              <a href="https://stock-flow-erp-tau.vercel.app/" target="_blank" class="pill-link"><i class="fas fa-external-link-alt"></i> Live</a>
+              <a href="https://github.com/atulsingh1501/StockFlow-ERP" target="_blank" class="pill-link"><i class="fab fa-github"></i> Code</a>
+            </div>
+          </div>
+          <p class="all-project-desc">A full-stack ERP & CRM system for wholesale businesses. Features role-based access, inventory tracking, sequential sales challans, and stock validation.</p>
+          <div class="tech-bubbles">
+            <span class="tech-pill"><i class="devicon-react-original colored"></i> React</span>
+            <span class="tech-pill"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+            <span class="tech-pill"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+            <span class="tech-pill"><i class="devicon-express-original" style="filter:invert(1);"></i> Express</span>
+            <span class="tech-pill"><i class="devicon-postgresql-plain colored"></i> PostgreSQL</span>
+            <span class="tech-pill">Prisma ORM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Digital RX -->
       <div class="all-project-card" data-category="fullstack ai">
         <div class="project-cover-wrap">
           <img src="assets/images/cover_digitalrx.png" alt="Digital RX" class="project-cover">
