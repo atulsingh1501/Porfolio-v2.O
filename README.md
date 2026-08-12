@@ -3,7 +3,7 @@
 Welcome to my personal portfolio v2.0! This website showcases my projects, coding statistics, and professional journey as a Frontend Developer.
 
 ## 🚀 Live Demo
-[Link to your live site (Enable GitHub Pages to see it here)](https://atulyafolio.netlify.app/)
+[Link to your live site (Enable GitHub Pages to see it here)](https://atulya.me/)
 
 ## ✨ Key Features
 - **Real-time Coding Stats**: Fetches live data from specific competitive programming platforms.
