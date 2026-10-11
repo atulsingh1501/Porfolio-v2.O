@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---- Active Nav Highlight ----
-  const sections = document.querySelectorAll('section[id]');
+  const sections = document.querySelectorAll('section[id], .profile-card-section[id]');
   const navAnchors = document.querySelectorAll('.nav-links a');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -37,8 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     a.addEventListener('click', () => overlay.classList.remove('active'));
   });
 
-  // ---- Achievements accordion ----
+  // ---- Accordion Toggles ----
   window.toggleExp = function(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('open');
+  };
+  window.toggleExpCard = function(id) {
     const el = document.getElementById(id);
     if (el) el.classList.toggle('open');
   };

@@ -88,11 +88,11 @@ body::after {
   list-style: none;
 }
 .nav-links a {
-  font-size: 0.875rem;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--fg-muted);
   text-decoration: none;
-  padding: 6px 14px;
+  padding: 6px 11px;
   border-radius: 99px;
   transition: all 0.2s;
 }
@@ -654,6 +654,195 @@ body::after {
   font-size: 0.9rem;
 }
 
+/* ===== NISHUL.DEV STYLE EDUCATION & EXPERIENCE CARDS ===== */
+.profile-card-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-top: 24px;
+  transition: border-color 0.25s;
+  position: relative;
+}
+.profile-card-section:hover {
+  border-color: var(--border-hover);
+}
+
+.profile-card-title {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+
+/* Education Card Item */
+.edu-card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.edu-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.edu-institution {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.3;
+}
+.edu-degree {
+  font-size: 0.86rem;
+  color: var(--fg-muted);
+  line-height: 1.4;
+}
+.edu-location {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  line-height: 1.4;
+}
+.edu-date {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  white-space: nowrap;
+  text-align: right;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+/* Experience Card Item (Outer box matching nishul.dev) */
+.exp-card-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.exp-card-item:hover {
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.exp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.exp-co-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.exp-co-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.exp-co-logo svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+}
+
+.exp-co-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.exp-co-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.exp-co-name {
+  font-family: var(--font-head);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.3;
+}
+
+.exp-social-link {
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
+  display: inline-flex;
+  align-items: center;
+}
+.exp-social-link:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.exp-role-title {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  line-height: 1.3;
+}
+
+.exp-co-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.exp-duration {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.exp-loc-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+}
+.exp-loc-text {
+  color: var(--fg-muted);
+}
+
+.exp-chevron {
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  transition: transform 0.3s ease;
+}
+.exp-card-item.open .exp-chevron {
+  transform: rotate(180deg);
+}
+
+/* Accordion Body */
+.exp-card-body {
+  display: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 14px;
+  padding-top: 14px;
+}
+.exp-card-item.open .exp-card-body {
+  display: block;
+}
+
 /* ---- Stats Section ---- */
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .stat-card.github-span { grid-column: span 2; overflow: visible; }
@@ -1007,6 +1196,26 @@ body::after {
   .nishul-contact { padding: 40px 16px; }
   .nishul-contact-pills { gap: 8px; }
   .nishul-pill { font-size: 0.82rem; padding: 8px 16px; }
+
+  /* Education & Experience Card responsive */
+  .profile-card-section { padding: 20px 18px; }
+  .edu-card-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .edu-date { text-align: left; }
+  .exp-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .exp-co-right {
+    align-items: flex-start;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 /* Phone (≤480px) */
