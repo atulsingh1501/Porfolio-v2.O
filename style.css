@@ -571,8 +571,8 @@ body::after {
 }
 .skill-tag:hover { color: var(--fg); border-color: rgba(255,255,255,0.2); }
 
-/* ---- Experience / Achievements ---- */
-.experience-list { display: flex; flex-direction: column; gap: 4px; }
+/* ---- Achievements ---- */
+.achievements-list { display: flex; flex-direction: column; gap: 4px; }
 
 .exp-item {
   background: var(--bg-card);
@@ -654,7 +654,7 @@ body::after {
   font-size: 0.9rem;
 }
 
-/* ===== NISHUL.DEV STYLE EDUCATION & EXPERIENCE CARDS ===== */
+/* ===== EDUCATION CARD ===== */
 .profile-card-section {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -715,136 +715,7 @@ body::after {
   line-height: 1.4;
 }
 
-/* Experience Card Item (Outer box matching nishul.dev) */
-.exp-card-item {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px 18px;
-  transition: all 0.25s ease;
-  cursor: pointer;
-}
-.exp-card-item:hover {
-  border-color: var(--border-hover);
-  background: rgba(255, 255, 255, 0.035);
-}
 
-.exp-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
-
-.exp-co-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.exp-co-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  padding: 4px;
-}
-.exp-co-logo img,
-.exp-co-logo svg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.exp-co-details {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.exp-co-name-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.exp-co-name {
-  font-family: var(--font-head);
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: var(--fg);
-  line-height: 1.3;
-}
-
-.exp-social-link {
-  color: var(--fg-muted);
-  font-size: 0.8rem;
-  text-decoration: none;
-  transition: color 0.2s, transform 0.2s;
-  display: inline-flex;
-  align-items: center;
-}
-.exp-social-link:hover {
-  color: var(--accent);
-  transform: translateY(-1px);
-}
-
-.exp-role-title {
-  font-size: 0.85rem;
-  color: var(--fg-muted);
-  line-height: 1.3;
-}
-
-.exp-co-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-  flex-shrink: 0;
-}
-
-.exp-duration {
-  font-size: 0.82rem;
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
-
-.exp-loc-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
-  color: var(--fg-muted);
-}
-.exp-loc-text {
-  color: var(--fg-muted);
-}
-
-.exp-chevron {
-  font-size: 0.72rem;
-  color: var(--fg-muted);
-  transition: transform 0.3s ease;
-}
-.exp-card-item.open .exp-chevron {
-  transform: rotate(180deg);
-}
-
-/* Accordion Body */
-.exp-card-body {
-  display: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  margin-top: 14px;
-  padding-top: 14px;
-}
-.exp-card-item.open .exp-card-body {
-  display: block;
-}
 
 /* ---- Stats Section ---- */
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -1200,7 +1071,7 @@ body::after {
   .nishul-contact-pills { gap: 8px; }
   .nishul-pill { font-size: 0.82rem; padding: 8px 16px; }
 
-  /* Education & Experience Card responsive */
+  /* Education Card responsive */
   .profile-card-section { padding: 20px 18px; }
   .edu-card-item {
     flex-direction: column;
@@ -1208,17 +1079,6 @@ body::after {
     gap: 6px;
   }
   .edu-date { text-align: left; }
-  .exp-card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .exp-co-right {
-    align-items: flex-start;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-  }
 }
 
 /* Phone (≤480px) */

@@ -42,10 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById(id);
     if (el) el.classList.toggle('open');
   };
-  window.toggleExpCard = function(id) {
-    const el = document.getElementById(id);
-    if (el) el.classList.toggle('open');
-  };
 
   // ---- LeetCode Stats ----
   async function fetchLeetCode() {
