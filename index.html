@@ -34,6 +34,7 @@
     <ul class="nav-links">
       <li><a href="#hero" class="active" id="nav-home">Home</a></li>
       <li><a href="#projects" id="nav-projects">Projects</a></li>
+      <li><a href="#experience" id="nav-experience">Experience</a></li>
       <li><a href="#skills" id="nav-skills">Skills</a></li>
       <li><a href="#stats" id="nav-stats">Stats</a></li>
       <li><a href="#achievements" id="nav-ach">Achievements</a></li>
@@ -52,6 +53,7 @@
     <button class="close-mobile-nav" id="close-mobile-nav"><i class="fas fa-times"></i></button>
     <a href="#hero">Home</a>
     <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
     <a href="#stats">Stats</a>
     <a href="#achievements">Achievements</a>
@@ -97,7 +99,7 @@
 
           <!-- Resume CTA -->
           <div class="hero-ctas">
-            <a href="assets/resume/Atulya.pdf" download class="btn-primary btn-resume" id="hero-resume-btn">
+            <a href="assets/resume/Atul_Singh_Resume.pdf" download class="btn-primary btn-resume" id="hero-resume-btn">
               <i class="fas fa-file-alt"></i> Resume / CV
             </a>
           </div>
@@ -268,6 +270,47 @@
           Show all projects
           <i class="fas fa-arrow-right"></i>
         </a>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <p class="section-label">Career Journey</p>
+      <h2 class="section-title">Work Experience</h2>
+      <p class="section-sub">Internships and professional roles I've undertaken.</p>
+
+      <div class="experience-list">
+
+        <div class="exp-item open" id="exp-1">
+          <div class="exp-header" onclick="toggleExp('exp-1')">
+            <span class="exp-color-dot" style="background:#00c758"></span>
+            <div class="exp-info">
+              <div class="exp-title">Web Development Intern <span class="exp-tag">Internship</span></div>
+              <div class="exp-sub">Qveto Technologies &bull; Aug 2026 – Oct 2026</div>
+            </div>
+            <i class="fas fa-chevron-down exp-arrow"></i>
+          </div>
+          <div class="exp-body">
+            <ul class="exp-bullet-list">
+              <li>Developed responsive frontend pages and reusable UI components using React, JavaScript, and Tailwind CSS.</li>
+              <li>Integrated frontend screens with REST APIs, handling data fetching, form submissions, and error states.</li>
+              <li>Worked on backend endpoints using Node.js and Express.js, and tested API requests and responses using Postman.</li>
+              <li>Fixed UI bugs, improved desktop and mobile layouts, and collaborated using Git and GitHub (branches, pull requests, code review feedback).</li>
+            </ul>
+            <div class="tech-bubbles" style="margin-top:14px">
+              <span class="tech-pill"><i class="devicon-react-original colored"></i> React</span>
+              <span class="tech-pill"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+              <span class="tech-pill"><i class="devicon-tailwindcss-plain colored"></i> Tailwind CSS</span>
+              <span class="tech-pill"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
+              <span class="tech-pill"><i class="devicon-express-original" style="filter:invert(1);"></i> Express</span>
+              <span class="tech-pill"><i class="fas fa-network-wired" style="color:#00c758;"></i> REST APIs</span>
+              <span class="tech-pill"><i class="fas fa-paper-plane" style="color:#ff6c37;"></i> Postman</span>
+              <span class="tech-pill"><i class="devicon-git-plain colored"></i> Git</span>
+              <span class="tech-pill"><i class="devicon-github-original" style="filter:invert(1);"></i> GitHub</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 

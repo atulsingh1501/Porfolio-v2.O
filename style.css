@@ -615,6 +615,45 @@ body::after {
 }
 .exp-item.open .exp-body { display: block; }
 
+.exp-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: rgba(0, 199, 88, 0.1);
+  border: 1px solid rgba(0, 199, 88, 0.25);
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.exp-bullet-list {
+  list-style: none;
+  margin: 10px 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.exp-bullet-list li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  font-size: 0.85rem;
+}
+.exp-bullet-list li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
 /* ---- Stats Section ---- */
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .stat-card.github-span { grid-column: span 2; overflow: visible; }
